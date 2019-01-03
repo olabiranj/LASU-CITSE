@@ -8,5 +8,6 @@ router.get('/about-us', controller.aboutPage);
 router.get('/services', controller.servicesPage);
 router.get('/contact', controller.contactPage);
 router.get('/news', controller.newsPage);
+router.get('/team', controller.teamPage);
 
 module.exports = router;

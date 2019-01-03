@@ -17,3 +17,7 @@ exports.contactPage = function (req, res, next) {
 exports.newsPage = function (req, res, next) {
     res.render('news', {});
 }
+
+exports.teamPage = function (req, res, next) {
+    res.render('team', {});
+}
