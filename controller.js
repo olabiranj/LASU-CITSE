@@ -2,10 +2,6 @@ exports.homePage = function (req, res, next) {
     res.render('index', {  });
 }
 
-exports.aboutPage = function (req, res, next) {
-    res.render('about-us', {});
-}
-
 exports.servicesPage = function (req, res, next) {
     res.render('services', {});
 }
@@ -21,3 +17,4 @@ exports.newsPage = function (req, res, next) {
 exports.teamPage = function (req, res, next) {
     res.render('team', {});
 }
+
