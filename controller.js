@@ -25,3 +25,27 @@ exports.jecPage = function (req, res, next) {
 exports.visionPage = function (req, res, next) {
     res.render('vision', {});
 }
+
+exports.missionPage = function (req, res, next) {
+    res.render('mission', {});
+}
+
+exports.objectivesPage = function (req, res, next) {
+    res.render('objectives', {});
+}
+
+exports.retentionPage = function (req, res, next) {
+    res.render('retention', {});
+}
+
+exports.recruitmentPage = function (req, res, next) {
+    res.render('recruitment', {});
+}
+
+exports.staffPage = function (req, res, next) {
+    res.render('staff', {});
+}
+
+exports.operationsPage = function (req, res, next) {
+    res.render('operations', {});
+}
