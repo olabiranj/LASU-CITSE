@@ -49,3 +49,7 @@ exports.staffPage = function (req, res, next) {
 exports.operationsPage = function (req, res, next) {
     res.render('operations', {});
 }
+
+exports.implementationPage = function (req, res, next) {
+    res.render('implementation', {});
+}

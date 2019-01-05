@@ -16,6 +16,7 @@ router.get('/retention-and-support', controller.retentionPage);
 router.get('/student-recruitment', controller.recruitmentPage);
 router.get('/staff-development', controller.staffPage);
 router.get('/centre-operations', controller.operationsPage);
+router.get('/implementation-timeline', controller.implementationPage);
 
 
 module.exports = router;
