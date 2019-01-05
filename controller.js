@@ -18,3 +18,10 @@ exports.teamPage = function (req, res, next) {
     res.render('team', {});
 }
 
+exports.jecPage = function (req, res, next) {
+    res.render('jec', {});
+}
+
+exports.visionPage = function (req, res, next) {
+    res.render('vision', {});
+}
