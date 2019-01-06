@@ -28,6 +28,7 @@ router.get('/researchPlan', controller.researchPlanPage);
 router.get('/industrail', controller.industrailPage);
 router.get('/partnership', controller.partnershipPage);
 
+router.post('/post_contact', controller.post_contactPage);
 
 
 

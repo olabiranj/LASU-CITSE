@@ -92,3 +92,8 @@ exports.partnershipPage = (req, res, next)=>{
 exports.implementationPage = function (req, res, next) {
     res.render('implementation', {});
 }
+
+exports.post_contactPage =(req, res, next)=>{
+
+    res.render('contact', {})
+}
