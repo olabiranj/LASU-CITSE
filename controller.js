@@ -89,3 +89,6 @@ exports.industrailPage = (req, res, next)=>{
 exports.partnershipPage = (req, res, next)=>{
     res.render('partnership', {})
 }
+exports.implementationPage = function (req, res, next) {
+    res.render('implementation', {});
+}

@@ -37,6 +37,7 @@ router.get('/partnership', controller.partnershipPage);
 
 
 
+router.get('/implementation-timeline', controller.implementationPage); 
 
 
 module.exports = router;
