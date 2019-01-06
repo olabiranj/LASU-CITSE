@@ -27,16 +27,6 @@ router.get('/onlineCourse', controller.onlineCoursePage);
 router.get('/researchPlan', controller.researchPlanPage);
 router.get('/industrail', controller.industrailPage);
 router.get('/partnership', controller.partnershipPage);
-
-
-
-
-
-
-
-
-
-
 router.get('/implementation-timeline', controller.implementationPage); 
 
 

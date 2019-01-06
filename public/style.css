@@ -493,9 +493,9 @@ img {
       height: 70px; } }
 
 .header-area .main-menu .nav-link {
-  font-size: 14px;
+  font-size: 15px;
   text-transform: capitalize;
-  padding: 8px 15px;
+  padding: 10px 10px;
   color: #ffffff;
   font-weight: 500;
   margin: 0 1px; }
