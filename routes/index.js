@@ -40,14 +40,6 @@ router.get('/partnership', controller.partnershipPage);
 
 router.post('/post_contact', controller.post_contactPage);
 
-
-
-
-
-
-
-
-
 router.get('/implementation-timeline', controller.implementationPage); 
 
 router.get('/dashboard', adminLoggedIn, function(req, res, next){
@@ -62,9 +54,9 @@ router.get('/signup', function(req, res, next){
 router.get('/dashboard/authorizeadmins', isLoggedIn, function(req, res, next){
   User.find({position: "member"}).then((result)=>{
     if (result){
-       res.render('authorize', {result})
+       res.render('backend/authorize', {result})
     }else{
-       res.render('authorize')      
+       res.render('backend/authorize')      
     }
   })
 })
@@ -90,10 +82,10 @@ router.get('/dashboard/slider', function(req, res, next){
 
    Slider.find({}).then((result)=>{
     if (result){
-       res.render('slider', {result, failure, success})
+       res.render('backend/slider', {result, failure, success})
       console.log(result)
     }else{
-       res.render('slider')      
+       res.render('backend/slider')      
     }
   })
 })
