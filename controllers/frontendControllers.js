@@ -79,7 +79,7 @@ exports.onlineCoursePage = (req, res, next)=>{
 }
 
 exports.researchPlanPage = (req, res, next)=>{
-    res.render('researchPlan', {})
+    res.render('/frontend/researchPlan', {})
 }
 
 exports.industrailPage = (req, res, next)=>{
