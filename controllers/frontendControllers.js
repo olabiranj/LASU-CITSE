@@ -19,66 +19,6 @@ exports.teamPage = function (req, res, next) {
 };
 
 exports.jecPage = function (req, res, next) {
-<<<<<<< HEAD:controller.js
-    res.render('jec', {});
-};
-
-exports.visionPage = function (req, res, next) {
-    res.render('vision', {});
-};
-
-exports.missionPage = function (req, res, next) {
-    res.render('mission', {});
-};
-
-exports.objectivesPage = function (req, res, next) {
-    res.render('objectives', {});
-};
-
-exports.retentionPage = function (req, res, next) {
-    res.render('retention', {});
-};
-
-exports.recruitmentPage = function (req, res, next) {
-    res.render('recruitment', {});
-};
-
-exports.staffPage = function (req, res, next) {
-    res.render('staff', {});
-};
-
-exports.operationsPage = function (req, res, next) {
-    res.render('operations', {});
-};
-
-exports.educationPage = (req, res, next)=>{
-    res.render('frontend/education', {})
-};
-
-exports.learningPage = (req, res, next)=>{
-    res.render('frontend/learning', {})
-};
-
-exports.teachingPage = (req, res, next)=>{
-    res.render('frontend/teaching', {});
-};
-
-exports.skillsPage = (req, res, next)=>{
-    res.render('frontend/skills', {})
-};
-
-exports.innovationPage = (req, res, next)=>{
-    res.render('innovation', {})
-};
-
-exports.innovationAssPage = (req, res, next)=>{
-    res.render('innovationAss', {})
-};
-
-exports.onlineCoursePage = (req, res, next)=>{
-    res.render('onlineCourse', {})
-};
-=======
     res.render('frontend/jec', {});
 }
 
@@ -137,20 +77,14 @@ exports.innovationAssPage = (req, res, next)=>{
 exports.onlineCoursePage = (req, res, next)=>{
     res.render('frontend/onlineCourse', {})
 }
->>>>>>> d42d992b71be9390f9c74d8338e1e55d4ff8084d:controllers/frontendControllers.js
 
 exports.researchPlanPage = (req, res, next)=>{
     res.render('researchPlan', {})
 };
 
 exports.industrailPage = (req, res, next)=>{
-<<<<<<< HEAD:controller.js
-    res.render('industrail', {})
-};
-=======
     res.render('frontend/industrail', {})
 }
->>>>>>> d42d992b71be9390f9c74d8338e1e55d4ff8084d:controllers/frontendControllers.js
 
 exports.partnershipPage = (req, res, next)=>{
     res.render('frontend/partnership', {})
