@@ -1,5 +1,5 @@
 exports.homePage = function (req, res, next) {
-    res.render('index', {  });
+    res.render('frontend/index', {  });
 };
 
 exports.servicesPage = function (req, res, next) {
@@ -20,71 +20,71 @@ exports.teamPage = function (req, res, next) {
 
 exports.jecPage = function (req, res, next) {
     res.render('jec', {});
-}
+};
 
 exports.visionPage = function (req, res, next) {
     res.render('vision', {});
-}
+};
 
 exports.missionPage = function (req, res, next) {
     res.render('mission', {});
-}
+};
 
 exports.objectivesPage = function (req, res, next) {
     res.render('objectives', {});
-}
+};
 
 exports.retentionPage = function (req, res, next) {
     res.render('retention', {});
-}
+};
 
 exports.recruitmentPage = function (req, res, next) {
     res.render('recruitment', {});
-}
+};
 
 exports.staffPage = function (req, res, next) {
     res.render('staff', {});
-}
+};
 
 exports.operationsPage = function (req, res, next) {
     res.render('operations', {});
-}
+};
 
 exports.educationPage = (req, res, next)=>{
-    res.render('education', {})
-}
+    res.render('frontend/education', {})
+};
 
 exports.learningPage = (req, res, next)=>{
-    res.render('learning', {})
-}
+    res.render('frontend/learning', {})
+};
 
 exports.teachingPage = (req, res, next)=>{
-    res.render('teaching', {})
-}
+    res.render('frontend/teaching', {});
+};
 
 exports.skillsPage = (req, res, next)=>{
-    res.render('skills', {})
-}
+    res.render('frontend/skills', {})
+};
 
 exports.innovationPage = (req, res, next)=>{
     res.render('innovation', {})
-}
+};
 
 exports.innovationAssPage = (req, res, next)=>{
     res.render('innovationAss', {})
-}
+};
 
 exports.onlineCoursePage = (req, res, next)=>{
     res.render('onlineCourse', {})
-}
+};
 
 exports.researchPlanPage = (req, res, next)=>{
     res.render('researchPlan', {})
-}
+};
 
 exports.industrailPage = (req, res, next)=>{
     res.render('industrail', {})
-}
+};
 
 exports.partnershipPage = (req, res, next)=>{
     res.render('partnership', {})

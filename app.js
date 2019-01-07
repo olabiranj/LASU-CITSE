@@ -26,6 +26,9 @@ mongoose.connect('mongodb://localhost:27017/dashboard').then(console.log("databa
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views/partials'));
+
+
 app.set('view engine', 'ejs');
 
 
