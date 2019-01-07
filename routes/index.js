@@ -3,7 +3,7 @@ var router = express.Router();
 let passport = require("passport");
 let User = require('../models/users');
 const methodOverride = require("method-override");
-const controller = require('../controller')
+const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
 
 /* GET home page. */
@@ -48,12 +48,12 @@ router.post('/post_contact', controller.post_contactPage);
 router.get('/implementation-timeline', controller.implementationPage); 
 
 router.get('/dashboard', adminLoggedIn, function(req, res, next){
-  res.render('dashboard')
+  res.render('backend/dashboard')
 })
 
 router.get('/login', dashboardController.login)
 router.get('/signup', function(req, res, next){
-    res.render('signup')
+    res.render('backend/signup')
 })
 
 router.get('/dashboard/authorizeadmins', isLoggedIn, function(req, res, next){

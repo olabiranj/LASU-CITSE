@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>INNOVATIONS| CITSE - Africa Centre of Excellence</title>
+    <title>OBJECTIVES | CITSE - Africa Centre of Excellence</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/Africa.png">
@@ -17,12 +17,17 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/w3.css">
+    <style>
+    .w3-container ol li{
+        list-style-type:decimal;
+    }
+    </style>
 
 </head>
 
 <body>
     <!-- Preloader -->
-    <% include ./partials/navbar.ejs %>
+    <% include ../partials/navbar.ejs %>
 
     <!-- ***** Breadcumb Area Start ***** -->
     <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/ttt.JPG);">
@@ -30,45 +35,54 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title">INNOVATIONS IN PEDAGOGY THAT WILL BE LAUNCHED BY THE CENTRE</h3>
+                        <h3 class="breadcumb-title">OBJECTIVES</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ***** Breadcumb Area End ***** -->
-    
+
     <!-- ***** Blog Area Start ***** -->
-    <section class="medilife-blog-area section-padding-50">
+    <section class="medilife-blog-area section-padding-100">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class=" w3-container w3-leftbar">
-                        <br>
-                        <!-- page main post -->
-                        <p>
-                            With improved resourcing as a Centre of Excellence, emphasis in pedagogical practices in the proposed Centre will shift to 
-                            technology-mediation. 
-                            The innovation will be within the Culturo-Techno-Contextual Approach which has 
-                            the high chance of producing innovative and transformative STEM master teachers. 
-                            E-learning protocols will also be deployed to ensure flexible learning and strengthen face-to-face delivery of the curriculum.
-                        </p>
-                        <br><br>
+                        <div class="container-fluid">
+                            <br>
+                            <ol>
+                                <li>To offer unique, qualitative and transformative training aimed at promoting excellence and innovation in STEM
+                                    teaching,
+                                    development of 21st century skills and leadership.</li>
+                                <li>To serve as a train-the-trainers’ centre of excellence for skilled STEM master teachers who will later
+                                    undertake
+                                    training of other teachers and school leaders and policy makers.</li>
+                                <li>To develop and apply models of innovative STEM teaching and learning based on cutting-edge research and
+                                    practice.</li>
+                                <li>To address science and technology-related national and regional development challenges through the provision of
+                                    better-trained STEM teachers.</li>
+                                <li>To undertake continuous monitoring of the critical mass of master teachers trained by the Centre in
+                                    institutions where
+                                    they are multiplying their innovative and transformative skills.</li>
+                            </ol>
+                            <br><br>
+                        </div>
                     </div>
                 </div>
-    
+
                 <!-- sideNav -->
-                <% include ./partials/sideNav.ejs %>
+                <% include ../partials/sideNav.ejs %>
             </div>
-    
-            
+
+
         </div>
     </section>
     <!-- ***** Blog Area End ***** -->
 
 
     <!-- ***** Footer Area Start ***** -->
-    <% include ./partials/footer.ejs %>
+    <% include ../partials/footer.ejs %>
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
