@@ -167,7 +167,7 @@ router.post("/uploadslider", function (req, res){
 
     // console.log("sorry cannot save new data")
    }   
-     // res.send("test")
+  //    // res.send("test")
     })
     }
   })
