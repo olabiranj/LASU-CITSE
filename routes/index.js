@@ -203,7 +203,7 @@ router.put("/update/uploadslider", function (req, res){
 
 
 router.post('/createAccount', passport.authenticate('local.registerAdmin',{
-  successRedirect: 'backend/dashboard/authorizeadmins',
+  successRedirect: '/dashboard/authorizeadmins',
   failureRedirect: '/',
   failureFlash: true
 }))

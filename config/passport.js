@@ -40,7 +40,7 @@ passport.use('local.registerAdmin', new LocalStrategy({
                 
             }
             
-            // return done(null, newUser)
+            return done(null, newUser)
         })
     })
 }))
