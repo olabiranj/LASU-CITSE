@@ -140,10 +140,15 @@ router.post("/uploadslider", function (req, res){
    res.send(err)
     }else{
       console.log(req.files);
-      Slider.find({}).then(function(result){
-   if (!result){ 
+      Slider.findOne({name: "slider"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update sliders not create new ones");
+             res.redirect("/dashboard/slider");
 
-        let newSlider = new Slider();
+        
+         }else if(!result){
+           let newSlider = new Slider();
            newSlider.slider1.name = req.files['slider1'][0].fieldname;
            newSlider.slider1.path = req.files['slider1'][0].path;
            newSlider.slider2.name = req.files['slider2'][0].fieldname;
@@ -154,16 +159,12 @@ router.post("/uploadslider", function (req, res){
            
          newSlider.save().then((result)=>{
            if(result){
-             console.log(result)
+             console.log(result)  
              res.redirect("/dashboard/slider");
            }else{
              res.send("err")
            }
          })
-
-         }else{
-               req.flash('failure', "Sorry You can only update sliders not create new ones");
-             res.redirect("/dashboard/slider");
 
     // console.log("sorry cannot save new data")
    }   
