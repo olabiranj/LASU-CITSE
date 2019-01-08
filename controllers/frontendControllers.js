@@ -1,3 +1,8 @@
+
+let mongoose = require('mongoose')
+let message = require('../models/message')
+
+
 exports.homePage = function (req, res, next) {
     res.render('frontend/index', {  });
 };
@@ -94,6 +99,13 @@ exports.implementationPage = function (req, res, next) {
 }
 
 exports.post_contactPage =(req, res, next)=>{
-
+    let messageData = {
+        name: req.body.name,
+        email: req.body.email,
+        message: req.body.message
+        
+    }
+    let newData = new message(messageData);
+    newData.save()
     res.render('frontend/contact', {})
 }
