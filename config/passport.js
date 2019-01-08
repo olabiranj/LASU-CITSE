@@ -21,10 +21,11 @@ passport.use('local.registerAdmin', new LocalStrategy({
     passReqToCallback: true
 }, function(req, email, password, done){
     User.findOne({'email': email}, function(err, user){
-        if (err){
+        if (err) {
             return done(err);
         }
-        if (user){
+        if (user) {
+            req.flash('error', 'User account exist, login instead');
             return done(null, false)
         }
 
@@ -40,7 +41,7 @@ passport.use('local.registerAdmin', new LocalStrategy({
                 
             }
             
-            // return done(null, newUser)
+            return done(null, newUser)
         })
     })
 }))
@@ -60,7 +61,7 @@ passport.use('local.loginAdmin', new LocalStrategy({
             return done(null, false)
         }
 
-        if(!user.validatePassword(req.body.password)) {
+        if(!user.validatePassword(password)) {
             req.flash('wrongMatric', "Wrong Password")
             return done(null, false)
         }

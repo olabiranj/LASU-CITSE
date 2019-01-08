@@ -83,7 +83,7 @@ router.get('/dashboard/slider', function(req, res, next){
 
    Slider.find({}).then((result)=>{
     if (result){
-       res.render('slider', {result, failure, success, uploaded})
+       res.render('backend/slider', {result, failure, success, uploaded})
       console.log(result)
     }else{
        res.render('backend/slider')      
@@ -206,14 +206,12 @@ router.put("/update/uploadslider", function (req, res){
 
 
 router.post('/createAccount', passport.authenticate('local.registerAdmin',{
-  successRedirect: 'backend/dashboard/authorizeadmins',
+  successRedirect: '/dashboard/authorizeadmins',
   failureRedirect: '/',
   failureFlash: true
 }))
 
 router.post('/login/admin', passport.authenticate('local.loginAdmin',{
-  // successRedirect: 'backend/dashboard',
-  // failureRedirect: '/',
   successRedirect: '/dashboard',
   failureRedirect: '/login',
   failureFlash: true
