@@ -3,7 +3,7 @@ exports.homePage = function (req, res, next) {
 };
 
 exports.servicesPage = function (req, res, next) {
-    res.render('frontend/services', {});
+    res.render('extras/services', {});
 };
 
 exports.contactPage = function (req, res, next) {
@@ -11,7 +11,7 @@ exports.contactPage = function (req, res, next) {
 };
 
 exports.newsPage = function (req, res, next) {
-    res.render('frontend/news', {});
+    res.render('extras/news', {});
 };
 
 exports.teamPage = function (req, res, next) {
@@ -20,71 +20,71 @@ exports.teamPage = function (req, res, next) {
 
 exports.jecPage = function (req, res, next) {
     res.render('frontend/jec', {});
-}
+};
 
 exports.visionPage = function (req, res, next) {
     res.render('frontend/vision', {});
-}
+};
 
 exports.missionPage = function (req, res, next) {
     res.render('frontend/mission', {});
-}
+};
 
 exports.objectivesPage = function (req, res, next) {
     res.render('frontend/objectives', {});
-}
+};
 
 exports.retentionPage = function (req, res, next) {
     res.render('frontend/retention', {});
-}
+};
 
 exports.recruitmentPage = function (req, res, next) {
     res.render('frontend/recruitment', {});
-}
+};
 
 exports.staffPage = function (req, res, next) {
     res.render('frontend/staff', {});
-}
+};
 
 exports.operationsPage = function (req, res, next) {
     res.render('frontend/operations', {});
-}
+};
 
 exports.educationPage = (req, res, next)=>{
     res.render('frontend/education', {})
-}
+};
 
 exports.learningPage = (req, res, next)=>{
     res.render('frontend/learning', {})
-}
+};
 
 exports.teachingPage = (req, res, next)=>{
-    res.render('frontend/teaching', {})
-}
+    res.render('frontend/teaching', {});
+};
 
 exports.skillsPage = (req, res, next)=>{
     res.render('frontend/skills', {})
-}
+};
 
 exports.innovationPage = (req, res, next)=>{
     res.render('frontend/innovation', {})
-}
+};
 
 exports.innovationAssPage = (req, res, next)=>{
     res.render('frontend/innovationAss', {})
-}
+};
 
 exports.onlineCoursePage = (req, res, next)=>{
     res.render('frontend/onlineCourse', {})
-}
+};
 
 exports.researchPlanPage = (req, res, next)=>{
-    res.render('researchPlan', {})
-};
+    res.render('frontend/researchPlan', {})
+}
 
 exports.industrailPage = (req, res, next)=>{
     res.render('frontend/industrail', {})
-}
+};
 
 exports.partnershipPage = (req, res, next)=>{
     res.render('frontend/partnership', {})
