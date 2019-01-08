@@ -209,8 +209,10 @@ router.post('/createAccount', passport.authenticate('local.registerAdmin',{
 }))
 
 router.post('/login/admin', passport.authenticate('local.loginAdmin',{
-  successRedirect: 'backend/dashboard',
-  failureRedirect: '/',
+  // successRedirect: 'backend/dashboard',
+  // failureRedirect: '/',
+  successRedirect: '/dashboard',
+  failureRedirect: '/login',
   failureFlash: true
 }))
 
