@@ -87,10 +87,11 @@ router.delete('/deleteadmin', function(req, res, next){
 router.get('/dashboard/slider', function(req, res, next){
       let failure = req.flash('failure');
       let success = req.flash('success');     
+      let uploaded = req.flash('uploaded');     
 
    Slider.find({}).then((result)=>{
     if (result){
-       res.render('slider', {result, failure, success})
+       res.render('slider', {result, failure, success, uploaded})
       console.log(result)
     }else{
        res.render('slider')      
@@ -160,6 +161,7 @@ router.post("/uploadslider", function (req, res){
          newSlider.save().then((result)=>{
            if(result){
              console.log(result)  
+               req.flash('uploaded', "Slidder has been uploaded successfully");             
              res.redirect("/dashboard/slider");
            }else{
              res.send("err")
