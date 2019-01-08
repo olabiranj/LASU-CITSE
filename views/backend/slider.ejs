@@ -115,6 +115,9 @@
         <span style="display: none" id="success">
         <%=success%>
     </span>
+       <span style="display: none" id="uploaded">
+        <%=uploaded%>
+    </span>
 
           <br> <br>  
         <h1 style="margin-left:200px">Slider Images</h1> <hr>
@@ -211,6 +214,11 @@
         
   if($.trim($('#failure').text()).length !== 0) {
            alert("<%=failure%>")
+        }
+
+        
+  if($.trim($('#uploaded').text()).length !== 0) {
+           alert("<%=uploaded%>")
         }
 
         
