@@ -79,10 +79,11 @@ router.delete('/deleteadmin', function(req, res, next){
 router.get('/dashboard/slider', function(req, res, next){
       let failure = req.flash('failure');
       let success = req.flash('success');     
+      let uploaded = req.flash('uploaded');     
 
    Slider.find({}).then((result)=>{
     if (result){
-       res.render('backend/slider', {result, failure, success})
+       res.render('backend/slider', {result, failure, success, uploaded})
       console.log(result)
     }else{
        res.render('backend/slider')      
@@ -132,34 +133,36 @@ router.post("/uploadslider", function (req, res){
    res.send(err)
     }else{
       console.log(req.files);
-      Slider.find({}).then(function(result){
-   if (!result){ 
+      Slider.findOne({name: "slider"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update sliders not create new ones");
+             res.redirect("/dashboard/slider");
 
-        let newSlider = new Slider();
+        
+         }else if(!result){
+           let newSlider = new Slider();
            newSlider.slider1.name = req.files['slider1'][0].fieldname;
-           newSlider.slider1.path = req.files['slider1'][0].path;
+           newSlider.slider1.path = '/uploads/' + req.files['slider1'][0].filename;
            newSlider.slider2.name = req.files['slider2'][0].fieldname;
-           newSlider.slider2.path = req.files['slider2'][0].path;
+           newSlider.slider2.path = '/uploads/' + req.files['slider2'][0].filename;
            newSlider.slider3.name = req.files['slider3'][0].fieldname;
-           newSlider.slider3.path = req.files['slider3'][0].path;
+           newSlider.slider3.path = '/uploads/'+ req.files['slider3'][0].filename;
            newSlider.name = "slider";           
            
          newSlider.save().then((result)=>{
            if(result){
-             console.log(result)
+             console.log(result)  
+               req.flash('uploaded', "Slidder has been uploaded successfully");             
              res.redirect("/dashboard/slider");
            }else{
              res.send("err")
            }
          })
 
-         }else{
-               req.flash('failure', "Sorry You can only update sliders not create new ones");
-             res.redirect("/dashboard/slider");
-
     // console.log("sorry cannot save new data")
    }   
-     // res.send("test")
+  //    // res.send("test")
     })
     }
   })
@@ -177,11 +180,11 @@ router.put("/update/uploadslider", function (req, res){
       console.log(req.files);
       Slider.findOneAndUpdate({"name": "slider"},
        {$set:{"slider1.name": req.files['slider1'][0].fieldname,
-        "slider1.path": req.files['slider1'][0].path,
+        "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
         "slider2.name": req.files['slider2'][0].fieldname,
-      "slider2.path": req.files['slider2'][0].path,
+      "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
      "slider3.name": req.files['slider3'][0].fieldname,
-     "slider3.path": req.files['slider3'][0].path,
+     "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
     
     }},
      {new: true})
@@ -209,8 +212,6 @@ router.post('/createAccount', passport.authenticate('local.registerAdmin',{
 }))
 
 router.post('/login/admin', passport.authenticate('local.loginAdmin',{
-  // successRedirect: 'backend/dashboard',
-  // failureRedirect: '/',
   successRedirect: '/dashboard',
   failureRedirect: '/login',
   failureFlash: true
