@@ -143,11 +143,11 @@ router.post("/uploadslider", function (req, res){
          }else if(!result){
            let newSlider = new Slider();
            newSlider.slider1.name = req.files['slider1'][0].fieldname;
-           newSlider.slider1.path = req.files['slider1'][0].path;
+           newSlider.slider1.path = '/uploads/' + req.files['slider1'][0].filename;
            newSlider.slider2.name = req.files['slider2'][0].fieldname;
-           newSlider.slider2.path = req.files['slider2'][0].path;
+           newSlider.slider2.path = '/uploads/' + req.files['slider2'][0].filename;
            newSlider.slider3.name = req.files['slider3'][0].fieldname;
-           newSlider.slider3.path = req.files['slider3'][0].path;
+           newSlider.slider3.path = '/uploads/'+ req.files['slider3'][0].filename;
            newSlider.name = "slider";           
            
          newSlider.save().then((result)=>{
@@ -162,7 +162,7 @@ router.post("/uploadslider", function (req, res){
 
     // console.log("sorry cannot save new data")
    }   
-     // res.send("test")
+  //    // res.send("test")
     })
     }
   })
@@ -180,11 +180,11 @@ router.put("/update/uploadslider", function (req, res){
       console.log(req.files);
       Slider.findOneAndUpdate({"name": "slider"},
        {$set:{"slider1.name": req.files['slider1'][0].fieldname,
-        "slider1.path": req.files['slider1'][0].path,
+        "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
         "slider2.name": req.files['slider2'][0].fieldname,
-      "slider2.path": req.files['slider2'][0].path,
+      "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
      "slider3.name": req.files['slider3'][0].fieldname,
-     "slider3.path": req.files['slider3'][0].path,
+     "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
     
     }},
      {new: true})
