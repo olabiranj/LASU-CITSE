@@ -26,6 +26,9 @@ mongoose.connect('mongodb://localhost:27017/dashboard').then(console.log("databa
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views/partials'));
+
+
 app.set('view engine', 'ejs');
 
 
@@ -67,7 +70,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('frontend/error');
 });
 
 module.exports = app;

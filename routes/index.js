@@ -6,7 +6,7 @@ const multer =require("multer");
 let User = require('../models/users');
 let Slider = require('../models/slider');
 const methodOverride = require("method-override");
-const controller = require('../controller')
+const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
 
 /* GET home page. */
@@ -40,31 +40,23 @@ router.get('/partnership', controller.partnershipPage);
 
 router.post('/post_contact', controller.post_contactPage);
 
-
-
-
-
-
-
-
-
 router.get('/implementation-timeline', controller.implementationPage); 
 
 router.get('/dashboard', adminLoggedIn, function(req, res, next){
-  res.render('dashboard')
+  res.render('backend/dashboard')
 })
 
 router.get('/login', dashboardController.login)
 router.get('/signup', function(req, res, next){
-    res.render('signup')
+    res.render('backend/signup')
 })
 
 router.get('/dashboard/authorizeadmins', isLoggedIn, function(req, res, next){
   User.find({position: "member"}).then((result)=>{
     if (result){
-       res.render('authorize', {result})
+       res.render('backend/authorize', {result})
     }else{
-       res.render('authorize')      
+       res.render('backend/authorize')      
     }
   })
 })
@@ -91,10 +83,10 @@ router.get('/dashboard/slider', function(req, res, next){
 
    Slider.find({}).then((result)=>{
     if (result){
-       res.render('slider', {result, failure, success, uploaded})
+       res.render('backend/slider', {result, failure, success, uploaded})
       console.log(result)
     }else{
-       res.render('slider')      
+       res.render('backend/slider')      
     }
   })
 })
