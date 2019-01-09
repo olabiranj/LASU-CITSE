@@ -37,6 +37,8 @@ router.get('/onlineCourse', controller.onlineCoursePage);
 router.get('/researchPlan', controller.researchPlanPage);
 router.get('/industrial', controller.industrailPage);
 router.get('/partnership', controller.partnershipPage);
+router.get('/news', controller.newsPage);
+
 
 router.post('/post_contact', controller.post_contactPage);
 

@@ -109,3 +109,7 @@ exports.post_contactPage =(req, res, next)=>{
     newData.save()
     res.render('frontend/contact', {})
 }
+
+exports.newsPage = (req,res,next)=>{
+    res.render('extras/news', {})
+}
