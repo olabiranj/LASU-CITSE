@@ -61,7 +61,7 @@ passport.use('local.loginAdmin', new LocalStrategy({
         }
 
         if(!user.validatePassword(req.body.password)) {
-            req.flash('wrongMatric', "Wrong Password")
+            req.flash('wrongPassword', "Wrong Password")
             return done(null, false)
         }
 
