@@ -1,10 +1,17 @@
 
 let mongoose = require('mongoose')
 let message = require('../models/message')
+let Slider = require('../models/slider');
 
 
 exports.homePage = function (req, res, next) {
-    res.render('frontend/index', {  });
+    Slider.find({}).then((result)=>{
+        if (result){
+    res.render('frontend/index', {result});
+      }else{
+    res.render('frontend/index');          
+      }
+    })
 };
 
 exports.servicesPage = function (req, res, next) {
