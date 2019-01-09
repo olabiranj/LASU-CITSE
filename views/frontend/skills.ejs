@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>STAFF DEVELOPMENT | CITSE - Africa Centre of Excellence</title>
+    <title>SKILLS GAPPED TO.. | CITSE - Africa Centre of Excellence</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/Africa.png">
@@ -18,14 +18,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/w3.css">
     <style>
-
-    </style>
-
+         .this{
+            list-style-type: disc;
+            list-style-position: inside;
+            padding: 5px;
+        }
+     </style>
 </head>
 
 <body>
     <!-- Preloader -->
-    <% include ./partials/navbar.ejs %>
+    <% include ../partials/navbar.ejs %>
 
     <!-- ***** Breadcumb Area Start ***** -->
     <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/ttt.JPG);">
@@ -33,44 +36,51 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title">STAFF DEVELOPMENT</h3>
+                        <h3 class="breadcumb-title">SKILLS GAPS TO BE BRIDGED BY THE PROPOSED CENTRE</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ***** Breadcumb Area End ***** -->
-
+    
     <!-- ***** Blog Area Start ***** -->
-    <section class="medilife-blog-area section-padding-100">
+    <section class="medilife-blog-area section-padding-50">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class=" w3-container w3-leftbar">
                         <br>
-                        <p>The proposed Centre will support the career development of the associated faculty members (both academic and
-                        administrative) by ensuring attendance and participation at conferences both local and international at least once a
-                        year. Incentives will be put in place both through the institution or the proposed Centre, in appreciation of hard
-                        work. Such incentives may include establishing research grants from where faculty members who for example have produced
-                        master’s students or PhD graduates. They will be encouraged to pursue postdoctoral fellowships after graduation. For
-                        the administrative support staff of the proposed Center to further their career development, sponsorship to job-related
-                        conferences nationally and internationally will also be put in place.</p>
+                        <!-- page main post -->
+                        <p>
+                            The skills gaps to be bridged by the proposed centre are: <br> <br> 
+                        </p>
+                        <form action="">
+                            <ul class="this">
+                                <li class="this">Weak STEM practical skills and hence inability to organise effective laboratory classes for their students</li>
+                                <li class="this">Inadequate exposure to teaching practice  </li>
+                                <li class="this">Poor classroom management and control   </li>
+                                <li class="this">Poor computer skills  </li>
+                                <li class="this">Lack of self-reliant and entrepreneurial skills</li>
+                            
+                            </ul>
+                        </form>
                         <br><br>
                     </div>
                 </div>
-
+    
                 <!-- sideNav -->
-                <% include ./partials/sideNav.ejs %>
+                <% include ../partials/sideNav.ejs %>
             </div>
-
-
+    
+            
         </div>
     </section>
     <!-- ***** Blog Area End ***** -->
 
 
     <!-- ***** Footer Area Start ***** -->
-    <% include ./partials/footer.ejs %>
+    <% include ../partials/footer.ejs %>
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
