@@ -469,7 +469,7 @@ img {
 
 .main-header-area {
   width: 100%;
-  height: 110px;
+  height: 80px;
   position: relative;
   z-index: 1;
   background-color: rgba(0, 108, 255, 0.5);
@@ -493,9 +493,9 @@ img {
       height: 70px; } }
 
 .header-area .main-menu .nav-link {
-  font-size: 14px;
+  font-size: 15px;
   text-transform: capitalize;
-  padding: 10px 20px;
+  padding: 10px 10px;
   color: #ffffff;
   font-weight: 500;
   margin: 0 1px; }
