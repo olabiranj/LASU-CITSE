@@ -1,0 +1,11 @@
+<nav class="navbar navbar-dark fixed-top bg-light flex-md-nowrap p-0 shadow">
+    <div class="col-md-2 pl-3">
+        <img src="/img/bg-img/admin.png" alt="">
+    </div>
+    <ul class="navbar-nav px-3 mr-5">
+        <li class="nav-item text-nowrap">
+            <span class="ml-2 mr-2 fa-lg text-dark"> Welcome <%= typeof loginUser !== 'undefined' ? loginUser : 'Administrator' %></span> |
+            <a class="text-danger ml-2" href="/logout" style="color:black">Sign out</a>
+        </li>
+    </ul>
+</nav>
