@@ -9,6 +9,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "ckeditor": "^4.11.1",
     "connect-mongodb-session": "^2.0.6",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
