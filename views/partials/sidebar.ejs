@@ -2,7 +2,7 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="/dashboard">
+        <a class="nav-link <%= (active == 'dashboard') ? 'active' : '' %>" href="/dashboard">
           <span data-feather="home"></span>
           Dashboard <span class="sr-only">(current)</span>
         </a>
@@ -16,7 +16,7 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard/news">
+        <a class="nav-link <%= (active == 'news') ? 'active' : '' %>" href="/dashboard/news">
           <span data-feather="bar-chart-2"></span>
           News
         </a>
