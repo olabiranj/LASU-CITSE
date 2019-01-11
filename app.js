@@ -12,6 +12,9 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const methodOverride = require("method-override");
+const nodemailer = require("nodemailer")
+// const bootstrap = require("bootstrap")
+// const jquery = require(jquery)
 
 
 var indexRouter = require('./routes/index');

@@ -2,6 +2,7 @@
 let mongoose = require('mongoose')
 let message = require('../models/message')
 let Slider = require('../models/slider');
+let nodemailer = require('nodemailer');
 let News = require('../models/news');
 
 
@@ -262,11 +263,48 @@ exports.post_contactPage =(req, res, next)=>{
     let messageData = {
         name: req.body.name,
         email: req.body.email,
+        subject: req.body.subject,
         message: req.body.message
         
     }
     let newData = new message(messageData);
     newData.save()
     res.render('frontend/contact', {})
+
+    // let Transport = nodemailer.createTransport({
+    //     service: "gmail",
+    //     secure: false,
+    //     port: 25, 
+    //     auth: {
+    //       user: "phawazzzy@gmail.com",
+    //       pass: keys.keys.password
+    //     },
+    //     tls: {
+    //       rejectUnauthorized: false
+    //     }
+    //   });
+  
+    //   //sending email with SMTP, configuration using SMTP settings
+    //   let mailOptions = {
+    //     from: req.body.email, //sender adress
+    //     to: "<phawazzzy@gmail.com>", 
+    //     subject: req.body.subject ,
+    //     message: req.body.message 
+    //   };
+  
+    //   Transport.sendMail(mailOptions, (error, info)=>{
+    //     if (error){
+    //       console.log(error);
+    //       console.log(mailOptions.message);
+          
+    //       //res.send("email could not send due to error:" + error);
+    //     }else{
+    //       console.log(info);
+    //       console.log(mailOptions.message);
+          
+    //      // res.send("email has been sent successfully");
+    //     }
+    //     res.redirect("/contact")
+    //   });
 }
 
