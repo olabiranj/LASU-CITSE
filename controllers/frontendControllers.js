@@ -79,17 +79,34 @@ exports.jecPage = function (req, res, next) {
   })
   }
 
-
-exports.visionPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/vision', {doc});
+  exports.visionPage = function (req, res, next) {
+    News.find({}).then((doc)=>{
+        if (doc){
           console.log(doc)
-    }else{
-    res.render('frontend/vision', {});
+            Page.findOne({name: "vision"}).then((file)=>{
+                if(file){
+        res.render('frontend/vision', {doc, file});
+          console.log(file)                                                    
+                }
+            })
+        }else{
+        res.render('frontend/vision');                      
+        }
+    })
     }
-  })
-};
+
+
+// exports.visionPage = function (req, res, next) {
+//      News.find({}).then((doc)=>{
+//       if (doc){
+        
+//     res.render('frontend/vision', {doc});
+//           console.log(doc)
+//     }else{
+//     res.render('frontend/vision', {});
+//     }
+//   })
+// };
 
 exports.missionPage = function (req, res, next) {
      News.find({}).then((doc)=>{

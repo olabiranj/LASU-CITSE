@@ -262,7 +262,7 @@ router.post('/postvision', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newPagesus = new Page();
+          let newPageus = new Page();
 
            newPageus.name = req.body.name;
            newPageus.content = req.body.content;
