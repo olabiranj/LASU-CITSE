@@ -33,6 +33,9 @@
                 <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
+                <span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
 
                 <br> <br>
             </main>
@@ -45,10 +48,15 @@
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+              // Show success alert
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }
+          
+      if($.trim($('#failure').text()).length !== 0) {
+        alert("<%=failure%>")
+      }
+
     </script>
 </body>
 

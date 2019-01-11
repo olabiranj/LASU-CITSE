@@ -32,7 +32,9 @@
                 <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
-                 
+                 <span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
 
                 <br> <br>
             </main>
@@ -50,7 +52,10 @@
             alert("<%=upload%>")
         }
        
-         </script>
+      if($.trim($('#failure').text()).length !== 0) {
+        alert("<%=failure%>")
+      }
+    </script>
 </body>
 
 </html>
