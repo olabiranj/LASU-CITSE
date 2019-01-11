@@ -19,16 +19,21 @@
                     <h1 class="h2">Vision CMS</h1>
                 </div>
 
-                <form action="/handlenews" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <form action="/postvision" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                     
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'Vision Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Vision Content'}); %>
+                    
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'vision', valueField: 'vision'}); %>                   
 
                     <%- include('../fields/button', { fieldvalue: 'Upload'}); %>
                 </form>
                 <span style="display: none" id="upload">
                     <%=upload%>
+                </span>
+                 <span style="display: none" id="failure">
+                    <%=failure%>
                 </span>
 
                 <br> <br>
@@ -46,6 +51,10 @@
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }
+       
+      if($.trim($('#failure').text()).length !== 0) {
+        alert("<%=failure%>")
+      }
     </script>
 </body>
 

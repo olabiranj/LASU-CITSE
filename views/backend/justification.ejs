@@ -19,16 +19,23 @@
                     <h1 class="h2">Justification CMS</h1>
                 </div>
 
-                <form action="/handlenews" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <form action="/postjustification" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                     
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'Justification Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Justification Content'}); %>
 
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'justification', valueField: 'justification' }); %>                   
+                    
                     <%- include('../fields/button', { fieldvalue: 'Upload'}); %>
+                    
                 </form>
                 <span style="display: none" id="upload">
                     <%=upload%>
+                </span>
+
+                 <span style="display: none" id="failure">
+                    <%=failure%>
                 </span>
 
                 <br> <br>
@@ -42,10 +49,15 @@
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+                // Show success alert
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }
+          
+      if($.trim($('#failure').text()).length !== 0) {
+        alert("<%=failure%>")
+      }
+
     </script>
 </body>
 

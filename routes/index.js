@@ -9,6 +9,44 @@ let News = require('../models/news');
 const methodOverride = require("method-override");
 const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
+let Page = require('../models/page');
+
+
+// HANDLE IMAGES 
+
+const  storage = multer.diskStorage({
+  destination: './public/uploads',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+  }
+})
+
+
+const upload = multer({
+  storage: storage ,
+  //limits: {fileSize: 10},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
+
+//check file type 
+function checkFileType(file, cb){
+  //Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // check ext
+  const extname = filetypes.test(path.extname
+  (file.originalname).toLowerCase());
+  //check mime
+  const mimetype = filetypes.test(file.mimetype)
+
+  if(mimetype && extname){
+    return cb(null, true);
+  }else {
+    cb('Error: images Only!')
+  }
+}
+
 
 /* GET home page. */
 router.get('/', controller.homePage);
@@ -92,38 +130,6 @@ router.get('/dashboard/slider', function(req, res, next){
   })
 })
 
-const  storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
-  }
-})
-
-
-const upload = multer({
-  storage: storage ,
-  //limits: {fileSize: 10},
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
-
-//check file type 
-function checkFileType(file, cb){
-  //Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // check ext
-  const extname = filetypes.test(path.extname
-  (file.originalname).toLowerCase());
-  //check mime
-  const mimetype = filetypes.test(file.mimetype)
-
-  if(mimetype && extname){
-    return cb(null, true);
-  }else {
-    cb('Error: images Only!')
-  }
-}
 
 router.post("/uploadslider", function (req, res){
 
@@ -233,67 +239,247 @@ router.get('/dashboard/news', function(req, res, next){
 
 router.get('/dashboard/vision', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
+      res.render('backend/vision', { upload, failure })
+})
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/vision', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/vision')
+router.post('/postvision', function(req, res, next){
+    upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+      console.log(req.files);
+      Page.findOne({name: "vision"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update Vision not create new ones");
+             res.redirect("/dashboard/vision");
+
+        
+         }else if(!result){
+
+  let newPage = new Page();
+
+           newPage.name = req.body.name;
+           newPage.content = req.body.content;
+           newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newPage.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Vision has been uploaded successfully");             
+             res.redirect('dashboard/vision');
+           }else{
+             res.send("err")
+           }
+         })
+
+    // console.log("sorry cannot save new data")
+   }   
+  //    // res.send("test")
+    })
     }
   })
 })
 
 router.get('/dashboard/justification', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
+  
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/justification', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/justification')
+     res.render('backend/justification', { upload, failure })
+   
+})
+
+router.post('/postjustification', function(req, res, next){
+ upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+      console.log(req.files);
+      Page.findOne({name: "justification"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update not create new ones");
+             res.redirect('dashboard/justification');
+
+        
+         }else if(!result){
+
+  let newPage = new Page();
+
+           newPage.name = req.body.name;
+           newPage.content = req.body.content;
+           newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newPage.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Justification has been uploaded successfully");             
+             res.redirect('dashboard/justification');
+           }else{
+             res.send("err")
+           }
+         })
+
+    // console.log("sorry cannot save new data")
+   }   
+  //    // res.send("test")
+    })
     }
   })
 })
+
 router.get('/dashboard/mission', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/mission', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/mission')
+      res.render('backend/mission', {upload, failure})
+  
+})
+
+router.post('/postmission', function(req, res, next){
+        upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+      console.log(req.files);
+      Page.findOne({name: "mission"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update not create new ones");
+             res.redirect('dashboard/mission');
+
+        
+         }else if(!result){
+
+  let newPage = new Page();
+
+           newPage.name = req.body.name;
+           newPage.content = req.body.content;
+           newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newPage.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Mission has been uploaded successfully");             
+             res.redirect('dashboard/mission');
+           }else{
+             res.send("err")
+           }
+         })
+
+    // console.log("sorry cannot save new data")
+   }   
+  //    // res.send("test")
+    })
     }
   })
 })
 
 router.get('/dashboard/objectives', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
+ 
+      res.render('backend/objectives', { upload, failure})
+    
+})
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/objectives', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/objectives')
+router.post('/postobjectives', function(req, res, next){
+      upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+      console.log(req.files);
+      Page.findOne({name: "objectives"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update not create new ones");
+             res.redirect('dashboard/objectives');
+
+        
+         }else if(!result){
+
+  let newPage = new Page();
+
+           newPage.name = req.body.name;
+           newPage.content = req.body.content;
+           newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newPage.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Objectives has been uploaded successfully");             
+             res.redirect('dashboard/objectives');
+           }else{
+             res.send("err")
+           }
+         })
+
+    // console.log("sorry cannot save new data")
+   }   
+  //    // res.send("test")
+    })
     }
   })
 })
 
 router.get('/dashboard/contact-us', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
+      res.render('backend/contact-us', { upload, failure })
+     
+})
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/contact-us', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/contact-us')
+router.post('/postcontactus', function(req, res, next){
+        upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+      console.log(req.files);
+      Page.findOne({name: "contactus"}).then(function(result){
+   if (result){ 
+        
+               req.flash('failure', "Sorry You can only update not create new ones");
+             res.redirect('dashboard/contact-us');
+
+        
+         }else if(!result){
+
+  let newPage = new Page();
+
+           newPage.name = req.body.name;
+           newPage.content = req.body.content;
+           newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newPage.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Contact-us has been uploaded successfully");             
+             res.redirect('dashboard/contact-us');
+           }else{
+             res.send("err")
+           }
+         })
+
+    // console.log("sorry cannot save new data")
+   }   
+  //    // res.send("test")
+    })
     }
   })
 })
+
 router.get('/dashboard/education', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -306,6 +492,34 @@ router.get('/dashboard/education', function (req, res, next) {
     }
   })
 })
+
+// router.post('/posteducation', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Education has been uploaded successfully");             
+//              res.redirect('dashboard/education');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
 
 router.get('/dashboard/teaching', function (req, res, next) {
   let upload = req.flash('upload');
@@ -320,6 +534,34 @@ router.get('/dashboard/teaching', function (req, res, next) {
   })
 })
 
+// router.post('/postteaching', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Teaching Page has been uploaded successfully");             
+//              res.redirect('dashboard/teaching');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
+
 router.get('/dashboard/learning-activities', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -332,6 +574,34 @@ router.get('/dashboard/learning-activities', function (req, res, next) {
     }
   })
 })
+
+// router.post('/postlearning-activities', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Learning-activities Page has been uploaded successfully");             
+//              res.redirect('dashboard/learning-activities');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
 
 router.get('/dashboard/skills-gap', function (req, res, next) {
   let upload = req.flash('upload');
@@ -346,6 +616,34 @@ router.get('/dashboard/skills-gap', function (req, res, next) {
   })
 })
 
+// router.post('/postgaps', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Skill-gap has been uploaded successfully");             
+//              res.redirect('dashboard/skills-gap');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
+
 router.get('/dashboard/innovations-a', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -358,6 +656,34 @@ router.get('/dashboard/innovations-a', function (req, res, next) {
     }
   })
 })
+
+// router.post('/postinnovations-a', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Innovaitions in Assesstments Page has been uploaded successfully");             
+//              res.redirect('dashboard/innovations-a');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
 
 router.get('/dashboard/innovations-p', function (req, res, next) {
   let upload = req.flash('upload');
@@ -372,6 +698,35 @@ router.get('/dashboard/innovations-p', function (req, res, next) {
   })
 })
 
+// router.post('/postinnovations-p', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Innovaitions in Padegogy Page has been uploaded successfully");             
+//              res.redirect('dashboard/innovations-p');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
+
+
 router.get('/dashboard/online-courses', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -384,6 +739,35 @@ router.get('/dashboard/online-courses', function (req, res, next) {
     }
   })
 })
+
+// router.post('/postonline-courses', function(req, res, next){
+//     upload(req, res, (err) => {
+//     if (err){
+    
+//     //res.render('students', {msg : err})
+//    res.send(err)
+//     }else{
+//         console.log(req.files)
+
+//           let newPage = new Page();
+
+//            newPage.name = req.body.name;
+//            newPage.content = req.body.content;
+//            newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+//            newPage.save().then((result)=>{
+//            if(result){
+//              console.log(result)  
+//                req.flash('upload', "Online-courses Page has been uploaded successfully");             
+//              res.redirect('dashboard/online-courses');
+//            }else{
+//              res.send("err")
+//            }
+//          })
+//     }
+//   })
+// })
+
 
 router.get('/dashboard/ISP', function (req, res, next) {
   let upload = req.flash('upload');
