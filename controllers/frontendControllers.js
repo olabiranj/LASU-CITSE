@@ -147,7 +147,7 @@ exports.operationsPage = function (req, res, next) {
       res.render('frontend/operations', { doc });
       console.log(doc)
     } else {
-      res.render('frontendoperations', {});
+      res.render('frontend/operations', {});
     }
   })
 };

@@ -21,11 +21,11 @@
 
                 <form action="/handlenews" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
-                    <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'News Header Image'}); %>
+                    <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: ' Education Header Image'}); %>
 
-                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'News Content'}); %>
+                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: ' Education Content'}); %>
 
-                    <%- include('../fields/button', { fieldvalue: 'Upload News'}); %>
+                    <%- include('../fields/button', { fieldvalue: 'Upload'}); %>
                 </form>
                 <span style="display: none" id="upload">
                     <%=upload%>
