@@ -4,6 +4,9 @@ let message = require('../models/message')
 let Slider = require('../models/slider');
 let nodemailer = require('nodemailer');
 let News = require('../models/news');
+let Page = require('../models/page');
+
+
 
 
 exports.homePage = function (req, res, next) {
@@ -62,16 +65,20 @@ exports.teamPage = function (req, res, next) {
 };
 
 exports.jecPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/jec', {doc});
-          console.log(doc)
-    }else{
-    res.render('frontend/jec', {});
-    }
+  News.find({}).then((doc)=>{
+      if (doc){
+          Page.findOne({name: "justification"}).then((file)=>{
+              if(file){
+      res.render('frontend/jec', {doc, file});
+        console.log(file)                                                    
+              }
+          })
+      }else{
+      res.render('frontend/jec');                      
+      }
   })
-    
-};
+  }
+
 
 exports.visionPage = function (req, res, next) {
      News.find({}).then((doc)=>{
