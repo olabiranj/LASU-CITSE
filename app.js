@@ -21,7 +21,7 @@ require("./config/passport");
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/dashboard').then(console.log("database connected"));
+mongoose.connect('mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected"));
 
 
 // view engine setup

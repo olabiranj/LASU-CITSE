@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="css/w3.css">
   <style>
   .panel {
-      border: 1px solid#000033; 
+      border: 1px solid#000033;
       border-radius:0 !important;
       transition: box-shadow 0.5s;
   }
@@ -56,8 +56,8 @@
       background-color:#000033;
       color: #fff;
   }
-  
-  
+
+
   </style>
 
 </head>
@@ -67,63 +67,55 @@
   <% include ../partials/navbar.ejs %>
 
   <!-- ***** Hero Area Start ***** -->
-  <section class="hero-area">
-    <div class="hero-slides owl-carousel">
-      <!-- Single Hero Slide -->
-      <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(img/bg-img/lASUarial.jpg);">
-        <div class="container h-100">
-          <div class="row h-100 align-items-center">
-            <div class="col-12">
-              <div class="hero-slides-content">
-                <h2 data-animation="fadeInUp" data-delay="100ms"><b>AFRICA CENTRE <br> OF EXCELLENCE INNOVATIVE AND TRANSFORMATIVE
-                STEM EDUCATION (ACEITSE)</b></h2>
-                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet, consectetuer adipiscing
-                  elit sed diam nonummy nibh euismod.</h6>
-                <a href="/about-us" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Discover
-                  CITSE <span>+</span></a>
-              </div>
+    <section class="hero-area">
+     <% for(var i=0; i < result.length; i++) { %>
+        <div class="hero-slides owl-carousel">
+                           <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(<%=result[i].slider1.path%>);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <h2 data-animation="fadeInUp" data-delay="100ms"><b>Africa Centre of Excellence <br> For Innovative and Transformative <br> STEM Education</b></h2>
+                                <h6 data-animation="fadeInUp" data-delay="400ms">To promote excellence in teaching and learning science, technology, engineering and mathematics</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- Single Hero Slide -->
-      <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(img/bg-img/lASUjambites.jpg);">
-        <div class="container h-100">
-          <div class="row h-100 align-items-center">
-            <div class="col-12">
-              <div class="hero-slides-content">
-                <h2 data-animation="fadeInUp" data-delay="100ms"><b>AFRICA CENTRE <br> OF EXCELLENCE INNOVATIVE AND TRANSFORMATIVE
-                    STEM EDUCATION (ACEITSE)</b></h2>
-                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet, consectetuer adipiscing
-                  elit sed diam nonummy nibh euismod.</h6>
-                <a href="/about-us" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Discover
-                  CITSE <span>+</span></a>
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(<%=result[i].slider2.path%>);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <h2 data-animation="fadeInUp" data-delay="100ms"><b>Africa Centre of Excellence <br> For Innovative and Transformative <br> STEM Education</b></h2>
+                                <h6 data-animation="fadeInUp" data-delay="400ms">To promote excellence in teaching and learning science, technology, engineering and mathematics</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- Single Hero Slide -->
-      <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(img/bg-img/9.jpg);">
-        <div class="container h-100">
-          <div class="row h-100 align-items-center">
-            <div class="col-12">
-              <div class="hero-slides-content">
-                <h2 data-animation="fadeInUp" data-delay="100ms"><b>AFRICA CENTRE <br> OF EXCELLENCE INNOVATIVE AND TRANSFORMATIVE
-                    STEM EDUCATION (ACEITSE)</b></h2>
-                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet, consectetuer adipiscing
-                  elit sed diam nonummy nibh euismod.</h6>
-                <a href="/about-us" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Discover
-                  CITSE <span>+</span></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Hero Area End ***** -->
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(<%=result[i].slider3.path%>);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                              <h2 data-animation="fadeInUp" data-delay="100ms"><b>Africa Centre of Excellence <br> For Innovative and Transformative <br> STEM Education</b></h2>
+                                <h6 data-animation="fadeInUp" data-delay="400ms">To promote excellence in teaching and learning science, technology, engineering and mathematics</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  
+
+            </div>
+      <%}%>
+        </div>
+    </section>
+    <!-- ***** Hero Area End ***** -->
+
 
   <!-- ***** About Us Area Start ***** -->
   <section class="medica-about-us-area section-padding-50">
@@ -190,7 +182,7 @@
         <a href="img/bg-img/program-mech-eng.jpg" class="btn gallery-img">See More +</a>
       </div>
     </div>
-  
+
     <!-- Single Gallery Item -->
     <div class="single-gallery-item">
       <img src="img/bg-img/g4.jpg" alt="">
@@ -299,7 +291,7 @@
                   aria-controls="specialities" aria-selected="true">Learning Activities</a>
               </li>
             </ul>
-  
+
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade" id="institution" role="tabpanel" aria-labelledby="institution-tab">
                 <div class="medilife-tab-content d-md-flex align-items-center">
@@ -312,7 +304,7 @@
                     teaching and learning to take an upward swing (Uwadiae, 2015). The science classrooms have not been left out as many
                     students at all levels and their teachers are using new and emerging technologies in class interaction. A survey by
                     Okebukola (2013) documents high rates of e-learning readiness of students and teachers in Nigerian schools.
-                  
+
                     The over 30 years of inquiry as to how best to present science to African students in a way to enhance meaningful
                     learning, bolster achievement and improve interest and attitude has resulted in pockets of approaches now needing
                     connecting threads. It now needs isolating the elements of the individual approaches which research has confirmed to

@@ -22,16 +22,16 @@
 
 <body>
     <!-- Preloader -->
-    <% include ./partials/navbar.ejs %>
+    <% include ../partials/navbar.ejs %>
 
     <!-- ***** Breadcumb Area Start ***** -->
-    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/time.jpg);">
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/news.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title">News</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetuer</p>
+                        <h3 class="breadcumb-title"><b>News </b></h3>
+                         <h4>Lorem ipsum dolor sit amet, consectetuer</h4> 
                     </div>
                 </div>
             </div>
@@ -46,64 +46,32 @@
                 <div class="col-12 col-lg-8">
     
                     <div class="single-blog-area">
+                                      <% for(var i=0; i < doc.length; i++) { %>
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="img/bg-img/program-mech-eng.jpg" alt="">
+                            <img src="<%=doc[i].newImg%>" alt="">
                             <!-- Post Date -->
                             <div class="post-date">
-                                <a href="#">Jan 23, 2018</a>
+                                <a href="#"><%=doc[i].createdDate%></a>
                             </div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
                             <div class="post-author">
-                                <a href="#"><img src="img/blog-img/joe.jpg" alt=""></a>
+                                <a href="#"><img src="img/bg-img/edu.jpg" alt=""></a>
                             </div>
-                            <a href="#" class="headline mb-0">Basic Engineering Workshop for all CITSE team </a>
+                            <a href="#" class="headline mb-0"><%=doc[i].title%> </a>
                             <div class="post-meta">
-                                <a href="#" class="post-author-name">by Eng. Olabiran Joshua</a> | <a href="#" class="post-catagory">Engineering</a>
+                                <a href="#" class="post-author-name">by <%=doc[i].writer%></a> | <a href="#" class="post-catagory"><%=doc[i].department%></a>
                             </div>
-                            <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec gravida tortor, non
-                                vehicula mauris. Cras aliquam lobortis nulla vel fermentum. Phasellus iaculis id nunc at
-                                egestas. Etiam nec venenatis tortor, quis fermentum diam. Pellentesque gravida ante nisi,
-                                vel posuere leo suscipit et. Proin tortor magna, pharetra vel faucibus in, interdum vitae
-                                est. Vivamus aliquet dapibus lacus, ut viverra diam dapibus vel. Ut vehicula rhoncus dolor,
-                                nec malesuada ligula condimentum eu. Proin id placerat lorem. Maecenas varius felis id dui
-                                aliquet, at iaculis mauris molestie. Proin mattis dolor ut lacus rutrum posuere. Ut
-                                ullamcorper ipsum iaculis risus mollis, in volutpat turpis efficitur. Nullam dignissim
-                                imperdiet augue a convallis.</p>
+                            <%-doc[i].content%>
+                                <br>    <button class="btn btn-primary">Read more...</button>
                         </div>
 
-                        <div class="blog-post-thumbnail">
-                            <img src="img/bg-img/g1.jpg" alt="">
-                            <!-- Post Date -->
-                            <div class="post-date">
-                                <a href="#">Jan 23, 2018</a>
-                            </div>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <div class="post-author">
-                                <a href="#"><img src="img/blog-img/joe.jpg" alt=""></a>
-                            </div>
-                            <a href="#" class="headline mb-0">STEM 23rd Lecture Series - Health is Wealth </a>
-                            <div class="post-meta">
-                                <a href="#" class="post-author-name">by Dr. Mainjoe</a> | <a href="#" class="post-catagory">Science</a>
-                            </div>
-                            <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec gravida tortor, non
-                                vehicula mauris. Cras aliquam lobortis nulla vel fermentum. Phasellus iaculis id nunc at
-                                egestas. Etiam nec venenatis tortor, quis fermentum diam. Pellentesque gravida ante nisi,
-                                vel posuere leo suscipit et. Proin tortor magna, pharetra vel faucibus in, interdum vitae
-                                est. Vivamus aliquet dapibus lacus, ut viverra diam dapibus vel. Ut vehicula rhoncus dolor,
-                                nec malesuada ligula condimentum eu. Proin id placerat lorem. Maecenas varius felis id dui
-                                aliquet, at iaculis mauris molestie. Proin mattis dolor ut lacus rutrum posuere. Ut
-                                ullamcorper ipsum iaculis risus mollis, in volutpat turpis efficitur. Nullam dignissim
-                                imperdiet augue a convallis.</p>
-                        </div>
-                        
+                      <%}%>
+                                              
                     </div>
+                    <!-- end -->
     
                     <div class="comments-area">
                         <h5>Comments</h5>
@@ -269,7 +237,7 @@
     <!-- ***** Blog Area End ***** -->
 
     <!-- ***** Footer Area Start ***** -->
-    <% include ./partials/footer.ejs %>
+    <% include ../partials/footer.ejs %>
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -282,6 +250,9 @@
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script>    
+    console.log(cont)
+    </script>
 
 </body>
 

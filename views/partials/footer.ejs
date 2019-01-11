@@ -25,36 +25,20 @@
                             <h6>Latest News</h6>
                         </div>
                         <div class="widget-blog-post">
-                            <!-- Single Blog Post -->
+                                 <% for(var i=0; i < doc.length; i++) { %>
+                                    <!-- Single Blog Post -->
                             <div class="widget-single-blog-post d-flex">
                                 <div class="widget-post-thumbnail">
-                                    <img src="img/core-img/p1.jpg" alt="">
+                                    <img src="<%=doc[i].newImg%>" alt="">
                                 </div>
                                 <div class="widget-post-content">
-                                    <a href="#">National University Commission</a>
+                                    <a href="/news"><%=doc[i].title%></a>
                                     <p>Dec 02, 2017</p>
                                 </div>
                             </div>
-                            <!-- Single Blog Post -->
-                            <div class="widget-single-blog-post d-flex">
-                                <div class="widget-post-thumbnail">
-                                    <img src="img/core-img/p2.jpg" alt="">
-                                </div>
-                                <div class="widget-post-content">
-                                    <a href="#">ECOWAS</a>
-                                    <p>Dec 02, 2017</p>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post -->
-                            <div class="widget-single-blog-post d-flex">
-                                <div class="widget-post-thumbnail">
-                                    <img src="img/core-img/p3.jpg" alt="">
-                                </div>
-                                <div class="widget-post-content">
-                                    <a href="#">Association of African Universities</a>
-                                    <p>Dec 02, 2017</p>
-                                </div>
-                            </div>
+                                    <%}%>
+
+                           
                         </div>
                     </div>
                 </div>
