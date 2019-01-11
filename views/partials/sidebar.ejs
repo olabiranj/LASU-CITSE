@@ -21,7 +21,98 @@
           <li class="nav-item">
             <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="/dashboard/justification"> Justification</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'vision') ? 'active' : '' %>" href="/dashboard/vision"> Vision</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'mission') ? 'active' : '' %>" href="#"> Mission</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'objectives') ? 'active' : '' %>" href="#"> Objectives</a>
+            <li class="nav-item">
+              <a class="nav-link <%= (active == 'contact-us') ? 'active' : '' %>" href="#">Contact Us</a>
+            </li>
+          </li>
         </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#education"><span data-feather="book"></span> Education <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="education">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'education') ? 'active' : '' %>" href="#">
+              Education </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'teaching') ? 'active' : '' %>" href="#">Teaching</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'lactivities') ? 'active' : '' %>" href="#"> Learning Activities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'gap') ? 'active' : '' %>" href="#"> Skills Gap to be biridged</a>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'innovationsp') ? 'active' : '' %>" href="#"> Innovations in Padegogy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'innovationsa') ? 'active' : '' %>" href="#"> Innovations in Assessments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'onlinec') ? 'active' : '' %>" href="#"> Online Courses</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#research"><span data-feather="book"></span> Research <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="research">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Reaserach plan </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Industrial/Sectoral Partnerships</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Partnership with Academic Institutions</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#r&snav"><span data-feather="book"></span> Recruitment and Support <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="r&snav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Retention and Support </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Student Recruitment</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#mgtnav"><span data-feather="book"></span> Management <i class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="mgtnav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Staff </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">Centre Operations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">Implementation Table</a>
+          </li>
+      </li>
+      </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link <%= (active == 'news') ? 'active' : '' %>" href="/dashboard/news">

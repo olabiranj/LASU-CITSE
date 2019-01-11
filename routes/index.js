@@ -231,6 +231,32 @@ router.get('/dashboard/news', function(req, res, next){
   })  
 })
 
+router.get('/dashboard/vision', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/vision', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/vision')
+    }
+  })
+})
+
+router.get('/dashboard/justification', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/justification', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/justification')
+    }
+  })
+})
+
 router.post("/handlenews", function (req, res, next){
  
   upload(req, res, (err) => {
