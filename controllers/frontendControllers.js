@@ -29,14 +29,17 @@ exports.servicesPage = function (req, res, next) {
 };
 
 exports.contactPage = function (req, res, next) {
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('frontend/contact', { doc });
-      console.log(doc)
-    } else {
-      res.render('frontend/contact', {});
-    }
-  })  
+  Page.find({name: "contactus"}).then((file)=>{
+      if (file){
+          News.find({}).then((doc)=>{
+              if(doc){
+      res.render('frontend/contact', {file, doc});                                                    
+              }
+          })
+      }else{
+      res.render('frontend/contact');                      
+      }
+  })
 };
 
 exports.newsPage = function (req, res, next) {
