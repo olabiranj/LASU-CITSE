@@ -65,7 +65,7 @@ exports.teamPage = function (req, res, next) {
 };
 
 exports.jecPage = function (req, res, next) {
-  Page.find({}).then((file)=>{
+  Page.find({name: "justification"}).then((file)=>{
     if (file){
         News.find({}).then((doc)=>{
             if(doc){
@@ -79,7 +79,7 @@ exports.jecPage = function (req, res, next) {
   }
 
   exports.visionPage = function (req, res, next) {
-    Page.find({}).then((file)=>{
+    Page.find({name: "vision"}).then((file)=>{
       if (file){
           News.find({}).then((doc)=>{
               if(doc){
@@ -106,7 +106,7 @@ exports.jecPage = function (req, res, next) {
 // };
 
 exports.missionPage = function (req, res, next) {
-  Page.find({}).then((file)=>{
+  Page.find({name: "mission"}).then((file)=>{
     if (file){
         News.find({}).then((doc)=>{
             if(doc){
@@ -121,14 +121,17 @@ exports.missionPage = function (req, res, next) {
 
 
 exports.objectivesPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/objectives', {doc});
-          console.log(doc)
+  Page.find({name: "objectives"}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/objectives', {file, doc});                                                    
+            }
+        })
     }else{
-    res.render('frontend/objectives', {});
+    res.render('frontend/objectives');                      
     }
-  })
+})
 };
 
 exports.retentionPage = function (req, res, next) {
