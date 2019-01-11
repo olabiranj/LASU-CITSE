@@ -1,75 +1,172 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="/dashboard">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/dashboard/authorizeadmins">
-                  <span data-feather="file"></span>
-                  Authorize Admins
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/dashboard/slider">
-                  <span data-feather="shopping-cart"></span>
-                  Sliders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/dashboard/news">
-                  <span data-feather="bar-chart-2"></span>
-                  News
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
-            </ul>
+<nav class="col-md-2 d-md-block bg-light sidebar pd-2 mt-3">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link <%= (active == 'dashboard') ? 'active' : '' %>" href="/dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#homeNav"><span data-feather="book"></span> Home Page <i class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'home') ? '' : 'collapse navbar-collapse' %>" id="homeNav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'slider') ? 'active' : '' %>" href="/dashboard/slider"> Sliders</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#aboutNav"><span data-feather="book"></span> About Pages <i class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>" id="aboutNav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="/dashboard/justification"> Justification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'vision') ? 'active' : '' %>" href="/dashboard/vision"> Vision</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'mission') ? 'active' : '' %>" href="/dashboard/mission"> Mission</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'objectives') ? 'active' : '' %>" href="/dashboard/objectives"> Objectives</a>
+            <li class="nav-item">
+              <a class="nav-link <%= (active == 'contact-us') ? 'active' : '' %>" href="/dashboard/contact-us">Contact Us</a>
+            </li>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#education"><span data-feather="book"></span> Education <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="education">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'education') ? 'active' : '' %>" href="/dashboard/education">
+              Education </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'teaching') ? 'active' : '' %>" href="/dashboard/teaching">Teaching</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'lactivities') ? 'active' : '' %>" href="/dashboard/learning-activities"> Learning Activities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'gap') ? 'active' : '' %>" href="/dashboard/skills-gap"> Skills Gap to be biridged</a>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'innovations-p') ? 'active' : '' %>" href="/dashboard/innovations-p"> Innovations in Padegogy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'innovations-a') ? 'active' : '' %>" href="/dashboard/innovations-a"> Innovations in Assessments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'online-c') ? 'active' : '' %>" href="/dashboard/online-courses"> Online Courses</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#research"><span data-feather="book"></span> Research <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="research">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Reaserach plan </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Industrial/Sectoral Partnerships</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Partnership with Academic Institutions</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#r&snav"><span data-feather="book"></span> Recruitment and Support <i
+            class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="r&snav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Retention and Support </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#"> Student Recruitment</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" data-target="#mgtnav"><span data-feather="book"></span> Management <i class="fa fa-caret-down text-left pl-3"> </i></a>
+        <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+          id="mgtnav">
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">
+              Staff </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">Centre Operations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= (active == 'justification') ? 'active' : '' %>" href="#">Implementation Table</a>
+          </li>
+      </li>
+      </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= (active == 'news') ? 'active' : '' %>" href="/dashboard/news">
+          <span data-feather="bar-chart-2"></span>
+          News
+        </a>
+      </li>
+      <li class="nav-item"><hr/></li>
+      <li class="nav-item">
+        <a class="nav-link <%= (active == 'admin') ? 'active' : '' %>" href="/dashboard/authorizeadmins">
+          <span data-feather="file"></span>
+          CMS Admins
+        </a>
+      </li>
+      <li class="nav-item"><hr/></li>
+      <li class="nav-item">
+        <a class="nav-link" href="/" target="_blank">
+          <span data-feather="external-link"></span>
+          View Website
+        </a>
+      </li>
+    </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+    <h6 class="sidebar-heading d-none justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Saved reports</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2 d-none">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Current month
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Last quarter
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Social engagement
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Year-end sale
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

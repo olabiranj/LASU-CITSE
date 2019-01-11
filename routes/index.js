@@ -231,6 +231,160 @@ router.get('/dashboard/news', function(req, res, next){
   })  
 })
 
+router.get('/dashboard/vision', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/vision', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/vision')
+    }
+  })
+})
+
+router.get('/dashboard/justification', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/justification', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/justification')
+    }
+  })
+})
+router.get('/dashboard/mission', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/mission', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/mission')
+    }
+  })
+})
+
+router.get('/dashboard/objectives', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/objectives', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/objectives')
+    }
+  })
+})
+
+router.get('/dashboard/contact-us', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/contact-us', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/contact-us')
+    }
+  })
+})
+router.get('/dashboard/education', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/education', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/education')
+    }
+  })
+})
+
+router.get('/dashboard/teaching', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/teaching', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/teaching')
+    }
+  })
+})
+
+router.get('/dashboard/learning-activities', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/learning-activities', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/learning-activities')
+    }
+  })
+})
+
+router.get('/dashboard/skills-gap', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/gaps', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/gaps')
+    }
+  })
+})
+
+router.get('/dashboard/innovations-a', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/innovations-a', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/innovations-a')
+    }
+  })
+})
+
+router.get('/dashboard/innovations-p', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/innovations-p', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/innovations-p')
+    }
+  })
+})
+
+router.get('/dashboard/online-courses', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/online-courses', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/online-courses')
+    }
+  })
+})
+
 router.post("/handlenews", function (req, res, next){
  
   upload(req, res, (err) => {

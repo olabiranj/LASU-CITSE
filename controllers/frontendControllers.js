@@ -25,7 +25,14 @@ exports.servicesPage = function (req, res, next) {
 };
 
 exports.contactPage = function (req, res, next) {
-    res.render('frontend/contact', {});
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('frontend/contact', { doc });
+      console.log(doc)
+    } else {
+      res.render('frontend/contact', {});
+    }
+  })  
 };
 
 exports.newsPage = function (req, res, next) {
@@ -135,7 +142,14 @@ exports.staffPage = function (req, res, next) {
 };
 
 exports.operationsPage = function (req, res, next) {
-    res.render('frontend/operations', {});
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('frontend/operations', { doc });
+      console.log(doc)
+    } else {
+      res.render('frontendoperations', {});
+    }
+  })
 };
 
 exports.educationPage = (req, res, next)=>{
@@ -250,7 +264,7 @@ exports.partnershipPage = (req, res, next)=>{
 exports.implementationPage = function (req, res, next) {
      News.find({}).then((doc)=>{
     if (doc){
-    res.render('frontend/implemetation', {doc});
+    res.render('frontend/implementation', {doc});
           console.log(doc)
     }else{
     res.render('frontend/implementation', {});
