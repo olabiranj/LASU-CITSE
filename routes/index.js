@@ -424,6 +424,32 @@ router.get('/dashboard/research-plan', function (req, res, next) {
   })
 })
 
+router.get('/dashboard/retention-support', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/retention-support', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/retention-support')
+    }
+  })
+})
+
+router.get('/dashboard/student-recruitment', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/student-recruitment', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/student-recruitment')
+    }
+  })
+})
+
 router.post("/handlenews", function (req, res, next){
  
   upload(req, res, (err) => {
