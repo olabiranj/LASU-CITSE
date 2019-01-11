@@ -450,6 +450,45 @@ router.get('/dashboard/student-recruitment', function (req, res, next) {
   })
 })
 
+router.get('/dashboard/centre-operations', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/centre-operations', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/centre-operations')
+    }
+  })
+})
+
+router.get('/dashboard/implementation-table', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/implementation-table', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/implementation-table')
+    }
+  })
+})
+
+router.get('/dashboard/staff', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/staff', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/staff')
+    }
+  })
+})
+
 router.post("/handlenews", function (req, res, next){
  
   upload(req, res, (err) => {
