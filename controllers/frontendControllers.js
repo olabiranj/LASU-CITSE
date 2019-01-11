@@ -110,6 +110,7 @@ exports.post_contactPage =(req, res, next)=>{
     let messageData = {
         name: req.body.name,
         email: req.body.email,
+        subject: req.body.subject,
         message: req.body.message
         
     }

@@ -24,7 +24,7 @@
 
       .label{
         font-style: italic;
-        padding: 10px 0px;
+        padding: 10px;
       }
     </style>
   </head>
@@ -82,7 +82,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">
-                          MESSAGE FROM <%= result[i].name%>
+                          MESSAGE FROM <span style="font-style:italic"><%= result[i].name%></span>
 
                         </h4>
                         <button class="close" type="button" data-dismiss="modal" aria-label="close">
@@ -90,10 +90,15 @@
                             
                         </button>
                       </div>
-                      <div class="modal-body Mbody">
-                        <label for="message" class="label">message
-                        <%=result[i].message%>
+                      <div class="modal-body">
+                        <label for="subject" class="subject">
+                           <h4 class="text-center"> SUBJECT: <span style="font-style:italic"> <%=result[i].subject%> </span> </h4>
                         </label>
+                        <div class="Mbody">
+                          <label for="message" class="label"></label>
+                          <%=result[i].message%>
+                          </label>
+                        </div>
                       </div>
                       <br> <hr>
 
@@ -103,7 +108,7 @@
                           <form action="/reply" method="POST">
                               <label for="reply" class="label">reply:</label>
                               <input type="hidden" name="userMail" value=<%= result[i].email %>>
-                              <textarea name="reply" class="form-control" cols="10" rows="10" id="reply" ></textarea>
+                              <textarea name="reply" class="form-control" cols="10" rows="7" id="reply" ></textarea>
                               <br>
                               <button class="btn btn-primary" type="submit">post</button>
                           </form>
