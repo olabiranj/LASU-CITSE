@@ -256,6 +256,44 @@ router.get('/dashboard/justification', function (req, res, next) {
     }
   })
 })
+router.get('/dashboard/mission', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/mission', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/mission')
+    }
+  })
+})
+
+router.get('/dashboard/objectives', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/objectives', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/objectives')
+    }
+  })
+})
+
+router.get('/dashboard/contact-us', function (req, res, next) {
+  let upload = req.flash('upload');
+
+  News.find({}).then((doc) => {
+    if (doc) {
+      res.render('backend/contact-us', { upload, doc })
+      console.log(doc)
+    } else {
+      res.render('backend/contact-us')
+    }
+  })
+})
 
 router.post("/handlenews", function (req, res, next){
  
