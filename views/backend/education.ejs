@@ -24,11 +24,17 @@
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'News Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'News Content'}); %>
+                                       
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'Education', valueField: 'education'}); %>                   
+
 
                     <%- include('../fields/button', { fieldvalue: 'Upload News'}); %>
                 </form>
                 <span style="display: none" id="upload">
                     <%=upload%>
+                </span>
+    <span style="display: none" id="failure">
+                    <%=failure%>
                 </span>
 
                 <br> <br>
@@ -42,7 +48,9 @@
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+         if ($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }
