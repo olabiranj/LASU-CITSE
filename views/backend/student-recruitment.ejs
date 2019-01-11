@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/dashboard-head', {pagename: 'Edit Student Recruitment'}) %>
+</head>
+
+<body>
+    <%- include('../partials/dashboard-nav') %>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- sidebar -->
+            <%- include('../partials/sidebar.ejs', {active: 'student-r'}) %>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
+                    <h1 class="h2">Student Recruitment CMS</h1>
+                </div>
+
+                <form action="/handlenews" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+                    <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'News Header Image'}); %>
+
+                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'News Content'}); %>
+
+                    <%- include('../fields/button', { fieldvalue: 'Upload News'}); %>
+                </form>
+                <span style="display: none" id="upload">
+                    <%=upload%>
+                </span>
+
+                <br> <br>
+            </main>
+        </div>
+    </div>
+
+    <%- include('../partials/dashboard-scripts') %>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        // Init Ckeditor
+        CKEDITOR.replace('editor');
+
+        // Show success alert
+        if ($.trim($('#upload').text()).length !== 0) {
+            alert("<%=upload%>")
+        }
+    </script>
+</body>
+
+</html>
