@@ -5,6 +5,7 @@ let passport = require("passport");
 const multer =require("multer");
 let User = require('../models/users');
 let Slider = require('../models/slider');
+let News = require('../models/news');
 const methodOverride = require("method-override");
 const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
@@ -14,8 +15,6 @@ router.get('/', controller.homePage);
 router.get('/services', controller.servicesPage);
 
 router.get('/contact', controller.contactPage);
-
-router.get('/news', controller.newsPage);
 
 router.get('/team', controller.teamPage);
 router.get('/justification-for-establishing-the-centre', controller.jecPage);
@@ -110,7 +109,7 @@ const upload = multer({
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
-}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"}])
+}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
 
 //check file type 
 function checkFileType(file, cb){
@@ -222,6 +221,53 @@ router.post('/login/admin', passport.authenticate('local.loginAdmin',{
   failureFlash: true
 }))
 
+router.get('/dashboard/news', function(req, res, next){                      
+  let upload = req.flash('upload');  
+  
+   News.find({}).then((doc)=>{
+    if (doc){
+       res.render('backend/news', {upload, doc})
+      console.log(doc)
+    }else{
+       res.render('backend/news')      
+    }
+  })  
+})
+
+router.post("/handlenews", function (req, res, next){
+ 
+  upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newNews = new News();
+
+           newNews.title = req.body.title;
+           newNews.writer = req.body.writer;
+           newNews.department = req.body.department;
+           newNews.content = req.body.content;
+           newNews.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newNews.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "News has been uploaded successfully");             
+             res.redirect('dashboard/news');
+           }else{
+             res.send("err")
+           }
+         })
+
+
+    }
+  })
+})
+
+   
 
 function  isLoggedIn(req, res,next){
   
