@@ -242,15 +242,8 @@ router.get('/dashboard/news', function(req, res, next){
 
 router.get('/dashboard/vision', function (req, res, next) {
   let upload = req.flash('upload');
-
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/vision', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/vision')
-    }
-  })
+    let failure = req.flash('failure');
+      res.render('backend/vision', { upload, failure })
 })
 
 router.post('/postvision', function(req, res, next){
@@ -296,15 +289,11 @@ router.post('/postvision', function(req, res, next){
 
 router.get('/dashboard/justification', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
+  
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/justification', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/justification')
-    }
-  })
+     res.render('backend/justification', { upload, failure })
+   
 })
 
 router.post('/postjustification', function(req, res, next){
@@ -350,15 +339,10 @@ router.post('/postjustification', function(req, res, next){
 
 router.get('/dashboard/mission', function (req, res, next) {
   let upload = req.flash('upload');
+    let failure = req.flash('failure');
 
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/mission', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/mission')
-    }
-  })
+      res.render('backend/mission', {upload, failure})
+  
 })
 
 router.post('/postmission', function(req, res, next){
@@ -404,15 +388,10 @@ router.post('/postmission', function(req, res, next){
 
 router.get('/dashboard/objectives', function (req, res, next) {
   let upload = req.flash('upload');
-
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/objectives', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/objectives')
-    }
-  })
+    let failure = req.flash('failure');
+ 
+      res.render('backend/objectives', { upload, failure})
+    
 })
 
 router.post('/postobjectives', function(req, res, next){
@@ -458,15 +437,9 @@ router.post('/postobjectives', function(req, res, next){
 
 router.get('/dashboard/contact-us', function (req, res, next) {
   let upload = req.flash('upload');
-
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('backend/contact-us', { upload, doc })
-      console.log(doc)
-    } else {
-      res.render('backend/contact-us')
-    }
-  })
+    let failure = req.flash('failure');
+      res.render('backend/contact-us', { upload, failure })
+     
 })
 
 router.post('/postcontactus', function(req, res, next){
