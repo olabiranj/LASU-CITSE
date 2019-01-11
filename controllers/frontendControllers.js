@@ -65,34 +65,31 @@ exports.teamPage = function (req, res, next) {
 };
 
 exports.jecPage = function (req, res, next) {
-  News.find({}).then((doc)=>{
-      if (doc){
-          Page.findOne({name: "justification"}).then((file)=>{
-              if(file){
-      res.render('frontend/jec', {doc, file});
-        console.log(file)                                                    
-              }
-          })
-      }else{
-      res.render('frontend/jec');                      
-      }
-  })
+  Page.find({}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/jec', {file, doc});                                                    
+            }
+        })
+    }else{
+    res.render('frontend/jec');                      
+    }
+})
   }
 
   exports.visionPage = function (req, res, next) {
-    News.find({}).then((doc)=>{
-        if (doc){
-          console.log(doc)
-            Page.findOne({name: "vision"}).then((file)=>{
-                if(file){
-        res.render('frontend/vision', {doc, file});
-          console.log(file)                                                    
-                }
-            })
-        }else{
-        res.render('frontend/vision');                      
-        }
-    })
+    Page.find({}).then((file)=>{
+      if (file){
+          News.find({}).then((doc)=>{
+              if(doc){
+      res.render('frontend/vision', {file, doc});                                                    
+              }
+          })
+      }else{
+      res.render('frontend/vision');                      
+      }
+  })
     }
 
 
@@ -109,16 +106,19 @@ exports.jecPage = function (req, res, next) {
 // };
 
 exports.missionPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/mission', {doc});
-          console.log(doc)
+  Page.find({}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/mission', {file, doc});                                                    
+            }
+        })
     }else{
-    res.render('frontend/mission', {});
+    res.render('frontend/mission');                      
     }
-  })
-   
-};
+})
+  }
+
 
 exports.objectivesPage = function (req, res, next) {
      News.find({}).then((doc)=>{
@@ -309,40 +309,6 @@ exports.post_contactPage =(req, res, next)=>{
     newData.save()
     res.render('frontend/contact', {})
 
-    // let Transport = nodemailer.createTransport({
-    //     service: "gmail",
-    //     secure: false,
-    //     port: 25, 
-    //     auth: {
-    //       user: "phawazzzy@gmail.com",
-    //       pass: keys.keys.password
-    //     },
-    //     tls: {
-    //       rejectUnauthorized: false
-    //     }
-    //   });
-  
-    //   //sending email with SMTP, configuration using SMTP settings
-    //   let mailOptions = {
-    //     from: req.body.email, //sender adress
-    //     to: "<phawazzzy@gmail.com>", 
-    //     subject: req.body.subject ,
-    //     message: req.body.message 
-    //   };
-  
-    //   Transport.sendMail(mailOptions, (error, info)=>{
-    //     if (error){
-    //       console.log(error);
-    //       console.log(mailOptions.message);
-          
-    //       //res.send("email could not send due to error:" + error);
-    //     }else{
-    //       console.log(info);
-    //       console.log(mailOptions.message);
-          
-    //      // res.send("email has been sent successfully");
-    //     }
-    //     res.redirect("/contact")
-    //   });
+    
 }
 
