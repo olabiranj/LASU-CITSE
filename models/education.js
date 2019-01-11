@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 
-let aboutusSchema = new Schema({
+let eductionSchema = new Schema({
     newImg: { type: String },    
     content: { type: String },
     name: {type: String}, 
@@ -14,4 +14,4 @@ let aboutusSchema = new Schema({
 })
 
 
-module.exports = mongoose.model("About", aboutusSchema)
+module.exports = mongoose.model("Eduction", educationSchema)
