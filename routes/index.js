@@ -9,7 +9,7 @@ let News = require('../models/news');
 const methodOverride = require("method-override");
 const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
-let About = require('../models/aboutus');
+let Page = require('../models/page');
 
 
 // HANDLE IMAGES 
@@ -259,13 +259,13 @@ router.post('/postvision', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newAboutus = new About();
+          let newPagesus = new Page();
 
-           newAboutus.name = req.body.name;
-           newAboutus.content = req.body.content;
-           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+           newPageus.name = req.body.name;
+           newPageus.content = req.body.content;
+           newPageus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
      
-           newAboutus.save().then((result)=>{
+           newPageus.save().then((result)=>{
            if(result){
              console.log(result)  
                req.flash('upload', "Vision has been uploaded successfully");             
@@ -300,13 +300,13 @@ router.post('/postjustification', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newAboutus = new About();
+          let newPageus = new Page();
 
-           newAboutus.name = req.body.name;
-           newAboutus.content = req.body.content;
-           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+           newPageus.name = req.body.name;
+           newPageus.content = req.body.content;
+           newPageus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
      
-           newAboutus.save().then((result)=>{
+           newPageus.save().then((result)=>{
            if(result){
              console.log(result)  
                req.flash('upload', "Justification has been uploaded successfully");             
@@ -341,13 +341,13 @@ router.post('/postmission', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newAboutus = new About();
+          let newPageus = new Page();
 
-           newAboutus.name = req.body.name;
-           newAboutus.content = req.body.content;
-           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+           newPageus.name = req.body.name;
+           newPageus.content = req.body.content;
+           newPageus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
      
-           newAboutus.save().then((result)=>{
+           newPageus.save().then((result)=>{
            if(result){
              console.log(result)  
                req.flash('upload', "Mission has been uploaded successfully");             
@@ -382,13 +382,13 @@ router.post('/postobjectives', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newAboutus = new About();
+          let newPageus = new Page();
 
-           newAboutus.name = req.body.name;
-           newAboutus.content = req.body.content;
-           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+           newPageus.name = req.body.name;
+           newPageus.content = req.body.content;
+           newPageus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
      
-           newAboutus.save().then((result)=>{
+           newPageus.save().then((result)=>{
            if(result){
              console.log(result)  
                req.flash('upload', "Objectives has been uploaded successfully");             
@@ -423,13 +423,13 @@ router.post('/postcontactus', function(req, res, next){
     }else{
         console.log(req.files)
 
-          let newAboutus = new About();
+          let newPageus = new Page();
 
-           newAboutus.name = req.body.name;
-           newAboutus.content = req.body.content;
-           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+           newPageus.name = req.body.name;
+           newPageus.content = req.body.content;
+           newPageus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
      
-           newAboutus.save().then((result)=>{
+           newPageus.save().then((result)=>{
            if(result){
              console.log(result)  
                req.flash('upload', "Contact-us has been uploaded successfully");             
