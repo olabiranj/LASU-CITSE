@@ -9,6 +9,44 @@ let News = require('../models/news');
 const methodOverride = require("method-override");
 const controller = require('../controllers/frontendControllers.js')
 let dashboardController = require('../controllers/dashboard-controllers.js');
+let About = require('../models/aboutus');
+
+
+// HANDLE IMAGES 
+
+const  storage = multer.diskStorage({
+  destination: './public/uploads',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+  }
+})
+
+
+const upload = multer({
+  storage: storage ,
+  //limits: {fileSize: 10},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
+
+//check file type 
+function checkFileType(file, cb){
+  //Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // check ext
+  const extname = filetypes.test(path.extname
+  (file.originalname).toLowerCase());
+  //check mime
+  const mimetype = filetypes.test(file.mimetype)
+
+  if(mimetype && extname){
+    return cb(null, true);
+  }else {
+    cb('Error: images Only!')
+  }
+}
+
 
 /* GET home page. */
 router.get('/', controller.homePage);
@@ -92,38 +130,6 @@ router.get('/dashboard/slider', function(req, res, next){
   })
 })
 
-const  storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
-  }
-})
-
-
-const upload = multer({
-  storage: storage ,
-  //limits: {fileSize: 10},
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
-
-//check file type 
-function checkFileType(file, cb){
-  //Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // check ext
-  const extname = filetypes.test(path.extname
-  (file.originalname).toLowerCase());
-  //check mime
-  const mimetype = filetypes.test(file.mimetype)
-
-  if(mimetype && extname){
-    return cb(null, true);
-  }else {
-    cb('Error: images Only!')
-  }
-}
 
 router.post("/uploadslider", function (req, res){
 
@@ -244,6 +250,34 @@ router.get('/dashboard/vision', function (req, res, next) {
   })
 })
 
+router.post('/postvision', function(req, res, next){
+     upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newAboutus = new About();
+
+           newAboutus.name = req.body.name;
+           newAboutus.content = req.body.content;
+           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newAboutus.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Vision has been uploaded successfully");             
+             res.redirect('dashboard/vision');
+           }else{
+             res.send("err")
+           }
+         })
+    }
+  })
+})
+
 router.get('/dashboard/justification', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -256,6 +290,35 @@ router.get('/dashboard/justification', function (req, res, next) {
     }
   })
 })
+
+router.post('/postjustification', function(req, res, next){
+       upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newAboutus = new About();
+
+           newAboutus.name = req.body.name;
+           newAboutus.content = req.body.content;
+           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newAboutus.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Justification has been uploaded successfully");             
+             res.redirect('dashboard/justification');
+           }else{
+             res.send("err")
+           }
+         })
+    }
+  })
+})
+
 router.get('/dashboard/mission', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -265,6 +328,34 @@ router.get('/dashboard/mission', function (req, res, next) {
       console.log(doc)
     } else {
       res.render('backend/mission')
+    }
+  })
+})
+
+router.post('/postmission', function(req, res, next){
+        upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newAboutus = new About();
+
+           newAboutus.name = req.body.name;
+           newAboutus.content = req.body.content;
+           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newAboutus.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Mission has been uploaded successfully");             
+             res.redirect('dashboard/mission');
+           }else{
+             res.send("err")
+           }
+         })
     }
   })
 })
@@ -282,6 +373,34 @@ router.get('/dashboard/objectives', function (req, res, next) {
   })
 })
 
+router.post('/postobjectives', function(req, res, next){
+       upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newAboutus = new About();
+
+           newAboutus.name = req.body.name;
+           newAboutus.content = req.body.content;
+           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newAboutus.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Objectives has been uploaded successfully");             
+             res.redirect('dashboard/objectives');
+           }else{
+             res.send("err")
+           }
+         })
+    }
+  })
+})
+
 router.get('/dashboard/contact-us', function (req, res, next) {
   let upload = req.flash('upload');
 
@@ -294,6 +413,35 @@ router.get('/dashboard/contact-us', function (req, res, next) {
     }
   })
 })
+
+router.post('/postcontactus', function(req, res, next){
+        upload(req, res, (err) => {
+    if (err){
+    
+    //res.render('students', {msg : err})
+   res.send(err)
+    }else{
+        console.log(req.files)
+
+          let newAboutus = new About();
+
+           newAboutus.name = req.body.name;
+           newAboutus.content = req.body.content;
+           newAboutus.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+     
+           newAboutus.save().then((result)=>{
+           if(result){
+             console.log(result)  
+               req.flash('upload', "Contact-us has been uploaded successfully");             
+             res.redirect('dashboard/contact-us');
+           }else{
+             res.send("err")
+           }
+         })
+    }
+  })
+})
+
 router.get('/dashboard/education', function (req, res, next) {
   let upload = req.flash('upload');
 
