@@ -24,7 +24,7 @@ var app = express();
 
 const port = process.env.PORT|| 3000
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
