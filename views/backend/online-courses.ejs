@@ -24,15 +24,17 @@
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'Online Courses Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Online Courses Content'}); %>
-                    
-                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'objectives', valueField: 'objectives'}); %>
+                   
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'online-Courses', valueField: 'online-courses' }); %>                   
 
                     <%- include('../fields/button', { fieldvalue: 'Upload'}); %>
                 </form>
-                <span style="display: none" id="upload">
+               <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
-
+<span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
                 <br> <br>
             </main>
         </div>
@@ -40,11 +42,13 @@
 
     <%- include('../partials/dashboard-scripts') %>
     <script src="/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript">
+     <script type="text/javascript">
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+        if ($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }

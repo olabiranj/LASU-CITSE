@@ -24,8 +24,8 @@
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: ' Skills gap to be bridged Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: ' Skills gap to be bridged Content'}); %>
-                    
-                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'justification', valueField: 'justification' }); %>                   
+
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'skill gap', valueField: 'gaps' }); %>                   
 
 
                     <%- include('../fields/button', { fieldvalue: 'upload'}); %>
@@ -33,7 +33,9 @@
                 <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
-
+<span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
                 <br> <br>
             </main>
         </div>
@@ -45,7 +47,9 @@
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+        if ($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }

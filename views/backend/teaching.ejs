@@ -24,8 +24,8 @@
                     <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'Teaching Header Image'}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Teaching Content'}); %>
-                    
-                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'justification', valueField: 'justification' }); %>                   
+                                        
+                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'teaching', valueField: 'teaching' }); %>                   
 
 
                     <%- include('../fields/button', { fieldvalue: 'Upload'}); %>
@@ -33,7 +33,9 @@
                 <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
-
+                <span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
                 <br> <br>
             </main>
         </div>
@@ -45,7 +47,10 @@
         // Init Ckeditor
         CKEDITOR.replace('editor');
 
-        // Show success alert
+        if ($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
+
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }

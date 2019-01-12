@@ -2,7 +2,11 @@
 let mongoose = require('mongoose')
 let message = require('../models/message')
 let Slider = require('../models/slider');
+let nodemailer = require('nodemailer');
 let News = require('../models/news');
+let Page = require('../models/page');
+
+
 
 
 exports.homePage = function (req, res, next) {
@@ -25,14 +29,17 @@ exports.servicesPage = function (req, res, next) {
 };
 
 exports.contactPage = function (req, res, next) {
-  News.find({}).then((doc) => {
-    if (doc) {
-      res.render('frontend/contact', { doc });
-      console.log(doc)
-    } else {
-      res.render('frontend/contact', {});
-    }
-  })  
+  Page.find({name: "contactus"}).then((file)=>{
+      if (file){
+          News.find({}).then((doc)=>{
+              if(doc){
+      res.render('frontend/contact', {file, doc});                                                    
+              }
+          })
+      }else{
+      res.render('frontend/contact');                      
+      }
+  })
 };
 
 exports.newsPage = function (req, res, next) {
@@ -61,49 +68,73 @@ exports.teamPage = function (req, res, next) {
 };
 
 exports.jecPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/jec', {doc});
-          console.log(doc)
+  Page.find({name: "justification"}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/jec', {file, doc});                                                    
+            }
+        })
     }else{
-    res.render('frontend/jec', {});
+    res.render('frontend/jec');                      
     }
-  })
-    
-};
+})
+  }
 
-exports.visionPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/vision', {doc});
-          console.log(doc)
-    }else{
-    res.render('frontend/vision', {});
-    }
+  exports.visionPage = function (req, res, next) {
+    Page.find({name: "vision"}).then((file)=>{
+      if (file){
+          News.find({}).then((doc)=>{
+              if(doc){
+      res.render('frontend/vision', {file, doc});                                                    
+              }
+          })
+      }else{
+      res.render('frontend/vision');                      
+      }
   })
-};
+    }
+
+
+// exports.visionPage = function (req, res, next) {
+//      News.find({}).then((doc)=>{
+//       if (doc){
+        
+//     res.render('frontend/vision', {doc});
+//           console.log(doc)
+//     }else{
+//     res.render('frontend/vision', {});
+//     }
+//   })
+// };
 
 exports.missionPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/mission', {doc});
-          console.log(doc)
+  Page.find({name: "mission"}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/mission', {file, doc});                                                    
+            }
+        })
     }else{
-    res.render('frontend/mission', {});
+    res.render('frontend/mission');                      
     }
-  })
-   
-};
+})
+  }
+
 
 exports.objectivesPage = function (req, res, next) {
-     News.find({}).then((doc)=>{
-    if (doc){
-    res.render('frontend/objectives', {doc});
-          console.log(doc)
+  Page.find({name: "objectives"}).then((file)=>{
+    if (file){
+        News.find({}).then((doc)=>{
+            if(doc){
+    res.render('frontend/objectives', {file, doc});                                                    
+            }
+        })
     }else{
-    res.render('frontend/objectives', {});
+    res.render('frontend/objectives');                      
     }
-  })
+})
 };
 
 exports.retentionPage = function (req, res, next) {
@@ -276,11 +307,14 @@ exports.post_contactPage =(req, res, next)=>{
     let messageData = {
         name: req.body.name,
         email: req.body.email,
+        subject: req.body.subject,
         message: req.body.message
         
     }
     let newData = new message(messageData);
     newData.save()
     res.render('frontend/contact', {})
+
+    
 }
 
