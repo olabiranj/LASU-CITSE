@@ -12,10 +12,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const methodOverride = require("method-override");
-var store = new MongoDBStore({
-  uri: process.env.MONGODB_URI,
-  collection: 'mySessions'
-});
+
 
 
 var indexRouter = require('./routes/index');
@@ -54,7 +51,14 @@ app.use(session({
   secret: "mysecrect",
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({mongooseConnection: mongoose.connection})
+  store = new MongoDBStore(
+  {
+    uri: process.env.MONGODB_URI,
+    databaseName: 'connect_mongodb_session_test',
+    collection: 'mySessions'
+  }),
+
+  
 }));
 
 app.use(flash());
