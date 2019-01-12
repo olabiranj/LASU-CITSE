@@ -23,7 +23,7 @@ const port = process.env.PORT|| 3000
 
 var app = express();
 
-mongoose.connect('mongodb://criotech:lasu123@ds155614.mlab.com:55614/heroku_9n7zsc0c', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
