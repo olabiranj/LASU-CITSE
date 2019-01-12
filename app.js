@@ -18,12 +18,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 require("./config/passport");
 
-const port = process.env.PORT|| 3000
 
 
 var app = express();
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+const port = process.env.PORT|| 3000
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
