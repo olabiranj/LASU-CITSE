@@ -75,7 +75,7 @@ app.use(function(err, req, res, next) {
   res.render('frontend/error');
 });
 
-app.listen(port=>{
+app.listen(port, ()=>{
   console.log(`connected to port ${port}`)
 })
 
