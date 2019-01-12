@@ -24,6 +24,7 @@ require("./config/passport");
 
 var app = express();
 
+const port = process.env.PORT || 3000
 mongoose.connect('mongodb://criotech:lasu123@ds255364.mlab.com:55364/criotech', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
@@ -76,6 +77,8 @@ app.use(function(err, req, res, next) {
   res.render('frontend/error');
 });
 
-
+app.listen(port, ()=>{
+  console.log(`listening to port ${port}`)
+})
 
 module.exports = app;
