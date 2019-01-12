@@ -14,18 +14,16 @@ const multer =require("multer");
 const methodOverride = require("method-override");
 
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 require("./config/passport");
 
+const port = process.env.PORT|| 3000
 
 
 var app = express();
 
-const port = process.env.PORT|| 3000
-
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect(MONGOLAB_COBALT_URI ||'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err))
 
 
 // view engine setup
@@ -51,14 +49,7 @@ app.use(session({
   secret: "mysecrect",
   resave: true,
   saveUninitialized: true,
-  store = new MongoDBStore(
-  {
-    uri: process.env.MONGODB_URI,
-    databaseName: 'connect_mongodb_session_test',
-    collection: 'mySessions'
-  }),
-
-  
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
 app.use(flash());
