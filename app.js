@@ -12,10 +12,6 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const methodOverride = require("method-override");
-const nodemailer = require("nodemailer");
-const port = process.env.PORT || 3000
-// const bootstrap = require("bootstrap")
-// const jquery = require(jquery)
 
 
 var indexRouter = require('./routes/index');
@@ -25,8 +21,7 @@ require("./config/passport");
 
 var app = express();
 
-const port = process.env.PORT || 3000
-mongoose.connect('mongodb://criotech:lasu123@ds255364.mlab.com:55364/criotech', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect('mongodb://criotech:lasu123@ds155614.mlab.com:55614/heroku_9n7zsc0c', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
@@ -78,8 +73,6 @@ app.use(function(err, req, res, next) {
   res.render('frontend/error');
 });
 
-app.listen(port, ()=>{
-  console.log(`listening to port ${port}`)
-})
+
 
 module.exports = app;
