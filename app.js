@@ -23,7 +23,7 @@ const port = process.env.PORT|| 3000
 
 var app = express();
 
-mongoose.connect(MONGOLAB_COBALT_URI ||'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err))
+mongoose.connect(MONGODB_URI ||'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err))
 
 
 // view engine setup
