@@ -12,6 +12,10 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const methodOverride = require("method-override");
+var store = new MongoDBStore({
+  uri: process.env.MONGODB_URI,
+  collection: 'mySessions'
+});
 
 
 var indexRouter = require('./routes/index');
