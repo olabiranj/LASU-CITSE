@@ -2,3 +2,6 @@ node_modules
 .sass-cache
 public/uploads
 config/keys.js
+npm-debug.log
+.DS_Store
+/.env
