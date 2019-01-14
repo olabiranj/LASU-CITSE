@@ -118,7 +118,8 @@ router.delete('/deleteadmin', function(req, res, next){
 router.get('/dashboard/slider', function(req, res, next){
       let failure = req.flash('failure');
       let success = req.flash('success');     
-      let uploaded = req.flash('uploaded');     
+      let uploaded = req.flash('uploaded');   
+      let test = "test";  
 
    Slider.find({}).then((result)=>{
     if (result){
