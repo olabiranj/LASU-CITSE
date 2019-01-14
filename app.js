@@ -26,7 +26,7 @@ require("./config/passport");
 var app = express();
 
 // mongoose.connect('mongodb:/localhost:', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
-let db = "mongodb://mainjoe:main12345@ds131698.mlab.com:31698/lasucitse";
+let db = "mongodb://mainjoe:main12345@ds229450.mlab.com:29450/heroku_mw4k6dl4";
 mongoose.Promise = global.Promise;
 mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true });
 

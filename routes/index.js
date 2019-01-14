@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 let passport = require("passport");
 const multer =require("multer");
-let User = require('../models/admin');
+let User = require('../models/users');
 let Slider = require('../models/slider');
 let News = require('../models/news');
 const methodOverride = require("method-override");
@@ -49,7 +49,6 @@ function checkFileType(file, cb){
 
 
 /* GET home page. */
-
 router.get('/', controller.homePage);
 router.get('/services', controller.servicesPage);
 
