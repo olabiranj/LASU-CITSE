@@ -1,5 +1,5 @@
 let message = require('../models/message')
-let keys = require('../config/keys.js')
+
 let nodemailer= require('nodemailer')
 
 exports.login = function(req, res, next){

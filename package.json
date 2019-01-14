@@ -41,7 +41,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lasu-code/LASU-CITSE.git"
+    "url": "git+https://github.com/olabiranj/LASU-CITSE.git"
   },
   "keywords": [
     "lasu-citse"
@@ -49,7 +49,7 @@
   "author": "siyanbola opeyemi, olabiran joshua, kareem fawas, dosunmu temitope",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lasu-code/LASU-CITSE/issues"
+    "url": "https://github.com/olabiranj/LASU-CITSE/issues"
   },
-  "homepage": "https://github.com/lasu-code/LASU-CITSE#readme"
+  "homepage": "https://github.com/olabiranj/LASU-CITSE#readme"
 }

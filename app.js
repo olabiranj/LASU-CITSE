@@ -10,8 +10,12 @@ const session = require("express-session");
 const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
+const multer =require("multer");
 const methodOverride = require("method-override");
-
+const nodemailer = require("nodemailer");
+const port = process.env.PORT || 3000
+// const bootstrap = require("bootstrap")
+// const jquery = require(jquery)
 
 
 var indexRouter = require('./routes/index');
@@ -21,16 +25,15 @@ require("./config/passport");
 
 var app = express();
 
-
-
-let db = "mongodb://localhost:27017/dashboard";
+// mongoose.connect('mongodb:/localhost:', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+let db = "mongodb://mainjoe:main12345@ds131698.mlab.com:31698/lasucitse";
 mongoose.Promise = global.Promise;
-mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true });
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
+// app.set('views', path.join(__dirname, 'views/partials'));
 
 
 app.set('view engine', 'ejs');
@@ -51,11 +54,7 @@ app.use(session({
   secret: "mysecrect",
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({
-    uri: db,
-    databaseName: 'authoApp',
-    collection: 'app_sessions'
-  })
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
 app.use(flash());

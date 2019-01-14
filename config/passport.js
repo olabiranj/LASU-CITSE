@@ -2,7 +2,7 @@ let passport = require("passport");
 let LocalStrategy = require('passport-local').Strategy;
 
 
-let User = require('../models/users');
+let User = require('../models/admin');
 
 
 passport.serializeUser(function(user, done){
