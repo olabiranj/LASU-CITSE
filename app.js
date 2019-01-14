@@ -12,8 +12,8 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const methodOverride = require("method-override");
-const nodemailer = require("nodemailer");
-const port = process.env.PORT || 3000
+// const nodemailer = require("nodemailer");
+// const port = process.env.PORT || 3000
 // const bootstrap = require("bootstrap")
 // const jquery = require(jquery)
 
@@ -25,8 +25,8 @@ require("./config/passport");
 
 var app = express();
 
-// mongoose.connect('mongodb:/localhost:', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
-let db = "mongodb://mainjoe:main12345@ds229450.mlab.com:29450/heroku_mw4k6dl4";
+// mongoose.connect('mongodb://localhost:27017/authoApp', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+let db = "mongodb://mainjoe:main12345@ds131698.mlab.com:31698/lasucitse";
 mongoose.Promise = global.Promise;
 mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true });
 
