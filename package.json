@@ -1,5 +1,5 @@
 {
-  "name": "lasu-citse",
+  "name": "lasucitse",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -46,7 +46,7 @@
   "keywords": [
     "lasu-citse"
   ],
-  "author": "kareem fawas, siyanbola opeyemi, olabiran joshua, dosunmu temitope",
+  "author": "siyanbola opeyemi, olabiran joshua, kareem fawas, dosunmu temitope",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lasu-code/LASU-CITSE/issues"

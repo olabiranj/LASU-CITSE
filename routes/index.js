@@ -12,43 +12,11 @@ let dashboardController = require('../controllers/dashboard-controllers.js');
 let Page = require('../models/page');
 
 
-// HANDLE IMAGES 
 
-const  storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
-  }
-})
-
-
-const upload = multer({
-  storage: storage ,
-  //limits: {fileSize: 10},
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-}).fields([{name: "slider1"},{name: "slider2"},{name: "slider3"},{name: "newImg"}])
-
-//check file type 
-function checkFileType(file, cb){
-  //Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // check ext
-  const extname = filetypes.test(path.extname
-  (file.originalname).toLowerCase());
-  //check mime
-  const mimetype = filetypes.test(file.mimetype)
-
-  if(mimetype && extname){
-    return cb(null, true);
-  }else {
-    cb('Error: images Only!')
-  }
-}
 
 
 /* GET home page. */
+
 router.get('/', controller.homePage);
 router.get('/services', controller.servicesPage);
 
@@ -116,6 +84,41 @@ router.delete('/deleteadmin', function(req, res, next){
     })
 
 })
+
+// HANDLE IMAGES 
+
+const storage = multer.diskStorage({
+  destination: './public/uploads',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+  }
+})
+
+
+const upload = multer({
+  storage: storage,
+  //limits: {fileSize: 10},
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  }
+}).fields([{ name: "slider1" }, { name: "slider2" }, { name: "slider3" }, { name: "newImg" }])
+
+//check file type 
+function checkFileType(file, cb) {
+  //Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // check ext
+  const extname = filetypes.test(path.extname
+    (file.originalname).toLowerCase());
+  //check mime
+  const mimetype = filetypes.test(file.mimetype)
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb('Error: images Only!')
+  }
+}
 
 //slider
 router.get('/dashboard/slider', function(req, res, next){
