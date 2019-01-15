@@ -22,6 +22,7 @@ const port = process.env.PORT|| 3000
 
 
 var app = express();
+mongoose.connect('mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected"));
 
 mongoose.connect('mongodb://heroku_rdk8wx20:9vufp7rs4vr1fk7mnefs6t1s1q@ds255784.mlab.com:55784/heroku_rdk8wx20',  { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err)) 
 // mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost:27017/dashboard', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err))
