@@ -24,7 +24,7 @@ require("./config/passport");
 
 var app = express();
 
-mongoose.connect('mongodb://criotech:lasu123@ds255364.mlab.com:55364/criotech', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+mongoose.connect('mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
