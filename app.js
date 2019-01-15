@@ -24,7 +24,8 @@ require("./config/passport");
 
 var app = express();
 
-mongoose.connect('mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms', { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
+let db_uri = "mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms";
+mongoose.connect(db_uri, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 
 // view engine setup
@@ -50,7 +51,7 @@ app.use(session({
   secret: "mysecrect",
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({mongooseConnection: mongoose.connection})
+  store: new MongoStore({uri: db_uri, collection: 'app_sessions'})
 }));
 
 app.use(flash());
