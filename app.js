@@ -61,9 +61,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-if (app.get('env') === 'production') {
-  app.listen(3000 || 80);
-}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
