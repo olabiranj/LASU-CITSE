@@ -180,7 +180,6 @@ router.get('/dashboard/slider', function(req, res, next){
     Slider.find({}).then((result)=>{
         if (result){
             res.render('backend/slider', {result, failure, success, uploaded})
-            console.log(result)
         }else{
             res.render('backend/slider')
         }
