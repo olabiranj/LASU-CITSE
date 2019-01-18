@@ -8,6 +8,9 @@ let PageSchema = new Schema({
     name: {
         type: String
     },
+    summary: {
+        type: String
+    },
     content: {
         type: String
     },

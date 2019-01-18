@@ -26,6 +26,9 @@
                     <%- include('../fields/textarea', { fieldname: 'postImageCaption', fieldlabel: 'Post Image Caption', valueField: (content) ? content.postImageCaption : ''}); %>
 
                     <hr class="my-4"/>
+                    <%- include('../fields/textarea', { fieldname: 'summary', fieldlabel: 'Post Content Summary', valueField: (content) ? content.summary : ''}); %>
+                    <div class="col mb-4"></div>
+
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Post Content', valueField: (content) ? content.content : ''}); %>
 
                     <%- include('../fields/hidden', { fieldname: 'name', valueField: page }); %>
@@ -58,7 +61,19 @@
     <script src="/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
         // Init Ckeditor
-        CKEDITOR.replace('content', { height: 350 });
+        CKEDITOR.replace('summary', {
+            toolbar: [
+				{name:'basic', items:['Bold','Italic','Underline','-','Copy','Cut','Paste','PasteText','PasteFromWord','-','NumberedList','BulletedList','-','SelectAll','RemoveFormat','Undo','Redo']},
+			],
+            height: '200'
+        });
+        CKEDITOR.replace('content', {
+            toolbar: [
+                {name:'basic', items:['Font','Format','FontSize','TextColor','BGColor','-','Bold','Italic','Underline','Strike','Subscript','Superscript','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Copy','Cut','Paste','PasteText','PasteFromWord','-','Image','-','NumberedList','BulletedList']},
+                '/',
+                {name:'insert', items: ['Link','Unlink','Outdent','Indent','SpecialChar','InsertPre','HorizontalRule','PageBreak','-','Image','-','SelectAll','RemoveFormat','Undo','Redo','Maximize']},
+            ],
+            height: 350 });
 
         // Show POST success alert
         if ($.trim($('#upload').text()).length !== 0) {
