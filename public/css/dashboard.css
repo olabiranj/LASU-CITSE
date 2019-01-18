@@ -7,7 +7,9 @@ body {
   height: 16px;
   vertical-align: text-bottom;
 }
-
+.rw {
+  font-family: Raleway, sans-serif;
+}
 /*
  * Sidebar
  */
@@ -98,4 +100,9 @@ body {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+div#cke_editor {
+  padding-top: 1px;
+  padding-left: 1px;
 }
