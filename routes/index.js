@@ -419,7 +419,7 @@ router.route('/dashboard/:tag')
             pageData = {
                 tag: page_tag,
                 name: req.body.name,
-                summary: req.body.summary,
+                summary: (req.body.summary) ? req.body.summary : req.body.content,
                 content: req.body.content,
                 postImageCaption: req.body.postImageCaption,
                 meta_key: req.body.meta_key,
