@@ -9,6 +9,7 @@ let User = require('../models/users');
 let News = require('../models/news');
 let Slider = require('../models/slider');
 let Page = require('../models/page');
+let Contact = require('../models/contact');
 
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
@@ -354,6 +355,42 @@ router.post('/poststaff', function(req, res, next){
     })
 })
 
+// -----
+// Contact
+router.route('/dashboard/contact-us')
+        .all((req, res, next) => {
+            isLoggedIn(req, res, next);
+        })
+        .get((req, res, next) => {
+            let req_url = req.originalUrl;
+            let upload = req.flash('upload');
+            let failure = req.flash('failure');
+            Contact.find({})
+                .then((data) => {
+                    res.render('backend/contact-us', { upload, failure, req_url, content: data[0], page: 'contact-us', activeParent: 'about' })
+                })
+                .catch((err) => {
+                    console.error(`Error occured during GET(/dashboard/contact-us): ${err}`);
+                })
+        })
+        .post((req, res, next) => {
+            pageData = {
+                address: req.body.address,
+                phone: req.body.phone,
+                email: req.body.email,
+                mapLongitude: req.body.mapLongitude,
+                mapLatitude: req.body.mapLatitude,
+                is_active: true,
+                // _id = (req.body.id) ? req.body.id : ''
+            }
+
+            Contact.findOneAndUpdate({}, pageData, { upsert: true })
+                .catch((err) => { console.error(`Error occured during POST(/dashboard/contact-us): ${err}`); })
+                .then(() => {
+                    req.flash('upload', `PAGE (Contact Us) - Content Update Successful!`);
+                    res.redirect('/dashboard/contact-us');
+                })
+        })
 // -----
 // About pages
 // Education pages
