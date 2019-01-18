@@ -23,13 +23,15 @@
 
                     <%- include('../fields/file', { fieldname: 'postImage', fieldlabel: 'Post Header Image', valueField: (content) ? content.postImage : false }); %>
 
+                    <%- include('../fields/textarea', { fieldname: 'postImageCaption', fieldlabel: 'Post Image Caption', valueField: (content) ? content.postImageCaption : ''}); %>
+
+                    <hr class="my-4"/>
                     <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Post Content', valueField: (content) ? content.content : ''}); %>
 
                     <%- include('../fields/hidden', { fieldname: 'name', valueField: page }); %>
                     <%- include('../fields/hidden', { fieldname: 'tag', valueField: page }); %>
 
-                    <hr/>
-
+                    <hr class="my-4"/>
                     <%- include('../fields/text', { fieldname: 'meta_key', fieldlabel: 'SEO Keyword', valueField: (content) ? content.meta_key : ''}); %>
 
                     <%- include('../fields/textarea', { fieldname: 'meta_desc', fieldlabel: 'SEO Description', valueField: (content) ? content.meta_desc : ''}); %>

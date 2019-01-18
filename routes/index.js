@@ -421,6 +421,7 @@ router.route('/dashboard/:tag')
                 tag: page_tag,
                 name: req.body.name,
                 content: req.body.content,
+                postImageCaption: req.body.postImageCaption,
                 meta_key: req.body.meta_key,
                 meta_desc: req.body.meta_desc,
                 is_active: true

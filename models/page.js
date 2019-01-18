@@ -14,6 +14,9 @@ let PageSchema = new Schema({
     postImage: {
         type: String
     },
+    postImageCaption: {
+        type: String
+    },
     meta_key: {
         type: String
     },
