@@ -13,7 +13,7 @@ let Contact = require('../models/contact');
 
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
-let n = require('../config/navpages');
+let n = require('../config/cmsNav');
 
 
 // HANDLE IMAGES
