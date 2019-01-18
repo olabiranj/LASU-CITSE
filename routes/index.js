@@ -307,8 +307,8 @@ router.post("/handlenews", function (req, res, next) {
 })
 
 // -----
-// Staff
-router.get('/dashboard/staff', function (req, res, next) {
+// Staff    -   NOT USED
+router.get('/dashboard/staffs', function (req, res, next) {
     let upload = req.flash('upload');
     let failure = req.flash('failure')
     res.render('backend/staff', { upload, failure })
@@ -421,6 +421,8 @@ router.route('/dashboard/:tag')
                 tag: page_tag,
                 name: req.body.name,
                 content: req.body.content,
+                meta_key: req.body.meta_key,
+                meta_desc: req.body.meta_desc,
                 is_active: true
             }
             if (req.file) {

@@ -14,6 +14,12 @@ let PageSchema = new Schema({
     postImage: {
         type: String
     },
+    meta_key: {
+        type: String
+    },
+    meta_desc: {
+        type: String
+    },
     is_active: {
         type: Boolean,
         default: true
