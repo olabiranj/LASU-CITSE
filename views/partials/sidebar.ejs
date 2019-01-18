@@ -95,6 +95,9 @@
                     <span data-feather="book"></span> Management Pages <i class="fa fa-caret-down text-left pl-3"> </i></a>
                 <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'management') ? '' : 'collapse navbar-collapse' %>" id="mgtnav">
                     <li class="nav-item">
+                        <a class="nav-link <%= (page == 'staff') ? 'active' : '' %>" href="/dashboard/staff">Staff</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <%= (page == 'centre-operations') ? 'active' : '' %>" href="/dashboard/centre-operations">Centre Operations</a>
                     </li>
                     <li class="nav-item">
@@ -107,8 +110,8 @@
                     <span data-feather="radio"></span> News </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= (page == 'staff') ? 'active' : '' %>" href="/dashboard/staff">
-                    <span data-feather="users"></span> Staff </a>
+                <a class="nav-link <%= (page == 'stafflist') ? 'active' : '' %>" href="/dashboard/stafflist">
+                    <span data-feather="users"></span> Staff List </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <%= (page == 'users messages') ? 'active' : '' %>" href="/dashboard/messages">
