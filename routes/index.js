@@ -78,16 +78,6 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// WEBSITE ROUTES
-// -----
-router.get('/', controller.homePage);
-router.get('/services', controller.servicesPage);
-router.get('/contact', controller.contactPage);
-router.post('/post_contact', controller.post_contactPage);
-router.get('/team', controller.teamPage);
-router.get('/news', controller.newsPage);
-router.get('/:page_name', controller.renderPage);
-
 // DASHBOARD ROUTES
 // -----
 // Access Control
@@ -417,5 +407,16 @@ router.route('/dashboard/:tag')
                     res.redirect('/dashboard/' + page_tag);
                 })
         })
+
+
+// WEBSITE ROUTES
+// -----
+router.get('/', controller.homePage);
+router.get('/services', controller.servicesPage);
+router.get('/contact', controller.contactPage);
+router.post('/post_contact', controller.post_contactPage);
+router.get('/team', controller.teamPage);
+router.get('/news', controller.newsPage);
+router.get('/:page_name', controller.renderPage);
 
 module.exports = router;
