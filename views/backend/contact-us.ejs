@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('../partials/dashboard-head', {pagename: 'Edit Contact-Us'}) %>
+    <%- include('../partials/dashboard-head', { pagename: 'Edit Contact Us' }) %>
 </head>
 
 <body>
@@ -12,28 +12,36 @@
         <div class="row">
 
             <!-- sidebar -->
-            <%- include('../partials/sidebar.ejs', {active: 'contact-us'}) %>
+            <%- include('../partials/sidebar.ejs') %>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
-                    <h1 class="h2">Contact-Us CMS</h1>
+                    <h1 class="h2 rw">Edit Page Content: <span class="text-info">Contact Us</span></h1>
                 </div>
+                <form action="<%= req_url %>" method="post" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
-                <form action="/postcontactus" method="POST" enctype=multipart/form-data class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <%- include('../fields/textarea', { fieldname: 'address', fieldlabel: 'Address', valueField: (content) ? content.address : ''}); %>
 
-                    <%- include('../fields/file', { fieldname: 'newImg', fieldlabel: 'News Header Image'}); %>
+                    <%- include('../fields/text', { fieldname: 'phone', fieldlabel: 'Phone Number', valueField: (content) ? content.phone : false }); %>
 
-                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'News Content'}); %>
-                                     
-                    <%- include('../fields/filename', { fieldname: 'name', fieldplaceholder: 'contactus', valueField: 'contactus'}); %>                   
+                    <%- include('../fields/text', { fieldname: 'email', fieldlabel: 'Email Address', valueField: (content) ? content.email : false }); %>
 
+                    <%- include('../fields/text', { fieldname: 'mapLongitude', fieldlabel: 'Longitude Coordinates', valueField: (content) ? content.mapLongitude : false }); %>
 
-                    <%- include('../fields/button', { fieldvalue: 'Upload News'}); %>
+                    <%- include('../fields/text', { fieldname: 'mapLatitude', fieldlabel: 'Latitude Coordinates', valueField: (content) ? content.mapLatitude : false }); %>
+
+                    <%- include('../fields/hidden', { fieldname: 'id', valueField: (content) ? content._id : '' }); %>
+
+                    <div class="col-sm-10 ml-md-auto pl-0">
+                        <%- include('../fields/button', { fieldvalue: 'UPDATE CONTENT' }); %>
+                    </div>
+
                 </form>
                 <span style="display: none" id="upload">
                     <%=upload%>
                 </span>
-               <span style="display: none" id="failure">
+
+                 <span style="display: none" id="failure">
                     <%=failure%>
                 </span>
 
@@ -46,18 +54,18 @@
     <script src="/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
         // Init Ckeditor
-        CKEDITOR.replace('editor');
+        CKEDITOR.replace('editor', { height: 250 });
 
-                // Show success alert
+        // Show POST success alert
         if ($.trim($('#upload').text()).length !== 0) {
             alert("<%=upload%>")
         }
-          
-      if($.trim($('#failure').text()).length !== 0) {
-        alert("<%=failure%>")
-      }
 
-       </script>
+        // Show POST error alert
+        if($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
+
+    </script>
 </body>
-
 </html>

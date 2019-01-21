@@ -1,9 +1,6 @@
 let passport = require("passport");
 let LocalStrategy = require('passport-local').Strategy;
-
-
 let User = require('../models/users');
-
 
 passport.serializeUser(function(user, done){
     done(null, user.id)
@@ -38,14 +35,13 @@ passport.use('local.registerAdmin', new LocalStrategy({
         newUser.save(function(err){
             if (err){
             return done(err)
-                
+
             }
-            
+
             // return done(null, newUser)
         })
     })
 }))
-
 
 passport.use('local.loginAdmin', new LocalStrategy({
     usernameField: "email",
@@ -57,15 +53,18 @@ passport.use('local.loginAdmin', new LocalStrategy({
             return done(err);
         }
         if (!user){
-            req.flash('loginError', "Invalid LogIn")
+            console.log(`Invalid login attempt from: ${email}`)
+            req.flash('error', "Invalid LogIn")
             return done(null, false)
         }
 
         if(!user.validatePassword(req.body.password)) {
-            req.flash('wrongPassword', "Wrong Password")
+            console.log(`Invalid login password from: ${email}`)
+            req.flash('error', "Wrong Password")
             return done(null, false)
         }
 
+        console.log(`${email} is authenticated`);
         return done(null, user)
 
     })

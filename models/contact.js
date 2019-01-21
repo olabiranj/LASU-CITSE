@@ -1,29 +1,20 @@
 let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
-let PageSchema = new Schema({
-    tag: {
+let ContactSchema = new Schema({
+    address: {
         type: String
     },
-    name: {
+    phone: {
         type: String
     },
-    summary: {
+    email: {
         type: String
     },
-    content: {
+    mapLongitude: {
         type: String
     },
-    postImage: {
-        type: String
-    },
-    postImageCaption: {
-        type: String
-    },
-    meta_key: {
-        type: String
-    },
-    meta_desc: {
+    mapLatitude: {
         type: String
     },
     is_active: {
@@ -36,4 +27,4 @@ let PageSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("Page", PageSchema)
+module.exports = mongoose.model("Contact", ContactSchema)

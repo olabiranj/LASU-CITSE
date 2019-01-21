@@ -11,7 +11,6 @@
                 <div class="col-12 h-100">
                     <div class="h-100 d-md-flex justify-content-between align-items-center">
                         <p class="d-none">Welcome to <span>Africa</span> Centre of Excellence</p>
-
                     </div>
                 </div>
             </div>
@@ -20,27 +19,28 @@
 
     <!-- Main Header Area -->
     <div class="main-header-area" id="stickyHeader">
-        <div class="container">
+        <div class="container px-0">
             <div class="row h-100 align-items-center">
                 <div class="col-12 h-100">
                     <div class="main-menu h-100">
                         <nav class="navbar h-100 navbar-expand-lg">
                             <!-- Logo Area  -->
-                            <a class="navbar-brand" href="index.html" style="color: 	 #006bb3;"><img src="img/core-img/Africa.png"
-                                    alt="Logo" style="height: 80px;">CITSE</a>
+                            <a class="navbar-brand float-left" href="/">
+                                <img src="img/core-img/logo.png" alt="ACEITSE Logo">
+                            </a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu"
                                 aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation"><span
                                     class="navbar-toggler-icon"></span></button>
 
-                            <div class="collapse navbar-collapse" id="medilifeMenu">
+                            <div class="collapse navbar-collapse float-right" id="medilifeMenu">
                                 <!-- Menu Area -->
                                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item active">
+                                    <li class="nav-item <%= (activeNav === 'home') ? 'active' : '' %>">
                                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                                     </li>
                                     <!-- dropdown for rentention and support -->
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown <%= (activeNav === 'about') ? 'active' : '' %>">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -51,28 +51,28 @@
                                             <a class="dropdown-item" href="/contact">Contact Us</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown <%= (activeNav === 'education') ? 'active' : '' %>">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">Education</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="/education">Education</a>
                                             <a class="dropdown-item" href="/teaching">Teaching</a>
-                                            <a class="dropdown-item" href="/learning">Learning Activities</a>
-                                            <a class="dropdown-item" href="/skills">Skills Gap to be Brigded</a>
-                                            <a class="dropdown-item" href="/innovation">Innovations in Pedagogy</a>
-                                            <a class="dropdown-item" href="/innovationAss">Innovations in Assessment</a>
-                                            <a class="dropdown-item" href="/onlineCourse">Online Courses</a>
+                                            <a class="dropdown-item" href="/learning-activities">Learning Activities</a>
+                                            <a class="dropdown-item" href="/skills-gap">Skills Gap to be Brigded</a>
+                                            <a class="dropdown-item" href="/innovations-in-pedagogy">Innovations in Pedagogy</a>
+                                            <a class="dropdown-item" href="/innovations-in-assessment">Innovations in Assessment</a>
+                                            <a class="dropdown-item" href="/online-courses">Online Courses</a>
                                         </div>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown <%= (activeNav === 'research') ? 'active' : '' %>">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">Research</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="/researchPlan">Research Plan</a>
-                                            <a class="dropdown-item" href="/industrial">Industrial/Sectoral Partnerships</a>
-                                            <a class="dropdown-item" href="/partnership">Partnership with Academic Institutions</a>
+                                            <a class="dropdown-item" href="/research-plan">Research Plan</a>
+                                            <a class="dropdown-item" href="/industrial-partnerships">Industrial/Sectoral Partnerships</a>
+                                            <a class="dropdown-item" href="/academic-partnerships">Partnership with Academic Institutions</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown <%= (activeNav === 'recruit') ? 'active' : '' %>">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">Recruitment & Support</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,7 +80,7 @@
                                             <a class="dropdown-item" href="/student-recruitment">Student Recruitment</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown <%= (activeNav === 'management') ? 'active' : '' %>">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">Management</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -89,7 +89,7 @@
                                             <a class="dropdown-item" href="/implementation-timeline">Implementation Timeline</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item ">
+                                    <li class="nav-item <%= (activeNav === 'news') ? 'active' : '' %>">
                                         <a class="nav-link" href="/news">News</a>
                                     </li>
 

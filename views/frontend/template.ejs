@@ -9,10 +9,10 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>LEARNING | CITSE - Africa Centre of Excellence</title>
+    <title><%= title.toUpperCase() %> | LASU-ACEITSE</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/Africa.png">
+    <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
@@ -25,19 +25,19 @@
     <% include ../partials/navbar.ejs %>
 
     <!-- ***** Breadcumb Area Start ***** -->
-    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url('<%-file.newImg%>');">
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url('<%- content.postImage %>');">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title">LEARNING ACTIVITIES</h3>
+                        <h3 class="breadcumb-title"><%= title.toUpperCase() %></h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ***** Breadcumb Area End ***** -->
-    
+
     <!-- ***** Blog Area Start ***** -->
     <section class="medilife-blog-area section-padding-50">
         <div class="container">
@@ -45,24 +45,18 @@
                 <div class="col-12 col-lg-8">
                     <div class=" w3-container w3-leftbar ">
                         <br>
-                        <!-- page main post -->
-                        <p>
-                            <%- file.content%>
-                            <!-- To ensure that the master STEM teachers to be produced from the Centre are not weak in STEM content and 
-                            pedagogical practical skills as many produced in the typical training institutions in Nigeria 
-                            and the West Africa sub-region, the learning activities for teacher trainees will be laden with practical work. 
-                            Field trips and laboratory sessions and use of community resources will provide environments for 
-                            learning in a practical way. -->
-                        </p>
+                        <p> <%- content.content %></p>
                         <br><br>
+                        <img src="<%= content.postImage %>" alt=""><br><br>
+                        <div><%= content.postImageCaption %></div>
                     </div>
                 </div>
-    
+
                 <!-- sideNav -->
                 <% include ../partials/sideNav.ejs %>
             </div>
-    
-            
+
+
         </div>
     </section>
     <!-- ***** Blog Area End ***** -->

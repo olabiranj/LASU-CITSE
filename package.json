@@ -1,9 +1,9 @@
 {
-  "name": "lasucitse",
+  "name": "lasu-aceitse",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "url": "git+https://github.com/lasu-code/LASU-CITSE.git"
   },
   "keywords": [
-    "lasu-citse"
+    "lasu-aceitse"
   ],
   "author": "kareem fawas, siyanbola opeyemi, olabiran joshua, dosunmu temitope",
   "license": "ISC",

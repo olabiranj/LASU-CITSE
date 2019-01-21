@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/dashboard-head', { pagename: 'Edit' + title.toUpperCase() }) %>
+</head>
+
+<body>
+    <%- include('../partials/dashboard-nav') %>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- sidebar -->
+            <%- include('../partials/sidebar.ejs') %>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
+                    <h1 class="h2 rw">Edit Page Content: <span class="text-info"><%= title.toUpperCase() %></span></h1>
+                </div>
+
+                <form action="<%= req_url %>" method="post" enctype="multipart/form-data" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+                    <%- include('../fields/file', { fieldname: 'postImage', fieldlabel: 'Post Header Image', valueField: (content) ? content.postImage : false }); %>
+
+                    <%- include('../fields/textarea', { fieldname: 'postImageCaption', fieldlabel: 'Post Image Caption', valueField: (content) ? content.postImageCaption : ''}); %>
+
+                    <hr class="my-4"/>
+                    <%- include('../fields/textarea', { fieldname: 'summary', fieldlabel: 'Post Content Summary', valueField: (content) ? content.summary : ''}); %>
+                    <div class="col mb-4"></div>
+
+                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Post Content', valueField: (content) ? content.content : ''}); %>
+
+                    <%- include('../fields/hidden', { fieldname: 'name', valueField: page }); %>
+                    <%- include('../fields/hidden', { fieldname: 'tag', valueField: page }); %>
+
+                    <hr class="my-4"/>
+                    <%- include('../fields/text', { fieldname: 'meta_key', fieldlabel: 'SEO Keyword', valueField: (content) ? content.meta_key : ''}); %>
+
+                    <%- include('../fields/textarea', { fieldname: 'meta_desc', fieldlabel: 'SEO Description', valueField: (content) ? content.meta_desc : ''}); %>
+
+                    <div class="col-sm-10 ml-md-auto pl-0">
+                        <%- include('../fields/button', { fieldvalue: 'UPDATE CONTENT' }); %>
+                    </div>
+
+                </form>
+                <span style="display: none" id="upload">
+                    <%=upload%>
+                </span>
+
+                 <span style="display: none" id="failure">
+                    <%=failure%>
+                </span>
+
+                <br> <br>
+            </main>
+        </div>
+    </div>
+
+    <%- include('../partials/dashboard-scripts') %>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        // Init Ckeditor
+        CKEDITOR.replace('summary', {
+            toolbar: [
+				{name:'basic', items:['Bold','Italic','Underline','-','Copy','Cut','Paste','PasteText','PasteFromWord','-','NumberedList','BulletedList','-','SelectAll','RemoveFormat','Undo','Redo']},
+			],
+            height: '200'
+        });
+        CKEDITOR.replace('content', {
+            toolbar: [
+                {name:'basic', items:['Font','Format','FontSize','TextColor','BGColor','-','Bold','Italic','Underline','Strike','Subscript','Superscript','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Copy','Cut','Paste','PasteText','PasteFromWord','-','Image','-','NumberedList','BulletedList']},
+                '/',
+                {name:'insert', items: ['Link','Unlink','Outdent','Indent','SpecialChar','InsertPre','HorizontalRule','PageBreak','-','Image','-','SelectAll','RemoveFormat','Undo','Redo','Maximize']},
+            ],
+            height: 350 });
+
+        // Show POST success alert
+        if ($.trim($('#upload').text()).length !== 0) {
+            alert("<%=upload%>")
+        }
+
+        // Show POST error alert
+        if($.trim($('#failure').text()).length !== 0) {
+            alert("<%=failure%>")
+        }
+
+    </script>
+</body>
+
+</html>
