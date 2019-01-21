@@ -1,4 +1,7 @@
-<nav class="col-md-2 d-md-block bg-light sidebar pd-2 mt-3">
+<!-- <nav class="col-md-2 d-md-block bg-lightpd-2 mt-3">
+    <br>
+    <br>
+    <br>
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -123,6 +126,173 @@
                     <span data-feather="lock"></span> CMS Admins </a>
             </li>
             <li class="nav-item"><hr/></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/" target="_blank">
+                    <span data-feather="external-link"></span> View Website </a>
+            </li>
+        </ul>
+    </div>
+</nav> -->
+
+<nav class="w3-sidenav w3-collapse w3-white w3-card-2 w3-animate-left" style="width:200px;">    
+    
+    <div class="">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+       
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-large w3-hide-large">Close ×</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'dashboard') ? 'active' : '' %>" href="/dashboard">
+                    <span data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#homeNav">
+                    <span data-feather="book"></span> Home Page <i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'home') ? '' : 'collapse navbar-collapse' %>"
+                    id="homeNav">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'slider') ? 'active' : '' %>" href="/dashboard/slider"> Sliders</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#aboutNav">
+                    <span data-feather="book"></span> About Pages <i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'about') ? '' : 'collapse navbar-collapse' %>"
+                    id="aboutNav">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'justification') ? 'active' : '' %>" href="/dashboard/justification">
+                            Justification</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'vision') ? 'active' : '' %>" href="/dashboard/vision"> Vision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'mission') ? 'active' : '' %>" href="/dashboard/mission"> Mission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'objectives') ? 'active' : '' %>" href="/dashboard/objectives">
+                            Objectives</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'contact-us') ? 'active' : '' %>" href="/dashboard/contact-us">Contact
+                            Us</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#education">
+                    <span data-feather="book"></span> Education Pages<i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'education') ? '' : 'collapse navbar-collapse' %>"
+                    id="education">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'education') ? 'active' : '' %>" href="/dashboard/education">
+                            Education </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'teaching') ? 'active' : '' %>" href="/dashboard/teaching">Teaching</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'learning-activities') ? 'active' : '' %>" href="/dashboard/learning-activities">
+                            Learning Activities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'skills-gap') ? 'active' : '' %>" href="/dashboard/skills-gap">
+                            Skills Gap To Be Bridged</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'innovations-in-pedagogy') ? 'active' : '' %>" href="/dashboard/innovations-in-pedagogy">
+                            Innovations in Pedagogy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'innovations-in-assessment') ? 'active' : '' %>" href="/dashboard/innovations-in-assessment">
+                            Innovations in Assessments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'online-courses') ? 'active' : '' %>" href="/dashboard/online-courses">
+                            Online Courses</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#research">
+                    <span data-feather="book"></span> Research Pages<i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'research') ? '' : 'collapse navbar-collapse' %>"
+                    id="research">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'research-plan') ? 'active' : '' %>" href="/dashboard/research-plan">
+                            Research plan </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'industrial-partnerships') ? 'active' : '' %>" href="/dashboard/industrial-partnerships">
+                            Industrial/Sectoral Partnerships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'academic-partnerships') ? 'active' : '' %>" href="/dashboard/academic-partnerships">
+                            Partnership with Academic Institutions</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#r&snav">
+                    <span data-feather="book"></span> Recruitment Pages <i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'recruit') ? '' : 'collapse navbar-collapse' %>"
+                    id="r&snav">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'retention-support') ? 'active' : '' %>" href="/dashboard/retention-support">
+                            Retention and Support </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'student-recruitment') ? 'active' : '' %>" href="/dashboard/student-recruitment">
+                            Student Recruitment</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#mgtnav">
+                    <span data-feather="book"></span> Management Pages <i class="fa fa-caret-down text-left pl-3"> </i></a>
+                <ul class="<%= (typeof activeParent !== 'undefined' && activeParent === 'management') ? '' : 'collapse navbar-collapse' %>"
+                    id="mgtnav">
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'staff') ? 'active' : '' %>" href="/dashboard/staff">Staff</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'centre-operations') ? 'active' : '' %>" href="/dashboard/centre-operations">Centre
+                            Operations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= (page == 'implementation-timeline') ? 'active' : '' %>" href="/dashboard/implementation-timeline">Implementation
+                            Timeline</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'news') ? 'active' : '' %>" href="/dashboard/news">
+                    <span data-feather="radio"></span> News </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'stafflist') ? 'active' : '' %>" href="/dashboard/stafflist">
+                    <span data-feather="users"></span> Staff List </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'users messages') ? 'active' : '' %>" href="/dashboard/messages">
+                    <span data-feather="message-square"></span> Contact Messages </a>
+            </li>
+            <li class="nav-item">
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'admin') ? 'active' : '' %>" href="/dashboard/authorizeadmins">
+                    <span data-feather="lock"></span> CMS Admins </a>
+            </li>
+            <li class="nav-item">
+                <hr />
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/" target="_blank">
                     <span data-feather="external-link"></span> View Website </a>

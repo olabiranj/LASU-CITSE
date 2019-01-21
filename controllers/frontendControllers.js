@@ -77,6 +77,18 @@ exports.newsPage = function (req, res, next) {
 
 };
 
+exports.newsListsPage = function (req, res, next) {
+
+    News.find({}).then((doc) => {
+        if (doc) {
+            res.render('extras/news-lists', { doc, activeNav: 'news' })
+        } else {
+            res.render('extras/news-lists')
+        }
+    })
+
+};
+
 exports.teamPage = function (req, res, next) {
 
     News.find({}).then((doc)=>{
