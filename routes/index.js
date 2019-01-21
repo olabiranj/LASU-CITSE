@@ -101,7 +101,10 @@ router.get('/logout', function (req, res, next) {
 })
 
 router.get('/dashboard', isLoggedIn, function(req, res, next){
-    res.render('backend/dashboard')
+    let userPosition = req.user.position;
+    let userName = req.user.name;
+    
+             res.render('backend/dashboard', {userPosition, userName});
 });
 
 // -----
@@ -116,11 +119,28 @@ router.get('/dashboard/authorizeadmins', adminLoggedIn, function(req, res, next)
     })
 })
 
-router.post('/createAccount', passport.authenticate('local.registerAdmin',{
-    successRedirect: '/dashboard/authorizeadmins',
-    failureRedirect: '/',
-    failureFlash: true
-}))
+router.post('/createAccount', function(req, res, next){
+    let newUser = new User();
+
+        newUser.name = req.body.name;
+        newUser.email = req.body.email;
+        newUser.password = newUser.generateHash(req.body.password);
+        newUser.position = req.body.position;
+
+        newUser.save().then((result)=>{
+            if (result){
+                res.redirect('/dashboard/authorizeadmins')
+            }else if (!result){
+                res.send('error')
+            }
+        })
+})
+
+// router.post('/createAccount', passport.authenticate('local.registerAdmin',{
+//     successRedirect: '/dashboard/authorizeadmins',
+//     failureRedirect: '/',
+//     failureFlash: true
+// }))
 
 router.delete('/deleteadmin', function(req, res, next){
     User.deleteOne({ _id: req.body.id }).then((result)=>{
