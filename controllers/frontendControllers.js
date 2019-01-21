@@ -56,7 +56,7 @@ exports.contactPage = function (req, res, next) {
         if (file){
             News.find({}).then((doc)=>{
                 if(doc){
-                    res.render('frontend/contact', {file, doc});
+                    res.render('frontend/contact', { file, doc, activeNav: 'about'});
                 }
             })
         }else{
