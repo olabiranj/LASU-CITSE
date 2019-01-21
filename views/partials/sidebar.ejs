@@ -117,11 +117,13 @@
                 <a class="nav-link <%= (page == 'users messages') ? 'active' : '' %>" href="/dashboard/messages">
                     <span data-feather="message-square"></span> Contact Messages </a>
             </li>
-            <li class="nav-item" style = "<%if(userPosition == "head") {%> display: block   <% } else  {%> display: none <% }%>"><hr/></li>
-            <li id="admin" class="nav-item">
-                <a style = "<%if(userPosition == "head") {%> display: block   <% } else  {%> display: none <% }%>" class="nav-link <%= (page == 'admin') ? 'active' : '' %>" href="/dashboard/authorizeadmins">
-                    <span data-feather="lock"></span> CMS Admins </a>
-            </li>
+            <% if(usrInfo.pos == "head") { %>
+                <li class="nav-item"><hr/></li>
+                <li id="admin" class="nav-item">
+                    <a class="nav-link <%= (page == 'admin') ? 'active' : '' %>" href="/dashboard/authorizeadmins">
+                        <span data-feather="lock"></span> CMS Admins </a>
+                </li>
+            <% } %>
             <li class="nav-item"><hr/></li>
             <li class="nav-item">
                 <a class="nav-link" href="/" target="_blank">

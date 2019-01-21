@@ -2,8 +2,9 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const passport = require("passport");
-const multer =require("multer");
+const multer = require("multer");
 const methodOverride = require("method-override");
+const fse = require('fs-extra');
 
 let User = require('../models/users');
 let News = require('../models/news');
@@ -14,27 +15,28 @@ let Contact = require('../models/contact');
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
-
+let usrInfo = {};
+let oldImage = '';
 
 // HANDLE IMAGES
 // -----
 // Set multer storage config
 const storage = multer.diskStorage({
     destination: './public/uploads',
-    filename: function(req, file, cb){
+    filename: function (req, file, cb) {
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
 })
 // Set multer runtime options
 const multerOpts = {
-    storage: storage ,
+    storage: storage,
     //limits: {fileSize: 10},
-    fileFilter: function(req, file, cb){
+    fileFilter: function (req, file, cb) {
         checkFileType(file, cb);
     }
 }
 //check file type
-function checkFileType(file, cb){
+function checkFileType(file, cb) {
     // Allowed ext
     const filetypes = /jpeg|jpg|png|gif/;
     // Get ext
@@ -42,7 +44,7 @@ function checkFileType(file, cb){
     // Check mime
     const mimetype = filetypes.test(file.mimetype);
 
-    if (mimetype && extname){
+    if (mimetype && extname) {
         return cb(null, true);
     } else {
         cb(new Error('Error Occured: Upload Images Only!'))
@@ -56,6 +58,9 @@ const upload = multer(multerOpts);
 // -----
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated() || req.user) {
+        usrInfo.pos = req.user.position;
+        usrInfo.name = req.user.name;
+
         return next()
     } else {
         console.error('Login to continue')
@@ -66,6 +71,9 @@ function isLoggedIn(req, res, next) {
 
 function adminLoggedIn(req, res, next) {
     if (req.isAuthenticated() && req.user.position == "head") {
+        usrInfo.pos = req.user.position;
+        usrInfo.name = req.user.name;
+
         return next()
     } else {
         console.error('Login to continue')
@@ -91,7 +99,7 @@ router.post('/login/admin', passport.authenticate('local.loginAdmin', {
     failureFlash: true
 }))
 
-router.get('/signup', function(req, res, next){
+router.get('/signup', function (req, res, next) {
     res.render('backend/signup')
 })
 
@@ -100,40 +108,38 @@ router.get('/logout', function (req, res, next) {
     res.redirect('/login')
 })
 
-router.get('/dashboard', isLoggedIn, function(req, res, next){
-    let userPosition = req.user.position;
-    let userName = req.user.name;
-    
-             res.render('backend/dashboard', {userPosition, userName});
+router.get('/dashboard', isLoggedIn, function (req, res, next) {
+
+    res.render('backend/dashboard', { usrInfo });
 });
 
 // -----
 // Admin
-router.get('/dashboard/authorizeadmins', adminLoggedIn, function(req, res, next){
-    User.find({position: "member"}).then((result)=>{
-        if (result){
-            res.render('backend/authorize', {result})
-        }else{
+router.get('/dashboard/authorizeadmins', adminLoggedIn, function (req, res, next) {
+    User.find({ position: "member" }).then((result) => {
+        if (result) {
+            res.render('backend/authorize', { result })
+        } else {
             res.render('backend/authorize')
         }
     })
 })
 
-router.post('/createAccount', function(req, res, next){
+router.post('/createAccount', function (req, res, next) {
     let newUser = new User();
 
-        newUser.name = req.body.name;
-        newUser.email = req.body.email;
-        newUser.password = newUser.generateHash(req.body.password);
-        newUser.position = req.body.position;
+    newUser.name = req.body.name;
+    newUser.email = req.body.email;
+    newUser.password = newUser.generateHash(req.body.password);
+    newUser.position = req.body.position;
 
-        newUser.save().then((result)=>{
-            if (result){
-                res.redirect('/dashboard/authorizeadmins')
-            }else if (!result){
-                res.send('error')
-            }
-        })
+    newUser.save().then((result) => {
+        if (result) {
+            res.redirect('/dashboard/authorizeadmins')
+        } else if (!result) {
+            res.send('error')
+        }
+    })
 })
 
 // router.post('/createAccount', passport.authenticate('local.registerAdmin',{
@@ -142,12 +148,12 @@ router.post('/createAccount', function(req, res, next){
 //     failureFlash: true
 // }))
 
-router.delete('/deleteadmin', function(req, res, next){
-    User.deleteOne({ _id: req.body.id }).then((result)=>{
-        if(result){
-            if (result){
+router.delete('/deleteadmin', function (req, res, next) {
+    User.deleteOne({ _id: req.body.id }).then((result) => {
+        if (result) {
+            if (result) {
                 res.redirect('/dashboard/authorizeadmins')
-            }else{
+            } else {
                 console.log('err')
             }
         }
@@ -161,48 +167,48 @@ router.post('/reply', mailController.reply);
 
 // -----
 // Slider
-router.get('/dashboard/slider', function(req, res, next){
+router.get('/dashboard/slider', function (req, res, next) {
     let failure = req.flash('failure');
     let success = req.flash('success');
     let uploaded = req.flash('uploaded');
     let test = "test";
 
-    Slider.find({}).then((result)=>{
-        if (result){
-            res.render('backend/slider', {result, failure, success, uploaded})
-        }else{
+    Slider.find({}).then((result) => {
+        if (result) {
+            res.render('backend/slider', { result, failure, success, uploaded })
+        } else {
             res.render('backend/slider')
         }
     })
 })
 
-router.post("/uploadslider", function (req, res){
+router.post("/uploadslider", function (req, res) {
     upload(req, res, (err) => {
-        if (err){
+        if (err) {
             //res.render('students', {msg : err})
             res.send(err)
-        }else{
+        } else {
             console.log(req.files);
-            Slider.findOne({name: "slider"}).then(function(result){
-                if (result){
+            Slider.findOne({ name: "slider" }).then(function (result) {
+                if (result) {
                     req.flash('failure', "Sorry You can only update sliders not create new ones");
                     res.redirect("/dashboard/slider");
-                } else if(!result){
+                } else if (!result) {
                     let newSlider = new Slider();
                     newSlider.slider1.name = req.files['slider1'][0].fieldname;
                     newSlider.slider1.path = '/uploads/' + req.files['slider1'][0].filename;
                     newSlider.slider2.name = req.files['slider2'][0].fieldname;
                     newSlider.slider2.path = '/uploads/' + req.files['slider2'][0].filename;
                     newSlider.slider3.name = req.files['slider3'][0].fieldname;
-                    newSlider.slider3.path = '/uploads/'+ req.files['slider3'][0].filename;
+                    newSlider.slider3.path = '/uploads/' + req.files['slider3'][0].filename;
                     newSlider.name = "slider";
 
-                    newSlider.save().then((result)=>{
-                        if(result){
+                    newSlider.save().then((result) => {
+                        if (result) {
                             console.log(result)
                             req.flash('uploaded', "Slidder has been uploaded successfully");
                             res.redirect("/dashboard/slider");
-                        }else{
+                        } else {
                             res.send("err")
                         }
                     })
@@ -215,48 +221,50 @@ router.post("/uploadslider", function (req, res){
     })
 })
 
-router.put("/update/uploadslider", function (req, res){
+router.put("/update/uploadslider", function (req, res) {
+
     upload(req, res, (err) => {
-        if (err){
+        if (err) {
             //res.render('students', {msg : err})
             res.send(err)
-        }else{
+        } else {
             console.log(req.files);
             Slider.findOneAndUpdate(
-                {"name": "slider"},
-                {$set:{
-                    "slider1.name": req.files['slider1'][0].fieldname,
-                    "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
-                    "slider2.name": req.files['slider2'][0].fieldname,
-                    "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
-                    "slider3.name": req.files['slider3'][0].fieldname,
-                    "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
+                { "name": "slider" },
+                {
+                    $set: {
+                        "slider1.name": req.files['slider1'][0].fieldname,
+                        "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
+                        "slider2.name": req.files['slider2'][0].fieldname,
+                        "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
+                        "slider3.name": req.files['slider3'][0].fieldname,
+                        "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
                     }
                 },
-                {new: true})
-            .then((result)=>{
-                if (result) {
-                    req.flash('success', "Slider has been updated");
-                    res.redirect("/dashboard/slider")
-                } else {
-                    res.send("error")
-                }
-            })
-        // res.send("test")
+                { new: true })
+                .then((result) => {
+                    if (result) {
+                        req.flash('success', "Slider has been updated");
+                        res.redirect("/dashboard/slider")
+                    } else {
+                        res.send("error")
+                    }
+                })
+            // res.send("test")
         }
     })
 })
 
 // -----
 // News
-router.get('/dashboard/news', function(req, res, next){
+router.get('/dashboard/news', function (req, res, next) {
     let upload = req.flash('upload');
 
-    News.find({}).then((doc)=>{
-        if (doc){
-            res.render('backend/news', {upload, doc})
+    News.find({}).then((doc) => {
+        if (doc) {
+            res.render('backend/news', { upload, doc })
             console.log(doc)
-        }else{
+        } else {
             res.render('backend/news')
         }
     })
@@ -303,35 +311,35 @@ router.get('/dashboard/staffs', function (req, res, next) {
     res.render('backend/staff', { upload, failure })
 })
 
-router.post('/poststaff', function(req, res, next){
+router.post('/poststaff', function (req, res, next) {
     upload(req, res, (err) => {
-        if (err){
+        if (err) {
 
             //res.render('students', {msg : err})
             res.send(err)
-        }else{
+        } else {
             console.log(req.files);
-            Page.findOne({name: "staff"}).then(function(result){
-                if (result){
+            Page.findOne({ name: "staff" }).then(function (result) {
+                if (result) {
 
                     req.flash('failure', "Sorry You can only update not create new ones");
                     res.redirect('dashboard/staff');
 
 
-                }else if(!result){
+                } else if (!result) {
 
                     let newPage = new Page();
 
                     newPage.name = req.body.name;
                     newPage.content = req.body.content;
-                    newPage.newImg = '/uploads/'+ req.files["newImg"][0].filename;
+                    newPage.newImg = '/uploads/' + req.files["newImg"][0].filename;
 
-                    newPage.save().then((result)=>{
-                        if(result){
+                    newPage.save().then((result) => {
+                        if (result) {
                             console.log(result)
                             req.flash('upload', "Staff page has been uploaded successfully");
                             res.redirect('dashboard/staff');
-                        }else{
+                        } else {
                             res.send("err")
                         }
                     })
@@ -347,39 +355,44 @@ router.post('/poststaff', function(req, res, next){
 // -----
 // Contact
 router.route('/dashboard/contact-us')
-        .all((req, res, next) => {
-            isLoggedIn(req, res, next);
-        })
-        .get((req, res, next) => {
-            let req_url = req.originalUrl;
-            let upload = req.flash('upload');
-            let failure = req.flash('failure');
-            Contact.find({})
-                .then((data) => {
-                    res.render('backend/contact-us', { upload, failure, req_url, content: data[0], page: 'contact-us', activeParent: 'about' })
-                })
-                .catch((err) => {
-                    console.error(`Error occured during GET(/dashboard/contact-us): ${err}`);
-                })
-        })
-        .post((req, res, next) => {
-            pageData = {
-                address: req.body.address,
-                phone: req.body.phone,
-                email: req.body.email,
-                mapLongitude: req.body.mapLongitude,
-                mapLatitude: req.body.mapLatitude,
-                is_active: true,
-                // _id = (req.body.id) ? req.body.id : ''
-            }
+    .all((req, res, next) => {
+        isLoggedIn(req, res, next);
+    })
+    .get((req, res, next) => {
+        let req_url = req.originalUrl;
+        let upload = req.flash('upload');
+        let failure = req.flash('failure');
+        Contact.find({})
+            .then((data) => {
+                res.render('backend/contact-us', { upload, failure, req_url, content: data[0], page: 'contact-us', activeParent: 'about' })
+            })
+            .catch((err) => {
+                console.error(`Error occured during GET(/dashboard/contact-us): ${err}`);
+            })
+    })
+    .post((req, res, next) => {
+        pageData = {
+            address: req.body.address,
+            phone: req.body.phone,
+            email: req.body.email,
+            mapLongitude: req.body.mapLongitude,
+            mapLatitude: req.body.mapLatitude,
+            is_active: true,
+            // _id = (req.body.id) ? req.body.id : ''
+        }
 
-            Contact.findOneAndUpdate({}, pageData, { upsert: true })
-                .catch((err) => { console.error(`Error occured during POST(/dashboard/contact-us): ${err}`); })
-                .then(() => {
-                    req.flash('upload', `PAGE (Contact Us) - Content Update Successful!`);
-                    res.redirect('/dashboard/contact-us');
-                })
-        })
+        Contact.findOneAndUpdate({}, pageData, { upsert: true })
+            .catch((err) => { console.error(`Error occured during POST(/dashboard/contact-us): ${err}`); })
+            .then(() => {
+                req.flash('upload', `PAGE (Contact Us) - Content Update Successful!`);
+                res.redirect('/dashboard/contact-us');
+            })
+    })
+
+let getOldImage = async (req, res, next) => {
+    oldImage = await Page.findOne({ tag: req.params.tag.trim() })
+    return next()
+}
 // -----
 // About pages
 // Education pages
@@ -387,46 +400,51 @@ router.route('/dashboard/contact-us')
 // Recruitment pages
 // Management pages
 router.route('/dashboard/:tag')
-        .all((req, res, next) => {
-            isLoggedIn(req, res, next);
-        })
-        .get((req, res, next) => {
-            let req_url = req.originalUrl;
-            let upload = req.flash('upload');
-            let failure = req.flash('failure');
-            let page_tag = req.params.tag.trim();
-            let page_obj = n[page_tag.replace(/(-)+/gi, '_')];
-            Page.findOne({tag: page_tag})
-                .then((content) => {
-                    res.render('backend/template-one', { upload, failure, req_url, page: page_tag, content, activeParent: page_obj.parent, title: page_obj.title })
-                })
-                .catch((err) => {
-                    console.error(`Error occured during GET(/dashboard/${page_tag}): ${err}`);
-                })
-        })
-        .post(upload.single('postImage'), (req, res, next) => {
-            let page_tag = req.params.tag.trim();
-            pageData = {
-                tag: page_tag,
-                name: req.body.name,
-                summary: (req.body.summary) ? req.body.summary : req.body.content,
-                content: req.body.content,
-                postImageCaption: req.body.postImageCaption,
-                meta_key: req.body.meta_key,
-                meta_desc: req.body.meta_desc,
-                is_active: true
-            }
-            if (req.file) {
-                pageData.postImage = req.file.path.substring(6)
-            }
+    .all(isLoggedIn)
+    .get((req, res, next) => {
 
-            Page.findOneAndUpdate({ tag: page_tag }, pageData, { upsert: true })
-                .catch((err) => { console.error(`Error occured during POST(/dashboard/${page_tag}): ${err}`); })
-                .then(() => {
-                    req.flash('upload', `PAGE (${capitalize(page_tag)}) - Content Update Successful!`);
-                    res.redirect('/dashboard/' + page_tag);
-                })
-        })
+        let req_url = req.originalUrl;
+        let upload = req.flash('upload');
+        let failure = req.flash('failure');
+        let page_tag = req.params.tag.trim();
+        let page_obj = n[page_tag.replace(/(-)+/gi, '_')];
+        Page.findOne({ tag: page_tag })
+            .then((content) => {
+                res.render('backend/template-one', { upload, failure, req_url, page: page_tag, content, activeParent: page_obj.parent, title: page_obj.title, usrInfo })
+            })
+            .catch((err) => {
+                console.error(`Error occured during GET(/dashboard/${page_tag}): ${err}`);
+            })
+    })
+    .post(getOldImage, upload.single('postImage'), (req, res, next) => {
+
+        fse.remove('\public' + oldImage.postImage)
+            .catch(err => {
+                console.error(err)
+            })
+
+        let page_tag = req.params.tag.trim();
+        pageData = {
+            tag: page_tag,
+            name: req.body.name,
+            summary: (req.body.summary) ? req.body.summary : req.body.content,
+            content: req.body.content,
+            postImageCaption: req.body.postImageCaption,
+            meta_key: req.body.meta_key,
+            meta_desc: req.body.meta_desc,
+            is_active: true
+        }
+        if (req.file) {
+            pageData.postImage = req.file.path.substring(6)
+        }
+
+        Page.findOneAndUpdate({ tag: page_tag }, pageData, { upsert: true })
+            .catch((err) => { console.error(`Error occured during POST(/dashboard/${page_tag}): ${err}`); })
+            .then(() => {
+                req.flash('upload', `PAGE (${capitalize(page_tag)}) - Content Update Successful!`);
+                res.redirect('/dashboard/' + page_tag);
+            })
+    })
 
 
 // WEBSITE ROUTES
