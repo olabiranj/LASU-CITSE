@@ -6,17 +6,18 @@ let Schema = mongoose.Schema;
 let sliderSchema = new Schema({
     slider1: {
         name: { type: String },
-        path: { type: String }
+        path: { type: String },
+        text_on_img: {type: String},
+        img_link: {type:String},
+        img_link_text: {type: String},
+        is_visible: {
+            type: Boolean,
+            default: true
+        },
+
+        
     },
-    slider2: {
-        name: { type: String },
-        path: { type: String }
-    },
-    slider3: {
-        name: { type: String },
-        path: { type: String }
-    },
-    name: { type: String }
+    
 })
 
 

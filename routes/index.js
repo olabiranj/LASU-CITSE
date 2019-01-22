@@ -135,6 +135,18 @@ router.delete('/deleteadmin', function(req, res, next){
 
 })
 
+router.get('/dashboard/slider2', function (req, res, next) {
+    res.render('backend/slider2')
+})
+
+router.get('/dashboard/add', function (req, res, next) {
+    
+    res.render('backend/slider3')
+})
+
+
+
+
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
 router.post('/reply', mailController.reply);
@@ -180,7 +192,7 @@ router.post("/uploadslider", function (req, res){
                     newSlider.save().then((result)=>{
                         if(result){
                             console.log(result)
-                            req.flash('uploaded', "Slidder has been uploaded successfully");
+                            req.flash('uploaded', "Slider has been uploaded successfully");
                             res.redirect("/dashboard/slider");
                         }else{
                             res.send("err")
