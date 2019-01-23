@@ -270,6 +270,7 @@ router.get('/dashboard/news', function (req, res, next) {
     })
 })
 
+
 router.post("/handlenews", function (req, res, next) {
 
     upload(req, res, (err) => {
@@ -455,6 +456,7 @@ router.get('/contact', controller.contactPage);
 router.post('/post_contact', controller.post_contactPage);
 router.get('/team', controller.teamPage);
 router.get('/news', controller.newsPage);
+router.get('/news-lists', controller.newsListsPage);
 router.get('/:page_name', controller.renderPage);
 
 module.exports = router;

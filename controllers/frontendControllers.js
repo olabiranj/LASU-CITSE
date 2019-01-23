@@ -56,7 +56,7 @@ exports.contactPage = function (req, res, next) {
         if (file){
             News.find({}).then((doc)=>{
                 if(doc){
-                    res.render('frontend/contact', {file, doc});
+                    res.render('frontend/contact', { file, doc, activeNav: 'about'});
                 }
             })
         }else{
@@ -72,6 +72,18 @@ exports.newsPage = function (req, res, next) {
             res.render('extras/news', {doc, activeNav: 'news'})
         }else{
             res.render('extras/news')
+        }
+    })
+
+};
+
+exports.newsListsPage = function (req, res, next) {
+
+    News.find({}).then((doc) => {
+        if (doc) {
+            res.render('extras/news-lists', { doc, activeNav: 'news' })
+        } else {
+            res.render('extras/news-lists')
         }
     })
 
