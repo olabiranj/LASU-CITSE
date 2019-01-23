@@ -139,9 +139,11 @@ router.get('/dashboard/slider2', function (req, res, next) {
     res.render('backend/slider2')
 })
 
-router.get('/dashboard/add', function (req, res, next) {
+router.get('/dashboard/slider/add', function (req, res, next) {
+    let upload = req.flash('upload');
+    let failure = req.flash('flash');
     
-    res.render('backend/slider3')
+    res.render('backend/slider3', {upload, failure})
 })
 
 

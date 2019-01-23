@@ -12,6 +12,7 @@
         <div class="row">
 
             <!-- sidebar -->
+            <%- include('../partials/sidebar.ejs', {page: 'slider', activeParent: 'home'}) %>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
@@ -20,23 +21,42 @@
 
                 <form action="" method="post" enctype="multipart/form-data" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
-                    <%- include('../fields/file', { fieldname: 'postImage', fieldlabel: 'Post Header Image',  }); %>
+                    <div class="form-group row">
+                        <label for="image upload" class="col-sm-2 col-form-label">Post Slider Image</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="sliderImg" >
+                            <img src="#" class="p-2 mt-2" height='50px' />
+                            <a href="#">Click to Preview current image </a>
+                        </div>
+                        
+                    </div>
+                    
+                    <label for="image upload" class="col-sm-2 col-form-label">Image Visibilty</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">visible</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">not visible</label>
+                      </div>
+                    <br> <br>
+                    <div class="input-group mb-3">
+                    <label for="image text" class="col-sm-2 col-form-label">Image text</label>
+                        
+                        <input type="text" class="form-control" placeholder="image text" aria-label="Username" aria-describedby="basic-addon1">
 
-                    <%- include('../fields/textarea', { fieldname: 'postImageCaption', fieldlabel: 'Post Image Caption', }); %>
+                      </div>
 
-                    <hr class="my-4"/>
-                    <%- include('../fields/textarea', { fieldname: 'summary', fieldlabel: 'Post Content Summary', }); %>
-                    <div class="col mb-4"></div>
+                      <div class="input-group mb-3">
+                        <label for="image text" class="col-sm-2 col-form-label">Image text link</label>
+                            
+                            <input type="text" class="form-control" placeholder="image text link" aria-label="Username" aria-describedby="basic-addon1">
+    
+                          </div>
+    
 
-                    <%- include('../fields/textarea', { fieldname: 'content', fieldlabel: 'Post Content', }); %>
-
-                    <%- include('../fields/hidden', { fieldname: 'name', valueField: page }); %>
-                    <%- include('../fields/hidden', { fieldname: 'tag', valueField: page }); %>
-
-                    <hr class="my-4"/>
-                    <%- include('../fields/text', { fieldname: 'meta_key', fieldlabel: 'SEO Keyword', }); %>
-
-                    <%- include('../fields/textarea', { fieldname: 'meta_desc', fieldlabel: 'SEO Description', }); %>
+                    <br>
 
                     <div class="col-sm-10 ml-md-auto pl-0">
                         <%- include('../fields/button', { fieldvalue: 'UPDATE CONTENT' }); %>
