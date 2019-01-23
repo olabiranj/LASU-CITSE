@@ -28,7 +28,6 @@ exports.renderPage = function (req, res, next) {
         (async () => {
             const news = await allNews;
 
-            // res.render('frontend/template', { content: dt[0], doc: news, title: navIndex.replace(/(-)+/gi, ' '), activeNav });
             res.render('frontend/404', {activeNav: '', navIndex, doc: news });
         })()
     } else {
