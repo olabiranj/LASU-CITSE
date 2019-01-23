@@ -5,6 +5,7 @@ const passport = require("passport");
 const multer = require("multer");
 const methodOverride = require("method-override");
 const fse = require('fs-extra');
+const mcache = require('memory-cache');
 
 let User = require('../models/users');
 let News = require('../models/news');
@@ -17,6 +18,25 @@ let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
 let usrInfo = {};
 let oldImage = '';
+
+//Handle Cache 
+let cache = (duration) => {
+  return (req, res, next) => {
+    let key = '__express__' + req.originalUrl || req.url
+    let cachedBody = mcache.get(key)
+    if (cachedBody) {
+      res.send(cachedBody)
+      return
+    } else {
+      res.sendResponse = res.send
+      res.send = (body) => {
+        mcache.put(key, body, duration * 1000);
+        res.sendResponse(body)
+      }
+      next()
+    }
+  }
+}
 
 // HANDLE IMAGES
 // -----
@@ -89,7 +109,7 @@ function capitalize(str) {
 // DASHBOARD ROUTES
 // -----
 // Access Control
-router.get('/login', function (req, res, next) {
+router.get('/login', cache(10), function (req, res, next) {
     res.render('backend/login')
 })
 
@@ -358,7 +378,7 @@ router.route('/dashboard/contact-us')
     .all((req, res, next) => {
         isLoggedIn(req, res, next);
     })
-    .get((req, res, next) => {
+    .get( cache(10), (req, res, next) => {
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
         let failure = req.flash('failure');
@@ -402,7 +422,6 @@ let getOldImage = async (req, res, next) => {
 router.route('/dashboard/:tag')
     .all(isLoggedIn)
     .get((req, res, next) => {
-
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
         let failure = req.flash('failure');
