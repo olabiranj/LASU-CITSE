@@ -12,6 +12,7 @@ let News = require('../models/news');
 let Slider = require('../models/slider');
 let Page = require('../models/page');
 let Contact = require('../models/contact');
+let Settings = require('../models/settings');
 
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
@@ -21,21 +22,21 @@ let oldImage = '';
 
 //Handle Cache 
 let cache = (duration) => {
-  return (req, res, next) => {
-    let key = '__express__' + req.originalUrl || req.url
-    let cachedBody = mcache.get(key)
-    if (cachedBody) {
-      res.send(cachedBody)
-      return
-    } else {
-      res.sendResponse = res.send
-      res.send = (body) => {
-        mcache.put(key, body, duration * 1000);
-        res.sendResponse(body)
-      }
-      next()
+    return (req, res, next) => {
+        let key = '__express__' + req.originalUrl || req.url
+        let cachedBody = mcache.get(key)
+        if (cachedBody) {
+            res.send(cachedBody)
+            return
+        } else {
+            res.sendResponse = res.send
+            res.send = (body) => {
+                mcache.put(key, body, duration * 1000);
+                res.sendResponse(body)
+            }
+            next()
+        }
     }
-  }
 }
 
 // HANDLE IMAGES
@@ -185,6 +186,31 @@ router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
 router.post('/reply', mailController.reply);
 
+router.get('/dashboard/settings', adminLoggedIn, function (req, res) {
+    let upload = req.flash('upload');
+
+    res.render('backend/settings', { upload, usrInfo, page: "settings" })
+})
+
+router.post('/postdashboard/settings', upload.single('siteLogo'), (req, res, next) => {
+     pageData = {
+            tag: req.body.tag,
+            siteName: req.body.siteName,  
+        }
+
+    if (req.file) {
+        pageData.siteLogo = req.file.path.substring(6)
+    }
+    Settings.findOneAndUpdate({ tag: 'settings' }, pageData, { upsert: true })
+        .catch((err) => { console.error(`Error occured during POST(/dashboard/settings): ${err}`); })
+        .then(() => {
+            req.flash('upload', 'PAGE - Content Updated Successful!');
+            res.redirect('/dashboard/settings');
+        })
+})
+
+router.post('/reply', mailController.reply);
+
 // -----
 // Slider
 router.get('/dashboard/slider', function (req, res, next) {
@@ -317,8 +343,6 @@ router.post("/handlenews", function (req, res, next) {
                     res.send("err")
                 }
             })
-
-
         }
     })
 })
@@ -378,7 +402,7 @@ router.route('/dashboard/contact-us')
     .all((req, res, next) => {
         isLoggedIn(req, res, next);
     })
-    .get( cache(10), (req, res, next) => {
+    .get(cache(10), (req, res, next) => {
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
         let failure = req.flash('failure');
