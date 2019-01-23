@@ -17,7 +17,6 @@ let n = require('../config/cmsNav');
 let usrInfo = {};
 let oldImage = '';
 
-
 // HANDLE IMAGES
 // -----
 // Set multer storage config
@@ -360,12 +359,6 @@ router.post('/poststaff', function (req, res, next) {
 })
 
 // -----
-// Slider
-// router.get('/dashboard/slider/add', isLoggedIn, (req, res, next) => {
-//     res.render('backend/slider4');
-// })
-
-// -----
 // Contact
 router.route('/dashboard/contact-us')
     .all((req, res, next) => {
@@ -411,7 +404,6 @@ router.route('/dashboard/contact-us')
 router.route('/dashboard/:tag')
     .all(isLoggedIn)
     .get((req, res, next) => {
-
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
         let failure = req.flash('failure');

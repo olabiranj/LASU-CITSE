@@ -12,18 +12,17 @@ const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const multer =require("multer");
 const nodemailer = require("nodemailer")
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 require("./config/passport");
 
-
 var app = express();
 
-let db_uri = "mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms";
+let db_uri = process.env.db_uri;
 mongoose.connect(db_uri, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,8 +36,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('mysecrect'));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
+var oneDay = 86400000; // in milliseconds
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxage: oneDay
+}));
 
 app.use(session({
     secret: "mysecrect",
