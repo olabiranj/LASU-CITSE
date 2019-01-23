@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
-const methodOverride = require("method-override");
 const fse = require('fs-extra');
 
 let User = require('../models/users');
@@ -17,6 +16,7 @@ let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
 let usrInfo = {};
 let oldImage = '';
+
 
 // HANDLE IMAGES
 // -----
@@ -86,6 +86,13 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// Get old image path
+async function getOldImage(req, res, next) {
+    oldImage = await Page.findOne({ tag: req.params.tag.trim() })
+    return next()
+}
+
+
 // DASHBOARD ROUTES
 // -----
 // Access Control
@@ -109,7 +116,6 @@ router.get('/logout', function (req, res, next) {
 })
 
 router.get('/dashboard', isLoggedIn, function (req, res, next) {
-
     res.render('backend/dashboard', { usrInfo });
 });
 
@@ -141,12 +147,6 @@ router.post('/createAccount', function (req, res, next) {
         }
     })
 })
-
-// router.post('/createAccount', passport.authenticate('local.registerAdmin',{
-//     successRedirect: '/dashboard/authorizeadmins',
-//     failureRedirect: '/',
-//     failureFlash: true
-// }))
 
 router.delete('/deleteadmin', function (req, res, next) {
     User.deleteOne({ _id: req.body.id }).then((result) => {
@@ -270,7 +270,6 @@ router.get('/dashboard/news', function (req, res, next) {
     })
 })
 
-
 router.post("/handlenews", function (req, res, next) {
 
     upload(req, res, (err) => {
@@ -390,10 +389,6 @@ router.route('/dashboard/contact-us')
             })
     })
 
-let getOldImage = async (req, res, next) => {
-    oldImage = await Page.findOne({ tag: req.params.tag.trim() })
-    return next()
-}
 // -----
 // About pages
 // Education pages
@@ -409,6 +404,7 @@ router.route('/dashboard/:tag')
         let failure = req.flash('failure');
         let page_tag = req.params.tag.trim();
         let page_obj = n[page_tag.replace(/(-)+/gi, '_')];
+
         Page.findOne({ tag: page_tag })
             .then((content) => {
                 res.render('backend/template-one', { upload, failure, req_url, page: page_tag, content, activeParent: page_obj.parent, title: page_obj.title, usrInfo })
@@ -428,7 +424,7 @@ router.route('/dashboard/:tag')
         pageData = {
             tag: page_tag,
             name: req.body.name,
-            summary: (req.body.summary) ? req.body.summary : req.body.content,
+            summary: req.body.summary,
             content: req.body.content,
             postImageCaption: req.body.postImageCaption,
             meta_key: req.body.meta_key,
