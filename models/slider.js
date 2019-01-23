@@ -6,7 +6,7 @@ let Schema = mongoose.Schema;
 let sliderSchema = new Schema({
     slider1: {
         name: { type: String },
-        path: { type: String },
+        postImage: { type: String },
         text_on_img: {type: String},
         img_link: {type:String},
         img_link_text: {type: String},

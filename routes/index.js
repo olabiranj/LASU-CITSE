@@ -135,19 +135,12 @@ router.delete('/deleteadmin', function(req, res, next){
 
 })
 
-router.get('/dashboard/slider2', function (req, res, next) {
-    res.render('backend/slider2')
-})
-
 router.get('/dashboard/slider/add', function (req, res, next) {
     let upload = req.flash('upload');
     let failure = req.flash('flash');
     
-    res.render('backend/slider3', {upload, failure})
+    res.render('backend/slider4', {upload, failure, content: {} })
 })
-
-
-
 
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
@@ -337,6 +330,12 @@ router.post('/poststaff', function(req, res, next){
         }
     })
 })
+
+// -----
+// Slider
+// router.get('/dashboard/slider/add', isLoggedIn, (req, res, next) => {
+//     res.render('backend/slider4');
+// })
 
 // -----
 // Contact

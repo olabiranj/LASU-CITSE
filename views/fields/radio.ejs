@@ -2,19 +2,13 @@
     <label for="<%= fieldname %>" class="col-sm-2 col-form-label"></label>
     <div class="col-sm-10">
          <!-- code for image visibility (radio button) -->
-            <form action="">
-         <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="<%= fieldname1 %>" class="custom-control-input">
-                <label class="custom-control-label" for="visible"><%= fieldvalue1%></label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name= "<%= fieldname2%>" class="custom-control-input">
-                <label class="custom-control-label" for="notVisible"><%= fieldvalue2 %></label>
-            </div>
-            </form>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" name="<%= fieldname %>" value="1" class="custom-control-input" <%= (valueField == 1) ? 'checked' : '' %> >
+            <label class="custom-control-label">Yes</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" name= "<%= fieldname %>" value="0" class="custom-control-input" <%= (valueField == 0) ? 'checked' : '' %> >
+            <label class="custom-control-label">No</label>
+        </div>
     </div>
 </div>
-
-<script>
-    $('.your-checkbox').prop('indeterminate', true)
-</script>
