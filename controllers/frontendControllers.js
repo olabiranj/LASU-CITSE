@@ -28,7 +28,6 @@ exports.renderPage = function (req, res, next) {
         (async () => {
             const news = await allNews;
 
-            // res.render('frontend/template', { content: dt[0], doc: news, title: navIndex.replace(/(-)+/gi, ' '), activeNav });
             res.render('frontend/404', {activeNav: '', navIndex, doc: news });
         })()
     } else {
@@ -77,6 +76,18 @@ exports.newsPage = function (req, res, next) {
 
 };
 
+exports.newsListsPage = function (req, res, next) {
+
+    News.find({}).then((doc) => {
+        if (doc) {
+            res.render('extras/news-lists', { doc, activeNav: 'news' })
+        } else {
+            res.render('extras/news-lists')
+        }
+    })
+
+};
+
 exports.teamPage = function (req, res, next) {
 
     News.find({}).then((doc)=>{
@@ -99,7 +110,16 @@ exports.post_contactPage =(req, res, next)=>{
     }
     let newData = new message(messageData);
     newData.save()
-    res.render('frontend/contact', {})
-
+    Page.find({name: "contactus"}).then((file)=>{
+        if (file){
+            News.find({}).then((doc)=>{
+                if(doc){
+                    res.render('frontend/contact', {file, doc, activeNav: 'about'});
+                }
+            })
+        }else{
+            res.render('frontend/contact');
+        }
+    })
 
 }

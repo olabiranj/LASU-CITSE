@@ -3,9 +3,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
-const methodOverride = require("method-override");
 const fse = require('fs-extra');
-const mcache = require('memory-cache');
 
 let User = require('../models/users');
 let News = require('../models/news');
@@ -107,10 +105,17 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// Get old image path
+async function getOldImage(req, res, next) {
+    oldImage = await Page.findOne({ tag: req.params.tag.trim() })
+    return next()
+}
+
+
 // DASHBOARD ROUTES
 // -----
 // Access Control
-router.get('/login', cache(10), function (req, res, next) {
+router.get('/login', function (req, res, next) {
     res.render('backend/login')
 })
 
@@ -130,7 +135,6 @@ router.get('/logout', function (req, res, next) {
 })
 
 router.get('/dashboard', isLoggedIn, function (req, res, next) {
-
     res.render('backend/dashboard', { usrInfo });
 });
 
@@ -163,12 +167,6 @@ router.post('/createAccount', function (req, res, next) {
     })
 })
 
-// router.post('/createAccount', passport.authenticate('local.registerAdmin',{
-//     successRedirect: '/dashboard/authorizeadmins',
-//     failureRedirect: '/',
-//     failureFlash: true
-// }))
-
 router.delete('/deleteadmin', function (req, res, next) {
     User.deleteOne({ _id: req.body.id }).then((result) => {
         if (result) {
@@ -180,6 +178,13 @@ router.delete('/deleteadmin', function (req, res, next) {
         }
     })
 
+})
+
+router.get('/dashboard/slider/add', function (req, res, next) {
+    let upload = req.flash('upload');
+    let failure = req.flash('flash');
+    
+    res.render('backend/slider4', {upload, failure, content: {} })
 })
 
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
@@ -252,7 +257,7 @@ router.post("/uploadslider", function (req, res) {
                     newSlider.save().then((result) => {
                         if (result) {
                             console.log(result)
-                            req.flash('uploaded', "Slidder has been uploaded successfully");
+                            req.flash('uploaded', "Slider has been uploaded successfully");
                             res.redirect("/dashboard/slider");
                         } else {
                             res.send("err")
@@ -402,7 +407,7 @@ router.route('/dashboard/contact-us')
     .all((req, res, next) => {
         isLoggedIn(req, res, next);
     })
-    .get(cache(10), (req, res, next) => {
+    .get((req, res, next) => {
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
         let failure = req.flash('failure');
@@ -433,10 +438,6 @@ router.route('/dashboard/contact-us')
             })
     })
 
-let getOldImage = async (req, res, next) => {
-    oldImage = await Page.findOne({ tag: req.params.tag.trim() })
-    return next()
-}
 // -----
 // About pages
 // Education pages
@@ -451,6 +452,7 @@ router.route('/dashboard/:tag')
         let failure = req.flash('failure');
         let page_tag = req.params.tag.trim();
         let page_obj = n[page_tag.replace(/(-)+/gi, '_')];
+
         Page.findOne({ tag: page_tag })
             .then((content) => {
                 res.render('backend/template-one', { upload, failure, req_url, page: page_tag, content, activeParent: page_obj.parent, title: page_obj.title, usrInfo })
@@ -470,7 +472,7 @@ router.route('/dashboard/:tag')
         pageData = {
             tag: page_tag,
             name: req.body.name,
-            summary: (req.body.summary) ? req.body.summary : req.body.content,
+            summary: req.body.summary,
             content: req.body.content,
             postImageCaption: req.body.postImageCaption,
             meta_key: req.body.meta_key,
@@ -498,6 +500,7 @@ router.get('/contact', controller.contactPage);
 router.post('/post_contact', controller.post_contactPage);
 router.get('/team', controller.teamPage);
 router.get('/news', controller.newsPage);
+router.get('/news-lists', controller.newsListsPage);
 router.get('/:page_name', controller.renderPage);
 
 module.exports = router;
