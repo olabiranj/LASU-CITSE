@@ -2,161 +2,188 @@
 <html lang="en">
   <head>
     <%- include('../partials/dashboard-head', {pagename: 'Edit Slider'}) %>
+    
   </head>
 
   <body>
+
+    <style>
+    #A_1 {
+    bottom: 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    height: 45px;
+    left: 0px;
+    min-width: 140px;
+    position: relative;
+    right: 0px;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    top: 0px;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 196.5px;
+    z-index: 1;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 98.25px 22.5px;
+    transform-origin: 98.25px 22.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    animation: none 0s ease 0.7s 1 normal none running;
+    background: rgb(0, 108, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 700 normal 14px / 42px Roboto, sans-serif;
+    margin: 50px 0px 0px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 0px 55px 0px 30px;
+    transition: color 0.5s ease-in-out 0s, background-color 0.5s ease-in-out 0s, border-color 0.5s ease-in-out 0s, box-shadow 0.5s ease-in-out 0s;
+}/*#A_1*/
+
+#A_1:after {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    white-space: nowrap;
+    column-rule-color: rgb(255, 255, 255);
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 700 normal 14px / 42px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#A_1:after*/
+
+#A_1:before {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    white-space: nowrap;
+    column-rule-color: rgb(255, 255, 255);
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 700 normal 14px / 42px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#A_1:before*/
+
+#SPAN_2 {
+    bottom: -1px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 45px;
+    left: 155.5px;
+    position: absolute;
+    right: -1px;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    top: -1px;
+    white-space: nowrap;
+    width: 40px;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 20px 22.5px;
+    transform-origin: 20px 22.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(8, 31, 62) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 500 normal 24px / 42px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    transition: all 0.5s ease 0s;
+}/*#SPAN_2*/
+
+#SPAN_2:after {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    white-space: nowrap;
+    column-rule-color: rgb(255, 255, 255);
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 500 normal 24px / 42px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#SPAN_2:after*/
+
+        #SPAN_2:before {
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none solid rgb(255, 255, 255);
+            text-size-adjust: 100%;
+            white-space: nowrap;
+            column-rule-color: rgb(255, 255, 255);
+            user-select: none;
+            caret-color: rgb(255, 255, 255);
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 500 normal 24px / 42px Roboto, sans-serif;
+            outline: rgb(255, 255, 255) none 0px;
+        }/*#SPAN_2:before*/
+
+
+    </style>
     <%- include('../partials/dashboard-nav') %>
 
     <div class="container-fluid">
-      <div class="row ">
+      <div class="row">
 
-        <!-- sidebar -->
-         <%- include('../partials/sidebar.ejs', {page: 'slider', activeParent: 'home'}) %>
+                <!-- sidebar -->
+                <%- include('../partials/sidebar.ejs', {page: 'slider', activeParent: 'home'}) %>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
-            <h1 class="h2">Slider CMS</h1>
-          </div>
-
-          <h3 style = "<%if(result.length == 0) {%> display: block   <% } else if(result.length > 0) {%> display: none <% }%>" >Create Slide Images</h3>
-                    <form  action="/uploadslider" style = "<%if(result.length == 0) {%> display: block  <% } else if(result.length > 0) {%> display: none <% }%>" method="POST" enctype="multipart/form-data">
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 1</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider1">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 2</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider2">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 3</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider3">
-            </div>
-        </div>
-
-           <div class="form-group row">
-            <div class="col-sm-10">
-            <button type="submit" id="submit" class="btn btn-primary">upload</button>
-            </div>
-        </div>
-        </form>
-<hr>
-
-          <h3 style = "<%if(result.length == 0) {%> display: none   <% } else if(result.length > 0) {%> display: block <% }%>">Update Slider Images</h3>
-                    <form style = "<%if(result.length == 0) {%> display: none  <% } else if(result.length > 0) {%> display: block <% }%>" action="/update/uploadslider?_method=PUT" method="POST" enctype="multipart/form-data">
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 1</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider1">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 2</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider2">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 3</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider3">
-            </div>
-        </div>
-
-           <div class="form-group row">
-            <div class="col-sm-10">
-            <button type="submit" id="submit" class="btn btn-primary">update</button>
-            </div>
-        </div>
-        </form>
-        <span style="display: none" id="failure">
-        <%=failure%>
-    </span>
-        <span style="display: none" id="success">
-        <%=success%>
-    </span>
-       <span style="display: none" id="uploaded">
-        <%=uploaded%>
-    </span>
-
-          <br> <br>
-        <h1 style="margin-left:200px">Slider Images</h1> <hr>
-
-                <table class="table" style="width:800px; margin-left:200px">
-            <thead class="thead-dark" style="font-weight:bold; font-size: 20px;" >
-                <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Link</th>
-                </tr>
-            </thead>
-            <tbody style="font-size:20px">
-              <% for(var i=0; i < result.length; i++) { %>
-                <tr>
-                 <td><%=result[i].slider1.name%></td>
-                 <td><img src="<%=result[i].slider1.path%>" width="200px" height="150px" alt=""> </td>
-               </tr>
-
-               <tr>
-                 <td><%=result[i].slider2.name%></td>
-                 <td><img src="<%=result[i].slider2.path%>" width="200px" height="150px" alt=""></td>
-               </tr>
-
-               <tr>
-                 <td><%=result[i].slider3.name%></td>
-                 <td><img src="<%=result[i].slider3.path%>" width="200px" height="150px" alt=""></td>
-               </tr>
-                                <% } %>
-
-            </tbody>
-            </table>
-
-          </div>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3">
+                        <h1 class="h2">Slider CMS</h1>
+                    </div>
 
 
-                    <!-- <h3>Slider only accepts three images</h3>
-                    <form action="/update/uploadslider?_method=PUT" method="POST" enctype="multipart/form-data">
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 1</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider1">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 2</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider2">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Image 3</label>
-            <div class="col-sm-10">
-            <input type="file" class="form-control" id="img" name="slider3">
-            </div>
-        </div>
-
-           <div class="form-group row">
-            <div class="col-sm-10">
-            <button type="submit" id="submit" class="btn btn-primary">upload</button>
-            </div>
-        </div>
-        </form>
-
-          </div> -->
+                    <!-- <a href="/dashboard/add"> Create new slider</a> -->
+                    <a href="/dashboard/slider/add" id="A_1">Create new slider <span id="SPAN_2">+</span></a>
+                    <br> <br>
+                    <% for(var i=0; i < result.length; i++) { %>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="card">
+                            <img src="/img/bg-img/class.jpg" alt="image" width="100%" height="100%">
+                          </div>
+                        
+                          
+                        </div>
 
 
-        </main>
-      </div>
+
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <img src="/img/bg-img/class.jpg" alt="image" width="100%" height="100%">
+                            </div>
+    
+                        </div>
+
+                            <div class="col-sm-4">
+                              <div class="card">
+                                <img src="/img/bg-img/class.jpg" alt="image" width="100%" height="100%">
+                              </div>
+      
+                          </div>
+                    </div>
+                  </div>
+                <% }%>
+                
+                </main>
+      
     </div>
 
     <%- include('../partials/dashboard-scripts') %>
@@ -172,7 +199,12 @@
       if($.trim($('#success').text()).length !== 0) {
           alert("<%=success%>")
       }
+
     </script>
+
+<script>
+  $('.your-checkbox').prop('indeterminate', true)
+</script>
 
 <!-- <script>
     $("#submit").click(function(event){

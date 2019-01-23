@@ -55,7 +55,7 @@ exports.contactPage = function (req, res, next) {
         if (file){
             News.find({}).then((doc)=>{
                 if(doc){
-                    res.render('frontend/contact', { file, doc, activeNav: 'about'});
+                    res.render('frontend/contact', {file, doc});
                 }
             })
         }else{
@@ -110,7 +110,16 @@ exports.post_contactPage =(req, res, next)=>{
     }
     let newData = new message(messageData);
     newData.save()
-    res.render('frontend/contact', {})
-
+    Page.find({name: "contactus"}).then((file)=>{
+        if (file){
+            News.find({}).then((doc)=>{
+                if(doc){
+                    res.render('frontend/contact', {file, doc, activeNav: 'about'});
+                }
+            })
+        }else{
+            res.render('frontend/contact');
+        }
+    })
 
 }

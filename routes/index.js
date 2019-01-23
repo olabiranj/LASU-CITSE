@@ -161,6 +161,13 @@ router.delete('/deleteadmin', function (req, res, next) {
 
 })
 
+router.get('/dashboard/slider/add', function (req, res, next) {
+    let upload = req.flash('upload');
+    let failure = req.flash('flash');
+    
+    res.render('backend/slider4', {upload, failure, content: {} })
+})
+
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
 router.post('/reply', mailController.reply);
@@ -206,7 +213,7 @@ router.post("/uploadslider", function (req, res) {
                     newSlider.save().then((result) => {
                         if (result) {
                             console.log(result)
-                            req.flash('uploaded', "Slidder has been uploaded successfully");
+                            req.flash('uploaded', "Slider has been uploaded successfully");
                             res.redirect("/dashboard/slider");
                         } else {
                             res.send("err")
@@ -351,6 +358,12 @@ router.post('/poststaff', function (req, res, next) {
         }
     })
 })
+
+// -----
+// Slider
+// router.get('/dashboard/slider/add', isLoggedIn, (req, res, next) => {
+//     res.render('backend/slider4');
+// })
 
 // -----
 // Contact
