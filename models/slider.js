@@ -13,11 +13,8 @@ let sliderSchema = new Schema({
         is_visible: {
             type: Boolean,
             default: true
-        },
-
-        
+        },    
     },
-    
 })
 
 

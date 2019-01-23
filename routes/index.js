@@ -180,13 +180,6 @@ router.delete('/deleteadmin', function (req, res, next) {
 
 })
 
-router.get('/dashboard/slider/add', function (req, res, next) {
-    let upload = req.flash('upload');
-    let failure = req.flash('flash');
-    
-    res.render('backend/slider4', {upload, failure, content: {} })
-})
-
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
 router.post('/reply', mailController.reply);
@@ -218,93 +211,116 @@ router.post('/reply', mailController.reply);
 
 // -----
 // Slider
-router.get('/dashboard/slider', function (req, res, next) {
+router.get('/dashboard/slider', isLoggedIn, function (req, res, next) {
     let failure = req.flash('failure');
     let success = req.flash('success');
     let uploaded = req.flash('uploaded');
-    let test = "test";
 
     Slider.find({}).then((result) => {
         if (result) {
-            res.render('backend/slider', { result, failure, success, uploaded })
+            res.render('backend/slider', { result, usrInfo, failure, success, uploaded })
         } else {
-            res.render('backend/slider')
+            res.render('backend/slider', {usrInfo})
         }
     })
 })
 
-router.post("/uploadslider", function (req, res) {
-    upload(req, res, (err) => {
-        if (err) {
-            //res.render('students', {msg : err})
-            res.send(err)
-        } else {
-            console.log(req.files);
-            Slider.findOne({ name: "slider" }).then(function (result) {
-                if (result) {
-                    req.flash('failure', "Sorry You can only update sliders not create new ones");
-                    res.redirect("/dashboard/slider");
-                } else if (!result) {
-                    let newSlider = new Slider();
-                    newSlider.slider1.name = req.files['slider1'][0].fieldname;
-                    newSlider.slider1.path = '/uploads/' + req.files['slider1'][0].filename;
-                    newSlider.slider2.name = req.files['slider2'][0].fieldname;
-                    newSlider.slider2.path = '/uploads/' + req.files['slider2'][0].filename;
-                    newSlider.slider3.name = req.files['slider3'][0].fieldname;
-                    newSlider.slider3.path = '/uploads/' + req.files['slider3'][0].filename;
-                    newSlider.name = "slider";
+router.get('/dashboard/slider/add', isLoggedIn, function (req, res, next) {
+    let upload = req.flash('upload');
+    let failure = req.flash('flash');
+    
+    res.render('backend/slider4', {upload, usrInfo, failure, content: {} })
+})
 
-                    newSlider.save().then((result) => {
-                        if (result) {
-                            console.log(result)
-                            req.flash('uploaded', "Slider has been uploaded successfully");
-                            res.redirect("/dashboard/slider");
-                        } else {
-                            res.send("err")
-                        }
-                    })
+router.post('/dashboard/slider/post', upload.single('postImage'), function(req, res, next){
+    let pageData = new Slider();
 
-                    // console.log("sorry cannot save new data")
-                }
-                // res.send("test")
-            })
-        }
+        pageData.slider1.name= req.body.name;
+        pageData.slider1.text_on_img= req.body.text_on_img;
+        pageData.slider1.img_link= req.body.img_link;
+        pageData.slider1.img_link_text= req.body.img_link_text; 
+    
+    if (req.file){
+        pageData.slider1.postImage = req.file.path.substring(6)
+    }
+    pageData.save().then(()=>{
+         req.flash('upload', 'Slider Content Updated Successful!');
+            res.redirect('/dashboard/slider');
     })
 })
 
-router.put("/update/uploadslider", function (req, res) {
+// router.post("/uploadslider", function (req, res) {
+//     upload(req, res, (err) => {
+//         if (err) {
+//             //res.render('students', {msg : err})
+//             res.send(err)
+//         } else {
+//             console.log(req.files);
+//             Slider.findOne({ name: "slider" }).then(function (result) {
+//                 if (result) {
+//                     req.flash('failure', "Sorry You can only update sliders not create new ones");
+//                     res.redirect("/dashboard/slider");
+//                 } else if (!result) {
+//                     let newSlider = new Slider();
+//                     newSlider.slider1.name = req.files['slider1'][0].fieldname;
+//                     newSlider.slider1.path = '/uploads/' + req.files['slider1'][0].filename;
+//                     newSlider.slider2.name = req.files['slider2'][0].fieldname;
+//                     newSlider.slider2.path = '/uploads/' + req.files['slider2'][0].filename;
+//                     newSlider.slider3.name = req.files['slider3'][0].fieldname;
+//                     newSlider.slider3.path = '/uploads/' + req.files['slider3'][0].filename;
+//                     newSlider.name = "slider";
 
-    upload(req, res, (err) => {
-        if (err) {
-            //res.render('students', {msg : err})
-            res.send(err)
-        } else {
-            console.log(req.files);
-            Slider.findOneAndUpdate(
-                { "name": "slider" },
-                {
-                    $set: {
-                        "slider1.name": req.files['slider1'][0].fieldname,
-                        "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
-                        "slider2.name": req.files['slider2'][0].fieldname,
-                        "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
-                        "slider3.name": req.files['slider3'][0].fieldname,
-                        "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
-                    }
-                },
-                { new: true })
-                .then((result) => {
-                    if (result) {
-                        req.flash('success', "Slider has been updated");
-                        res.redirect("/dashboard/slider")
-                    } else {
-                        res.send("error")
-                    }
-                })
-            // res.send("test")
-        }
-    })
-})
+//                     newSlider.save().then((result) => {
+//                         if (result) {
+//                             console.log(result)
+//                             req.flash('uploaded', "Slider has been uploaded successfully");
+//                             res.redirect("/dashboard/slider");
+//                         } else {
+//                             res.send("err")
+//                         }
+//                     })
+
+//                     // console.log("sorry cannot save new data")
+//                 }
+//                 // res.send("test")
+//             })
+//         }
+//     })
+// })
+
+// router.put("/update/uploadslider", function (req, res) {
+
+//     upload(req, res, (err) => {
+//         if (err) {
+//             //res.render('students', {msg : err})
+//             res.send(err)
+//         } else {
+//             console.log(req.files);
+//             Slider.findOneAndUpdate(
+//                 { "name": "slider" },
+//                 {
+//                     $set: {
+//                         "slider1.name": req.files['slider1'][0].fieldname,
+//                         "slider1.path": '/uploads/' + req.files['slider1'][0].filename,
+//                         "slider2.name": req.files['slider2'][0].fieldname,
+//                         "slider2.path": '/uploads/' + req.files['slider2'][0].filename,
+//                         "slider3.name": req.files['slider3'][0].fieldname,
+//                         "slider3.path": '/uploads/' + req.files['slider3'][0].filename,
+//                     }
+//                 },
+//                 { new: true })
+//                 .then((result) => {
+//                     if (result) {
+//                         req.flash('success', "Slider has been updated");
+//                         res.redirect("/dashboard/slider")
+//                     } else {
+//                         res.send("error")
+//                     }
+//                 })
+//             // res.send("test")
+//         }
+//     })
+// })
 
 // -----
 // News
