@@ -164,7 +164,7 @@ router.get('/dashboard/slider/add', function (req, res, next) {
     let upload = req.flash('upload');
     let failure = req.flash('flash');
     
-    res.render('backend/slider4', {upload, failure, content: {} })
+    res.render('backend/slider4', {upload, failure, usrInfo, content: {} })
 })
 
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
@@ -181,7 +181,7 @@ router.get('/dashboard/slider', function (req, res, next) {
 
     Slider.find({}).then((result) => {
         if (result) {
-            res.render('backend/slider', { result, failure, success, uploaded })
+            res.render('backend/slider', { result, failure, success, uploaded, usrInfo })
         } else {
             res.render('backend/slider')
         }

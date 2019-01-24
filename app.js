@@ -21,7 +21,7 @@ require("./config/passport");
 
 var app = express();
 
-let db_uri = process.env.db_uri;
+let db_uri = "mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms";
 mongoose.connect(db_uri, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 // view engine setup
