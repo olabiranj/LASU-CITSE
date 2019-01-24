@@ -2,6 +2,7 @@ let message = require('../models/message')
 let Slider = require('../models/slider');
 let News = require('../models/news');
 let Page = require('../models/page');
+let Contact = require('../models/contact');
 
 let f = require('../config/frontNav');
 let allNews = News.find({});
@@ -51,17 +52,16 @@ exports.servicesPage = function (req, res, next) {
 };
 
 exports.contactPage = function (req, res, next) {
-    Page.find({name: "contactus"}).then((file)=>{
-        if (file){
-            News.find({}).then((doc)=>{
-                if(doc){
-                    res.render('frontend/contact', {file, doc});
-                }
-            })
-        }else{
-            res.render('frontend/contact');
-        }
-    })
+    (async () => {
+        let pageData = Contact.find({})
+
+        const [dt, news] =
+            await Promise.all(
+                [pageData, allNews]
+            );
+
+        res.render('frontend/contact', { content: dt[0], doc: news, activeNav: 'about' });
+    })()
 };
 
 exports.newsPage = function (req, res, next) {
