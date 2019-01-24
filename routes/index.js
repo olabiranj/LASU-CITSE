@@ -14,7 +14,7 @@ let Contact = require('../models/contact');
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
-let usrInfo = {};
+global.usrInfo = {};
 let oldImage = '';
 
 // HANDLE IMAGES
@@ -57,8 +57,8 @@ const upload = multer(multerOpts);
 // -----
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated() || req.user) {
-        usrInfo.pos = req.user.position;
-        usrInfo.name = req.user.name;
+        global.usrInfo.pos = req.user.position;
+        global.usrInfo.name = req.user.name;
 
         return next()
     } else {
@@ -70,8 +70,8 @@ function isLoggedIn(req, res, next) {
 
 function adminLoggedIn(req, res, next) {
     if (req.isAuthenticated() && req.user.position == "head") {
-        usrInfo.pos = req.user.position;
-        usrInfo.name = req.user.name;
+        global.usrInfo.pos = req.user.position;
+        global.usrInfo.name = req.user.name;
 
         return next()
     } else {
@@ -89,6 +89,20 @@ function capitalize(str) {
 async function getOldImage(req, res, next) {
     oldImage = await Page.findOne({ tag: req.params.tag.trim() })
     return next()
+}
+async function getOldSliderImage(req, res, next) {
+    if (oldImage != null) {
+        oldImage = await Slider.findOne({ _id: isUpdate })
+    }
+    return next();
+}
+
+// remove old uploaded image
+function removeOldImage() {
+    fse.remove('\public' + oldImage.postImage)
+        .catch(err => {
+            console.error(err)
+        })
 }
 
 
@@ -110,12 +124,13 @@ router.get('/signup', function (req, res, next) {
 })
 
 router.get('/logout', function (req, res, next) {
-    req.logout()
-    res.redirect('/login')
+    req.logout();
+    delete globals.usrInfo;
+    res.redirect('/login');
 })
 
 router.get('/dashboard', isLoggedIn, function (req, res, next) {
-    res.render('backend/dashboard', { usrInfo });
+    res.render('backend/dashboard');
 });
 
 // -----
@@ -160,33 +175,57 @@ router.delete('/deleteadmin', function (req, res, next) {
 
 })
 
-router.get('/dashboard/slider/add', function (req, res, next) {
-    let upload = req.flash('upload');
-    let failure = req.flash('flash');
-    
-    res.render('backend/slider4', {upload, failure, content: {} })
-})
-
 router.get('/dashboard/messages', adminLoggedIn, mailController.messages)
 
 router.post('/reply', mailController.reply);
 
 // -----
 // Slider
-router.get('/dashboard/slider', function (req, res, next) {
-    let failure = req.flash('failure');
-    let success = req.flash('success');
-    let uploaded = req.flash('uploaded');
-    let test = "test";
+router.route('/dashboard/slider')
+    .all(isLoggedIn)
+    .get(function (req, res, next) {
+        let failure = req.flash('failure');
+        let success = req.flash('success');
+        let uploaded = req.flash('uploaded');
 
-    Slider.find({}).then((result) => {
-        if (result) {
-            res.render('backend/slider', { result, failure, success, uploaded })
-        } else {
-            res.render('backend/slider')
-        }
+        Slider.find({}).then((result) => {
+            if (result) {
+                res.render('backend/slider', { result, failure, success, uploaded })
+            } else {
+                res.render('backend/slider')
+            }
+        })
     })
-})
+
+router.route('/dashboard/slider/add')
+    .all(isLoggedIn, function (req, res, next) {
+        oldImage = null
+        return next()
+    })
+    .get(function (req, res, next) {
+        let upload = req.flash('upload');
+        let failure = req.flash('flash');
+
+        res.render('backend/slider-form', {upload, failure, content: {} })
+    })
+    .post(getOldSliderImage, upload.single('postImage'), (req, res) => {
+        removeOldImage();
+        pageData = {
+            name: req.body.name,
+            text_on_img: req.body.text_on_img,
+            img_link: req.body.img_link,
+            img_link_text: req.body.img_link_text,
+            is_active: true,
+            postImage: req.file.path.substring(6)
+        }
+
+        Slider.create(pageData)
+            .catch((err) => { console.error(`Error occured during POST(/dashboard/slider): ${err}`); })
+            .then(() => {
+                req.flash('upload', `Slider Creation Successful!`);
+                res.redirect('/dashboard/slider');
+            })
+    })
 
 router.post("/uploadslider", function (req, res) {
     upload(req, res, (err) => {
@@ -361,9 +400,7 @@ router.post('/poststaff', function (req, res, next) {
 // -----
 // Contact
 router.route('/dashboard/contact-us')
-    .all((req, res, next) => {
-        isLoggedIn(req, res, next);
-    })
+    .all(isLoggedIn)
     .get((req, res, next) => {
         let req_url = req.originalUrl;
         let upload = req.flash('upload');
@@ -420,10 +457,7 @@ router.route('/dashboard/:tag')
     })
     .post(getOldImage, upload.single('postImage'), (req, res, next) => {
 
-        fse.remove('\public' + oldImage.postImage)
-            .catch(err => {
-                console.error(err)
-            })
+        removeOldImage();
 
         let page_tag = req.params.tag.trim();
         pageData = {
