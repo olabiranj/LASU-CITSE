@@ -99,10 +99,12 @@ async function getOldSliderImage(req, res, next) {
 
 // remove old uploaded image
 function removeOldImage() {
-    fse.remove('\public' + oldImage.postImage)
-        .catch(err => {
-            console.error(err)
-        })
+    if (oldImage) {
+        fse.remove('\public' + oldImage.postImage)
+            .catch(err => {
+                console.error(err)
+            })
+    }
 }
 
 
