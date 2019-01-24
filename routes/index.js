@@ -127,7 +127,7 @@ router.get('/signup', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
     req.logout();
-    delete global.usrInfo;
+    global.usrInfo = {};
     res.redirect('/login');
 })
 
