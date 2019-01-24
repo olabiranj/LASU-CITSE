@@ -136,7 +136,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 // -----
 // Admin
 router.get('/dashboard/authorizeadmins', adminLoggedIn, function (req, res, next) {
-    User.find({ position: "member" }).then((result) => {
+    User.find({ }).then((result) => {
         if (result) {
             res.render('backend/authorize', { result })
         } else {
@@ -162,7 +162,7 @@ router.post('/createAccount', function (req, res, next) {
     })
 })
 
-router.delete('/deleteadmin', function (req, res, next) {
+router.post('/deleteadmin', function (req, res, next) {
     User.deleteOne({ _id: req.body.id }).then((result) => {
         if (result) {
             if (result) {
