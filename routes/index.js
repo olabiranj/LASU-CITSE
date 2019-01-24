@@ -431,5 +431,6 @@ router.post('/post_contact', controller.post_contactPage);
 router.get('/team', controller.teamPage);
 router.get('/news', controller.newsPage);
 router.get('/:page_name', controller.renderPage);
+router.post('/subscribe', controller.subscribe)
 
 module.exports = router;

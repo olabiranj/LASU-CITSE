@@ -4,6 +4,7 @@ let News = require('../models/news');
 let Page = require('../models/page'); 
 let nodemailer= require('nodemailer')
 let keys = require('../config/keys.js')
+let subscribe = require('../models/subscribe')
 
 
 
@@ -56,6 +57,12 @@ exports.servicesPage = function (req, res, next) {
 };
 
 exports.contactPage = function (req, res, next) {
+    let subscribeData ={
+        email: req.body.newsletterEmail1,
+    }
+
+    let newData = new subscribe(subscribeData);
+        newData.save()
     Page.find({name: "contactus"}).then((file)=>{
         if (file){
             News.find({}).then((doc)=>{
@@ -166,4 +173,15 @@ exports.post_contactPage =(req, res, next)=>{
     res.redirect('/contact')
 
 
+}
+
+exports.subscribe = function (req, res, next){
+    let subscribeData ={
+        email: req.body.newsletterEmail,
+    }
+
+    let newData = new subscribe(subscribeData);
+        newData.save()
+    
+    res.redirect(req.originalUrl)
 }

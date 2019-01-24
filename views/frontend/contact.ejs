@@ -113,7 +113,6 @@
         </div>
     </section>
     
-
     <!-- ***** Footer Area Start ***** -->
     <% include ../partials/footer.ejs %>
     <!-- ***** Footer Area End ***** -->
@@ -129,6 +128,33 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
 
+    <!-- <script>
+        $('#submitData').click(function(event) {
+            event.preventDefault();
+        
+            $.ajax({
+                global: false,
+                type: 'POST',
+                url: '/subscribe',
+                dataType: 'html',
+                data: {
+                    email: $("#newsletterEmail").val(),
+                },
+                success: function (data){
+                    
+                    alert('the mail has been sent');
+                    console.log(data)
+
+                },
+                error: function (request, status, error){
+                    serviceError();
+                }
+            });
+        });
+        </script> -->
+        <% include ../partials/subscribe-script.ejs %>
+
+       
 </body>
 
 </html>
