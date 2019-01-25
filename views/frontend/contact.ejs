@@ -98,6 +98,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- ***** Footer Area Start ***** -->
     <% include ../partials/footer.ejs %>
@@ -127,7 +128,30 @@
             var map = new google.maps.Map(mapCanvas, mapOptions)
         }
 		google.maps.event.addDomListener(window, 'load', initialize);
+$('#submitData').click(function(event) {
+            event.preventDefault();
+        
+            $.ajax({
+                global: false,
+                type: 'POST',
+                url: '/subscribe',
+                dataType: 'html',
+                data: {
+                    email: $("#newsletterEmail").val(),
+                },
+                success: function (data){
+                    
+                    alert('the mail has been sent');
+                    console.log(data)
+
+                },
+                error: function (request, status, error){
+                    serviceError();
+                }
+            });
+        });
 	</script>
+<% include ../partials/subscribe-script.ejs %>
 </body>
 
 </html>

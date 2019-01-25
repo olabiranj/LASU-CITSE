@@ -495,5 +495,6 @@ router.get('/team', controller.teamPage);
 router.get('/news', controller.newsPage);
 router.get('/news-lists', controller.newsListsPage);
 router.get('/:page_name', controller.renderPage);
+router.post('/subscribe', controller.subscribe)
 
 module.exports = router;
