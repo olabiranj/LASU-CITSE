@@ -5,13 +5,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
-const multer =require("multer");
-const nodemailer = require("nodemailer")
 const dotenv = require('dotenv');
 dotenv.config();
 

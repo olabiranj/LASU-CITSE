@@ -98,7 +98,7 @@
             </div>
         </div>
     </section>
-    
+
 
     <!-- ***** Footer Area Start ***** -->
     <% include ../partials/footer.ejs %>
@@ -115,7 +115,7 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTqP1WfCCjNPu4X-vHghbvPT7U8G6o8n8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= gmap_api_key %>"></script>
     <script>
 		function initialize() {
             var mapCanvas = document.getElementById('gmap');
@@ -128,9 +128,10 @@
             var map = new google.maps.Map(mapCanvas, mapOptions)
         }
 		google.maps.event.addDomListener(window, 'load', initialize);
-$('#submitData').click(function(event) {
+
+        // submit form
+        $('#submitData').click(function(event) {
             event.preventDefault();
-        
             $.ajax({
                 global: false,
                 type: 'POST',
@@ -140,10 +141,7 @@ $('#submitData').click(function(event) {
                     email: $("#newsletterEmail").val(),
                 },
                 success: function (data){
-                    
                     alert('the mail has been sent');
-                    console.log(data)
-
                 },
                 error: function (request, status, error){
                     serviceError();
@@ -151,7 +149,7 @@ $('#submitData').click(function(event) {
             });
         });
 	</script>
-<% include ../partials/subscribe-script.ejs %>
+    <% include ../partials/subscribe-script.ejs %>
 </body>
 
 </html>

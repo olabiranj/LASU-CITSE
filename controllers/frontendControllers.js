@@ -1,7 +1,7 @@
 let message = require('../models/message')
 let Slider = require('../models/slider');
 let News = require('../models/news');
-let Page = require('../models/page'); 
+let Page = require('../models/page');
 let nodemailer= require('nodemailer')
 let keys = require('../config/keys.js')
 let subscribe = require('../models/subscribe')
@@ -57,11 +57,11 @@ exports.servicesPage = function (req, res, next) {
 
 exports.contactPage = function (req, res, next) {
     (async () => {
-let subscribeData ={
-        email: req.body.newsletterEmail1,
-    }
+        let subscribeData = {
+            email: req.body.newsletterEmail1,
+        }
 
-    let newData = new subscribe(subscribeData);
+        let newData = new subscribe(subscribeData);
         newData.save()
 
 
@@ -72,7 +72,7 @@ let subscribeData ={
                 [pageData, allNews]
             );
 
-        res.render('frontend/contact', { content: dt[0], doc: news, activeNav: 'about' });
+        res.render('frontend/contact', { content: dt[0], doc: news, activeNav: 'about', gmap_api_key: process.env.GMAP_API_KEY });
     })()
 };
 
@@ -147,7 +147,7 @@ exports.post_contactPage =(req, res, next)=>{
           rejectUnauthorized: false
         }
       });
-  
+
       // let Transport = nodemailer.createTransport({
       //   host: "smtp.mailtrap.io",
       //   port: 2525,
@@ -156,44 +156,44 @@ exports.post_contactPage =(req, res, next)=>{
       //     pass: "01752e418f9181"
       //   }
       // });
-  
+
       //sending email with SMTP, configuration using SMTP settings
       let mailOptions = {
-        from: "lasu CITSE - <lasu_citse@gmail.com>", //sender adress
+        from: "LASU ACEITSE - <lasu_citse@gmail.com>", //sender adress
         // to: req.body.userMail,
         to: 'phawazzzy@gmail.com',
-  
+
         subject: "LASU CITSE",
         html: req.body.message
       };
-  
+
       Transport.sendMail(mailOptions, (error, info)=>{
         if (error) {
           console.log(error);
           console.log(mailOptions.html);
-  
+
           //res.send("email could not send due to error:" + error);
         } else {
           console.log(info);
           console.log(mailOptions.html);
-  
+
           // res.send("email has been sent successfully");
         }
         res.redirect("/contact")
       });
-  
+
     res.redirect('/contact')
 
 
 }
 
 exports.subscribe = function (req, res, next){
-    let subscribeData ={
+    let subscribeData = {
         email: req.body.newsletterEmail,
     }
 
     let newData = new subscribe(subscribeData);
-        newData.save()
-    
+    newData.save()
+
     res.redirect(req.originalUrl)
 }
