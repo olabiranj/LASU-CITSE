@@ -6,13 +6,15 @@ let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
     name: {type: String},
-    email: {type: String, trim: true},
+    email: {type: String, unique: true, required: true, trim: true},
     password: {type: String},
     position: {type: String},
     createdDate: {
         type: Date,
         default: Date.now
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 })
 
 userSchema.methods.generateHash = function(password){

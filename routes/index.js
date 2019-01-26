@@ -4,6 +4,10 @@ const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
 const fse = require('fs-extra');
+const async = require('async');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt-nodejs");
 
 let User = require('../models/users');
 let News = require('../models/news');
@@ -15,6 +19,7 @@ let Settings = require('../models/settings');
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
+const keys = require("../config/keys")
 let usrInfo = {};
 let oldImage = '';
 
@@ -116,7 +121,10 @@ async function getOldImage(req, res, next) {
 // -----
 // Access Control
 router.get('/login', function (req, res, next) {
-    res.render('backend/login')
+    let success = req.flash('success');
+    let error = req.flash('error')
+    
+    res.render('backend/login', {success, error})
 })
 
 router.post('/login/admin', passport.authenticate('local.loginAdmin', {
@@ -143,7 +151,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 router.get('/dashboard/authorizeadmins', adminLoggedIn, function (req, res, next) {
     User.find({ position: "member" }).then((result) => {
         if (result) {
-            res.render('backend/authorize', { result })
+            res.render('backend/authorize', { result, usrInfo })
         } else {
             res.render('backend/authorize')
         }
@@ -166,6 +174,126 @@ router.post('/createAccount', function (req, res, next) {
         }
     })
 })
+
+//HANDLE FORGOT PASSWORD
+router.get('/forgot', function(req, res, next){
+    let info = req.flash('info');
+    res.render('backend/forgot', {info})
+})
+
+router.post('/forgot', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'No account with that email address exists.');
+          return res.redirect('/forgot');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+       
+    let smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      secure: false,
+      port: 25, 
+      auth: {
+        user: "phawazzzy@gmail.com",
+        pass: keys.keys.password
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+      var mailOptions = {
+        to: req.body.email,
+        from: 'phawazzzy@gmail.com',
+        subject: 'Node.js Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('info', 'An e-mail has been sent to ' + req.body.email + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
+});
+
+//ROUTE TO GET RESET PAGE
+router.get('/reset/:token', function(req, res) {
+     let success = req.flash('success');
+      let error = req.flash('error');      
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+     
+    if (!user) {
+      req.flash('error');
+      return res.redirect('/forgot');
+    }
+    res.render('backend/reset', { token: req.params.token, success, error });
+  });
+});
+
+router.post('/reset/:token', async function(req, res, next){
+   
+       await User.findOneAndUpdate({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, 
+        {$set:{password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)), resetPasswordToken : undefinedresetPasswordExpires = undefined
+            }}, {new: true},
+         (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+    console.log(doc);
+    req.flash('success', 'Success! Your password has been changed. Login to continue');
+    res.redirect('/login')   
+});
+
+    User.findOne({ resetPasswordToken: req.params.token }).then((result)=>{
+        let smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      secure: false,
+      port: 25, 
+      auth: {
+        user: "phawazzzy@gmail.com",
+        pass: keys.keys.password
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+      var mailOptions = {
+        to:  result.email,
+        from: 'phawazzzy@gmail.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + result.email + ' has just been changed.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        done(err);
+      });
+    })
+})
+//END FORGOT PASSWORD
 
 router.delete('/deleteadmin', function (req, res, next) {
     User.deleteOne({ _id: req.body.id }).then((result) => {
@@ -498,8 +626,8 @@ router.route('/dashboard/:tag')
         if (req.file) {
             pageData.postImage = req.file.path.substring(6)
         }
-
-        Page.findOneAndUpdate({ tag: page_tag }, pageData, { upsert: true })
+ Page.findOneAndUpdate({ tag: page_tag }, pageData, { upsert: true })
+       
             .catch((err) => { console.error(`Error occured during POST(/dashboard/${page_tag}): ${err}`); })
             .then(() => {
                 req.flash('upload', `PAGE (${capitalize(page_tag)}) - Content Update Successful!`);
