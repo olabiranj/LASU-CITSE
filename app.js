@@ -10,6 +10,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 var indexRouter = require('./routes/index');
@@ -33,6 +34,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('mysecrect'));
+
 
 var oneDay = 86400000; // in milliseconds
 app.use(express.static(path.join(__dirname, 'public'), {

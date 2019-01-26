@@ -358,6 +358,24 @@ router.get('/dashboard/staffs', function (req, res, next) {
     res.render('backend/staff', { upload, failure })
 })
 
+router.get('/dashboard/adminSettings', function (req, res, next) {
+
+    res.render('backend/adminSettings', { email: req.user.email})
+})
+
+router.put('/dashboard/adminSettings', function (req, res, next) {
+    User.findOneAndUpdate({ _id: req.user._id }, { email: req.body.newEmail })
+        .exec()
+        .then(() => {
+            res.redirect('/backend/dashboard');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+    
+})
+
 router.post('/poststaff', function (req, res, next) {
     upload(req, res, (err) => {
         if (err) {
