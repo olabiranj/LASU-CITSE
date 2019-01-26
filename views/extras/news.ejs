@@ -25,7 +25,7 @@
     <% include ../partials/navbar.ejs %>
 
     <!-- ***** Breadcumb Area Start ***** -->
-    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/news.jpg);">
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/news.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -45,7 +45,7 @@
                 <div class="col-12 col-lg-8">
 
                     <div class="single-blog-area">
-                                      <% for(var i=0; i < doc.length; i++) { %>
+                    <% for(var i=0; i < doc.length; i++) { %>
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
                             <img src="<%=doc[i].newImg%>" alt="">
@@ -64,10 +64,11 @@
                                 <a href="#" class="post-author-name">by <%=doc[i].writer%></a> | <a href="#" class="post-catagory"><%=doc[i].department%></a>
                             </div>
                             <%-doc[i].content%>
-                                <br>    <button class="btn btn-primary">Read more...</button>
+                            <br>
+                            <button class="btn btn-primary">Read more...</button>
                         </div>
 
-                      <%}%>
+                    <%}%>
 
                     </div>
                     <!-- end -->
@@ -80,7 +81,7 @@
                                 <div class="comment-wrapper d-flex">
                                     <!-- Comment Meta -->
                                     <div class="comment-author">
-                                        <img src="img/blog-img/6.jpg" alt="">
+                                        <img src="img/avatar.jpg" alt="">
                                     </div>
                                     <!-- Comment Content -->
                                     <div class="comment-content">
@@ -99,7 +100,7 @@
                                         <div class="comment-wrapper d-flex">
                                             <!-- Comment Meta -->
                                             <div class="comment-author">
-                                                <img src="img/blog-img/7.jpg" alt="">
+                                                <img src="img/avatar.jpg" alt="">
                                             </div>
                                             <!-- Comment Content -->
                                             <div class="comment-content">
@@ -120,7 +121,7 @@
                                 <div class="comment-wrapper d-flex">
                                     <!-- Comment Meta -->
                                     <div class="comment-author">
-                                        <img src="img/blog-img/6.jpg" alt="">
+                                        <img src="img/avatar.jpg" alt="">
                                     </div>
                                     <!-- Comment Content -->
                                     <div class="comment-content">
@@ -182,9 +183,6 @@
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
-    <script>
-    console.log(cont)
-    </script>
 
 </body>
 

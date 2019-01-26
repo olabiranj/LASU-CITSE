@@ -5,13 +5,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
-const multer =require("multer");
-const nodemailer = require("nodemailer")
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -21,7 +18,7 @@ require("./config/passport");
 
 var app = express();
 
-let db_uri = "mongodb://korwalskiy:DBpass123@ds255364.mlab.com:55364/citse-cms";
+let db_uri = process.env.DB_URI;
 mongoose.connect(db_uri, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 // view engine setup
