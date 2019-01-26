@@ -17,6 +17,11 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/w3.css">
+    <style>
+    .hi{
+        height: 200px;
+    }
+    </style>
 
 </head>
 
@@ -41,128 +46,44 @@
     <!-- ***** Blog Area Start ***** -->
     <section class="medilife-blog-area section-padding-100">
         <div class="container">
-            <div class="row">
-                <div class="col-12 ">
-                    <div class="row">
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/1.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
+            <% if (doc.length < 1) { %>
+                <h2>No Latest News</h2>
+            <%} else { %>
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="row">
+                            <!-- Single Blog Area -->
+                            <% for (var i = 0; i < doc.length; i++) { %>
+                                <a href="/news-lists/<%= doc[i]._id%>">
+                                    <div class="col-12 col-md-6">
+                                        <div class="single-blog-area bg-gray mb-50">
+                                            <!-- Post Thumbnail -->
+                                            <div class="blog-post-thumbnail">
+                                                <img src="<%= doc[i].newImg %>" alt="" class="hi">
+                                                <!-- Post Date -->
+                                                <div class="post-date">
+                                                    <a href="#">
+                                                        <%= doc[i].createdDate %></a>
+                                                </div>
+                                            </div>
+                                            <!-- Post Content -->
+                                            <div class="post-content">
+                                                <a href="#" class="headline">
+                                                    <%= doc[i].title %></a>
+                                                <%- doc[i].content %>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">New drog release soon</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
+                                </a>
+                            <% } %>
+                            
+                            
+                
                         </div>
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/2.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
-                                    </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">Free dental care</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/3.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
-                                    </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">Good news for the pacients</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/1.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
-                                    </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">New drog release soon</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/2.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
-                                    </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">Free dental care</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Blog Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-area bg-gray mb-50">
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail">
-                                    <img src="img/blog-img/3.jpg" alt="">
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">Jan 23, 2018</a>
-                                    </div>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="#" class="headline">Good news for the pacients</a>
-                                    <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                                    <a href="#" class="comments">3 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+                
                 </div>
-
-            </div>
+            <%} %>
         </div>
     </section>
     <!-- ***** Blog Area End ***** -->

@@ -77,16 +77,21 @@ exports.contactPage = function (req, res, next) {
 };
 
 exports.newsPage = function (req, res, next) {
-
-    News.find({}).then((doc)=>{
-        if (doc){
-            res.render('extras/news', {doc, activeNav: 'news'})
-        }else{
-            res.render('extras/news')
-        }
-    })
-
+    let newsID = req.params.id;
+    News.findOne({ _id: newsID })
+        .exec()
+        .then((oneNews) => {
+            News.find({}).exec().then((doc) => {
+                if (doc) {
+                    res.render('extras/news', {oneNews, doc, activeNav: 'news' })
+                } else {
+                    res.render('extras/news')
+                }
+            })
+        })
 };
+
+
 
 exports.newsListsPage = function (req, res, next) {
 

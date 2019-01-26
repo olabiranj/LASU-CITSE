@@ -492,7 +492,7 @@ router.get('/services', controller.servicesPage);
 router.get('/contact', controller.contactPage);
 router.post('/post_contact', controller.post_contactPage);
 router.get('/team', controller.teamPage);
-router.get('/news', controller.newsPage);
+router.get('/news-lists/:id', controller.newsPage);
 router.get('/news-lists', controller.newsListsPage);
 router.get('/:page_name', controller.renderPage);
 router.post('/subscribe', controller.subscribe)

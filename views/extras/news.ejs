@@ -17,7 +17,11 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/w3.css">
-
+    <style>
+    .hi{
+        height: 300px;
+    }
+    </style>
 </head>
 
 <body>
@@ -45,13 +49,13 @@
                 <div class="col-12 col-lg-8">
 
                     <div class="single-blog-area">
-                    <% for(var i=0; i < doc.length; i++) { %>
+                    
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="<%=doc[i].newImg%>" alt="">
+                            <img src="<%=oneNews.newImg%>" alt="" class="hi">
                             <!-- Post Date -->
                             <div class="post-date">
-                                <a href="#"><%=doc[i].createdDate%></a>
+                                <a href="#"><%= oneNews.createdDate%></a>
                             </div>
                         </div>
                         <!-- Post Content -->
@@ -59,86 +63,21 @@
                             <div class="post-author">
                                 <a href="#"><img src="img/bg-img/edu.jpg" alt=""></a>
                             </div>
-                            <a href="#" class="headline mb-0"><%=doc[i].title%> </a>
+                            <a href="#" class="headline mb-0"><%= oneNews.title%> </a>
                             <div class="post-meta">
-                                <a href="#" class="post-author-name">by <%=doc[i].writer%></a> | <a href="#" class="post-catagory"><%=doc[i].department%></a>
+                                <a href="#" class="post-author-name">by <%= oneNews.writer%></a> | <a href="#" class="post-catagory"><%= oneNews.department%></a>
                             </div>
-                            <%-doc[i].content%>
+                            <%- oneNews.content%>
                             <br>
-                            <button class="btn btn-primary">Read more...</button>
+                            
                         </div>
 
-                    <%}%>
+                    
 
                     </div>
                     <!-- end -->
 
-                    <div class="comments-area">
-                        <h5>Comments</h5>
-                        <ol>
-                            <!-- Single Comment Area -->
-                            <li class="single_comment_area">
-                                <div class="comment-wrapper d-flex">
-                                    <!-- Comment Meta -->
-                                    <div class="comment-author">
-                                        <img src="img/avatar.jpg" alt="">
-                                    </div>
-                                    <!-- Comment Content -->
-                                    <div class="comment-content">
-                                        <div class="comment-meta">
-                                            <a href="#" class="comment-author-name">Maria Williams</a> |
-                                            <a href="#" class="comment-date">Jan 29, 2018</a> |
-                                            <a href="#" class="comment-reply">Reply</a>
-                                        </div>
-                                        <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla
-                                            placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet
-                                            neque. Fusce sagittis suscipit sem a consequat.</p>
-                                    </div>
-                                </div>
-                                <ol class="children">
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="img/avatar.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <div class="comment-meta">
-                                                    <a href="#" class="comment-author-name">Maria Williams</a> |
-                                                    <a href="#" class="comment-date">Jan 29, 2018</a> |
-                                                    <a href="#" class="comment-reply">Reply</a>
-                                                </div>
-                                                <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat
-                                                    nulla placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit
-                                                    amet laoreet neque. Fusce sagittis suscipit sem a consequat.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </li>
-                            <li class="single_comment_area">
-                                <div class="comment-wrapper d-flex">
-                                    <!-- Comment Meta -->
-                                    <div class="comment-author">
-                                        <img src="img/avatar.jpg" alt="">
-                                    </div>
-                                    <!-- Comment Content -->
-                                    <div class="comment-content">
-                                        <div class="comment-meta">
-                                            <a href="#" class="comment-author-name">Maria Williams</a> |
-                                            <a href="#" class="comment-date">Jan 29, 2018</a> |
-                                            <a href="#" class="comment-reply">Reply</a>
-                                        </div>
-                                        <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla
-                                            placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet
-                                            neque. Fusce sagittis suscipit sem a consequat.</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ol>
-                    </div>
-
+                    
                     <!-- Leave A Comment -->
                     <div class="leave-comment-area clearfix">
                         <div class="comment-form">
@@ -170,7 +109,7 @@
     <!-- ***** Blog Area End ***** -->
 
     <!-- ***** Footer Area Start ***** -->
-    <% include ../partials/footer.ejs %>
+    <!-- <% include ../partials/footer.ejs %> -->
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
