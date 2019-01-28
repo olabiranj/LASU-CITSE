@@ -130,10 +130,11 @@
                     <form action="/dashboard/adminSettings/delete?_method=DELETE" method="post">
                         <div class="form-group col-sm-offset-1 col-sm-4">
                             <label for="comment">Leave a comment:</label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea><br>
+                            <textarea class="form-control" rows="5" id="comment" ></textarea><br>
                             <label for="comment">Password:</label>
-                            <input type="password" class="form-control" placeholder="Enter password">
+                            <input type="password" class="form-control" placeholder="Enter password" name="password" id="password" onclick="deleteAcc()">
                         </div>
+                        <p id="msgD" style="color:red"> </p>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary"><Span class="fa fa-trash"></Span> Delete account</button>
@@ -165,6 +166,16 @@
                     document.getElementById('newEmail').value = document.getElementById('email2').value;
                     $('#emailModal').modal('show');
                 }
+        }
+
+        function deleteAcc() {
+            if (document.getElementById('comment').value == '') {
+                document.getElementById('msgD').innerHTML = 'Leave a comment';
+            }
+            else{
+                document.getElementById('msgD').innerHTML = '';
+            }
+
         }
 
         openCity("email")

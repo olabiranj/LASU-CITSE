@@ -385,30 +385,27 @@ router.put('/dashboard/adminSettings/email', function (req, res, next) {
 
 router.delete('/dashboard/adminSettings/delete', function (req, res, next) {
 
-    User.findByIdAndRemove({ _id: req.user._id })
-        .exec()
-        .then(() => {
-            res.redirect('/login');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    // let pwd = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    // if (pwd == req.user.password) {
-    //     User.deleteOne({ _id: req.user._id }).then((result) => {
-    //         if (result) {
-    //             if (result) {
-    //                 res.redirect('/login')
-    //             } else {
-    //                 console.log('err')
-    //             }
-    //         }
-    //     })
-    // }
-    // else{
-    //     console.log('error')
-    //     res.redirect('/dashboard/adminSettings')
-    // }
+    
+    bcrypt.compare(req.body.password, req.user.password, function (req, res, err) {
+        if (err) {
+            console.log(err)
+        }
+        if (res){
+            User.findByIdAndRemove({ _id: req.user._id })
+                .exec()
+                .then(() => {
+                    res.redirect('/login');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else {
+            console.log('unmatch');
+            res.redirect('/dashboard/adminSettings');
+            
+        }
+    });
 
 })
 
