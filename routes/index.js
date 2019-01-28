@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
 const fse = require('fs-extra');
+const bcrypt = require("bcrypt-nodejs");
 
 let User = require('../models/users');
 let News = require('../models/news');
@@ -16,6 +17,7 @@ let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
 global.usrInfo = {};
 let oldImage = '';
+
 
 // HANDLE IMAGES
 // -----
@@ -359,21 +361,46 @@ router.get('/dashboard/staffs', function (req, res, next) {
 })
 
 router.get('/dashboard/adminSettings', function (req, res, next) {
-
-    res.render('backend/adminSettings', { email: req.user.email})
+    let success = req.flash('succes');
+    let failure = req.flash('failure')
+    res.render('backend/adminSettings', {success, failure, email: req.user.email})
 })
 
-router.put('/dashboard/adminSettings', function (req, res, next) {
-    User.findOneAndUpdate({ _id: req.user._id }, { email: req.body.newEmail })
-        .exec()
-        .then(() => {
-            res.redirect('/backend/dashboard');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+router.put('/dashboard/adminSettings/email', function (req, res, next) {
+    if (req.body.dbEmail == req.user.email ) {
+        User.findByIdAndUpdate({ _id: req.user._id }, { email: req.body.newEmail })
+            .exec()
+            .then(() => {
+                res.redirect('/dashboard');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    else{
+        req.flash('info', "Incorrect Email!");
+        res.redirect('/dashboard/adminSettings');
+    } 
+})
 
-    
+router.post('/dashboard/adminSettings/delete', function (req, res, next) {
+    let pwd = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+    if (pwd == req.user.password) {
+        User.deleteOne({ _id: req.user._id }).then((result) => {
+            if (result) {
+                if (result) {
+                    res.redirect('/login')
+                } else {
+                    console.log('err')
+                }
+            }
+        })
+    }
+    else{
+        console.log('error')
+        res.redirect('/dashboard/adminSettings')
+    }
+
 })
 
 router.post('/poststaff', function (req, res, next) {

@@ -10,6 +10,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const flash = require("express-flash");
 const dotenv = require('dotenv');
+let methodOverride = require('method-override');
 
 dotenv.config();
 
@@ -19,8 +20,8 @@ require("./config/passport");
 
 var app = express();
 
-let db_uri = process.env.DB_URI;
-// let db_uri = 'mongodb://localhost:27017/dashboard'
+// let db_uri = process.env.DB_URI;
+let db_uri = 'mongodb://localhost:27017/dashboard'
 mongoose.connect(db_uri, { useNewUrlParser: true }).then(console.log("database connected")).catch(err=>console.log(err));
 
 // view engine setup
@@ -34,6 +35,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('mysecrect'));
+app.use(methodOverride('_method'));
 
 
 var oneDay = 86400000; // in milliseconds

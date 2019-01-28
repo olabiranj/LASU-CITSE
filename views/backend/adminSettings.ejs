@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <h3>Are you Sure you wanna change your email?</h3>
-                                    <form action="/dashboard/adminSettings/email?_method=PUT" method="POST" enctype=multipart/form-data>
+                                    <form action="/dashboard/adminSettings/email?_method=PUT" method="post">
                                         <input type="hidden" id="newEmail" name="newEmail">
                                         <input type="hidden" id="dbEmail" name="dbEmail" value="<%= email%>">
                                         <button class="btn btn-success">Yes</button>
@@ -78,12 +78,66 @@
                 
                 <div id="password" class="w3-container city">
                     <h2>Change Password</h2>
-                    <p>Paris is the capital of France.</p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Old Password:</label>
+                            <div class="col-sm-4">
+                                <input type="password" id="pass1" class="form-control" placeholder="Enter old password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="">New Password:</label>
+                            <div class="col-sm-4">
+                                <input type="password" id="pass2" class="form-control" placeholder="Enter new password"><br>
+                                <input type="password" id="pass3" class="form-control" placeholder="Enter new password to confirm">
+                                <p id="msg2" style="color:red"> </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary" onclick="passwordCheck()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="passwordModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Confirm Passowrd Change</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>Are you Sure you wanna change your Password?</h3>
+                                    <form action="/settings/edit/password?_method=PUT" method="post">
+                                        <input type="hidden" id="newPass" name="newPass">
+                                        <input type="hidden" id="dbPass" name="dbPass" value="">
+                                        <button class="btn btn-success">Yes</button>
+                                        <button class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </form>
+                    
+                                </div>
+                            </div>
+                    
+                        </div>
+                    </div>
                 </div>
                 
                 <div id="delete" class="w3-container city">
                     <h2>Delete Account</h2>
-                    <p>Tokyo is the capital of Japan.</p>
+                    <div class="form-group col-sm-offset-1 col-sm-4">
+                    <label for="comment">Leave a comment:</label>
+                    <textarea class="form-control" rows="5" id="comment"></textarea><br>
+                    <label for="comment">Password:</label>
+                    <input type="password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary"><Span class="fa fa-trash"></Span> Delete account</button>
+                    </div>
+                </div>
                 </div>
                 
                 
@@ -96,7 +150,7 @@
 
     <script>
         function emailCheck() {
-                if (document.getElementById('email1').value == '' || document.getElementById('email2').value == '' || document.getElementById('email3').value == '') {
+                if (document.getElementById('email2').value == '' || document.getElementById('email3').value == '') {
                     document.getElementById('msg').innerHTML = 'Empty fields';
                 }
                 else if (document.getElementById('email2').value !== document.getElementById('email3').value) {
