@@ -18,4 +18,5 @@ module.exports = {
     'staff-development': { data: 'staff', nav: 'management' },
     'centre-operations': { data: 'centre-operations', nav: 'management' },
     'implementation-timeline': { data: 'implementation-timeline', nav: 'management' },
+    'industrial-advisory-boards': { data: 'industrial-advisory-boards', nav: 'management' }
 }

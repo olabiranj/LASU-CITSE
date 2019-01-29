@@ -19,5 +19,6 @@ module.exports = {
     staff: {parent: 'management', title: 'staff'},
     centre_operations: {parent: 'management', title: 'centre operations'},
     implementation_timeline: {parent: 'management', title: 'implementation timeline'},
-    settings: {parent: 'settings', title: 'settings'}
+    settings: {parent: 'settings', title: 'settings'},
+    industrial_advisory_boards: {parent: 'management', title: 'industrial advisory boards'}
 }
