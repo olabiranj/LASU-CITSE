@@ -117,8 +117,8 @@
                 <a class="nav-link <%= (page == 'news') ? 'text-primary' : '' %>" href="/dashboard/news">
                     <span data-feather="radio"></span> News </a>
             </li>
-            <li class="nav-item d-none">
-                <a class="nav-link <%= (page == 'stafflist') ? 'text-primary' : '' %>" href="/dashboard/stafflist">
+            <li class="nav-item">
+                <a class="nav-link <%= (page == 'stafflist') ? 'active' : '' %>" href="/dashboard/stafflist">
                     <span data-feather="users"></span> Staff List </a>
             </li>
             <li class="nav-item d-none">
@@ -130,6 +130,10 @@
                 <li id="admin" class="nav-item">
                     <a class="nav-link <%= (page == 'admin') ? 'text-primary' : '' %>" href="/dashboard/authorizeadmins">
                         <span data-feather="lock"></span> CMS Admins </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= (page == 'settings') ? 'active' : '' %>" href="/dashboard/settings">
+                        <span data-feather="settings"></span> CMS Settings </a>
                 </li>
             <% } %>
             <li class="nav-item"><hr/></li>
