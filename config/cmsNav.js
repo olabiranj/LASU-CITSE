@@ -9,6 +9,7 @@ module.exports = {
     learning_activities: {parent: 'education', title: 'learning activities'},
     skills_gap: { parent: 'education', title: 'skill gap to be bridged'},
     innovations_in_pedagogy:  { parent: 'education', title: 'innovations in pedagogy'},
+    degree_programmes:  { parent: 'education', title: 'degree programmes'},
     online_courses: {parent: 'education', title: 'online courses'},
     research_plan: {parent: 'research', title: 'research plan'},
     industrial_partnerships: {parent: 'research', title: 'industrial partnerships'},
