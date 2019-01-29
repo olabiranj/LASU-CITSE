@@ -19,8 +19,8 @@ let Settings = require('../models/settings');
 let controller = require('../controllers/frontendControllers')
 let mailController = require('../controllers/mailControllers');
 let n = require('../config/cmsNav');
-const keys = require("../config/keys")
-let usrInfo = {};
+const keys = require("../config/keys");
+global.usrInfo = {};
 let oldImage = '';
 
 // HANDLE IMAGES
@@ -536,7 +536,7 @@ router.put('/dashboard/adminSettings/email', function (req, res, next) {
     else{
         req.flash('info', "Incorrect Email!");
         res.redirect('/dashboard/adminSettings');
-    } 
+    }
 })
 
 router.delete('/dashboard/adminSettings/delete', function (req, res, next) {
