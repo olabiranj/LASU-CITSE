@@ -383,6 +383,29 @@ router.put('/dashboard/adminSettings/email', function (req, res, next) {
     } 
 })
 
+router.put('/dashboard/adminSettings/password', function (req, res, next) {
+    bcrypt.compare(req.body.dbPass, req.user.password, function (req, res, err) {
+        if (err) {
+            console.log(err)
+        }
+        if (res) {
+            User.findByIdAndUpdate({ _id: req.user._id }, { email: req.body.newPass })
+                .exec()
+                .then(() => {
+                    res.redirect('/dashboard');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else {
+            console.log('unmatch');
+            res.redirect('/dashboard/adminSettings');
+
+        }
+    });
+})
+
 router.delete('/dashboard/adminSettings/delete', function (req, res, next) {
 
     
