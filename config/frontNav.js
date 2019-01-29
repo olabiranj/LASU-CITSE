@@ -8,7 +8,6 @@ module.exports = {
     'learning-activities': { data: 'learning-activities', nav: 'education' },
     'skills-gap': { data: 'skills-gap', nav: 'education' },
     'innovations-in-pedagogy': { data: 'innovations-in-pedagogy', nav: 'education' },
-    'innovations-in-assessment': { data: 'innovations-in-assessment', nav: 'education' },
     'online-courses': { data: 'online-courses', nav: 'education' },
     'research-plan': { data: 'research-plan', nav: 'research' },
     'industrial-partnerships': { data: 'industrial-partnerships', nav: 'research' },
